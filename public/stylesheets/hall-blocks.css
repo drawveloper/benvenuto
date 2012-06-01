@@ -1,0 +1,74 @@
+#places{
+	width: 100%;
+}
+
+body, html {
+    background-color:#AAA	
+}
+
+#blockWrapper {
+    width:280px;
+}
+
+.box span {
+    text-align:center;
+    padding:3px 0px;
+    display:block;
+    font-size: xx-large;
+    text-align:center;
+    height:100%;
+    width:100%;
+    pointer-events:none;
+    margin-top:25%;
+}
+
+.box {
+	border-radius:4px;
+   	border:1px solid #D0D0D0;
+   	background-color:#EFEFEF;
+   	float: left;
+   	width:91px;
+   	height:91px;
+}
+
+#blockWrapper label input {
+   	display:none;
+}
+
+.recent {
+	background-color: #c7e3ab;
+}
+
+.selected{
+    background-color:#252322;
+    color:#F7F7F7;
+}
+
+#blockWrapper input:checked +.box:hover{
+    background-color:#575757;
+}
+
+.box:hover {
+/* 	background-color:#919191; */
+}
+.ocupation{
+	font-size: x-large;
+	list-style:none;
+	height: 43px;	
+	background-color: #fff;
+	padding: 7px 0px 7px 25px;
+	
+}
+
+#selected-tables{
+	 color:#F7F7F7;
+}
+
+#block-bottom{
+	padding:10px;
+	text-align: center;
+	background-color:#252322 ;
+	position:fixed;
+	bottom: 0px;
+	width:100%;
+}

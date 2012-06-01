@@ -1,0 +1,72 @@
+#places{
+	width: 100%;
+}
+
+body {
+
+}
+
+#listWrapper{
+	max-width: 480px;
+	width: 100%;
+}
+
+#listWrapper li{
+	
+	background-color:#EFEFEF;
+	border-color: #404040;
+	border-style:solid;
+	border-width: 0px;
+	border-bottom-width: 1px;
+}
+
+#listWrapper ul{
+	background-color:#EFEFEF;
+	padding:0px;
+	margin: 0px;
+
+}
+
+#listWrapper span{
+	width:50px;
+	margin-top:7px;
+	text-align: right;
+	margin-right:14px;
+}
+
+.ocupation{
+	font-size: x-large;
+	list-style:none;
+	height: 43px;	
+	background-color: #fff;
+	padding: 7px 0px 7px 25px;
+	
+}
+
+
+.free-button{
+	background-color: #FF7900;
+}
+
+.free-confirmation-button{
+	background-color: #49cf31;
+}
+
+.free-cancel-button{
+	background-color: #dd311c;
+}
+
+#free-buttons input{
+	height: 40px;
+	width: 100px;
+	font-size: large;
+	border: none;
+	color: #fff;
+}
+#free-buttons{
+	margin-left: 20px;
+}
+
+li.recent {
+	background-color: #ccc;
+}
