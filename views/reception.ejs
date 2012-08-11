@@ -189,7 +189,7 @@
 				for (var index in data.tables) {
 			    	var json = data.tables[index];
 			    	//Crie uma nova table 
-		    		table = new Table(json.id, json.label, json.x, json.y, json['class']);
+		    		table = new Table(json.id, json.label, json.x, json.y, json['_class']);
 		    		self.tables.push(table);
 			    	
 			    	//Para cada lugar 
