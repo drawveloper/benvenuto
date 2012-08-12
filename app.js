@@ -1,107 +1,96 @@
-/**
- * Module dependencies.
- */
+(function() {
 
-var express = require('express'), 
-	routes = require('./routes'),
-    placesC = require('./places/places.js'),
-	_u = require('underscore');
+  require('zappa')(function() {
+    var flatPlaces, places, placesC, routes, _u,
+      _this = this;
+    routes = require('./routes');
+    placesC = require('./places/places.js');
+    _u = require('underscore');
+    places = placesC.collection;
+    flatPlaces = function() {
+      return _u.chain(places.tables).map(function(table) {
+        return table.places;
+      }).flatten().value();
+    };
+    this.use('bodyParser', 'methodOverride', this.app.router, this.express["static"](__dirname + '/public'));
+    this.configure({
+      development: function() {
+        return _this.use({
+          errorHandler: {
+            dumpExceptions: true
+          }
+        });
+      },
+      production: function() {
+        return _this.use('errorHandler');
+      }
+    });
+    this.set('views', __dirname + '/views');
+    this.set('view engine', 'ejs');
+    this.get({
+      '/': function() {
+        return routes.index(this.request, this.response);
+      }
+    });
+    this.get({
+      '/recepcao': function() {
+        return this.render('reception.ejs');
+      }
+    });
+    this.get({
+      '/salao1': function() {
+        return this.render('blocks.ejs');
+      }
+    });
+    this.get({
+      '/lugares.json': function() {
+        return this.response.send(places);
+      }
+    });
+    this.get({
+      '/livres.json': function() {
+        return this.response.send(_u.chain(flatPlaces()).filter(function(place) {
+          return place.occupied === false;
+        }).value());
+      }
+    });
+    this.get({
+      '/ocupados.json': function() {
+        return this.response.send(_u.chain(flatPlaces()).flatten().filter(function(place) {
+          return place.occupied === true;
+        }).value());
+      }
+    });
+    this.post({
+      '/ocupar': function() {
+        var occupiedPlaces;
+        occupiedPlaces = this.request.param('places', 'null');
+        console.log(occupiedPlaces);
+        _u.each(occupiedPlaces, function(id) {
+          var place;
+          place = _u.find(flatPlaces(), function(place) {
+            return place.id * 1 === id * 1;
+          });
+          return place.occupied = true;
+        });
+        return this.response.send('ok');
+      }
+    });
+    return this.post({
+      '/liberar': function() {
+        var freePlaces;
+        freePlaces = this.request.param('places', 'null');
+        console.log(freePlaces);
+        _u.each(freePlaces, function(id) {
+          var place;
+          place = _u.find(flatPlaces(), function(place) {
+            return place.id * 1 === id * 1;
+          });
+          return place.occupied = false;
+        });
+        return this.response.send('ok');
+      }
+    });
+  });
 
-var app = module.exports = express.createServer();
-
-// Configuration
-
-app.configure(function() {
-	app.set('views', __dirname + '/views');
-// app.set('view engine', 'jade');
-	app.set('view engine', 'ejs');
-	app.use(express.bodyParser());
-	app.use(express.methodOverride());
-	app.use(app.router);
-	app.use(express.static(__dirname + '/public'));
-});
-
-app.configure('development', function() {
-	app.use(express.errorHandler({
-		dumpExceptions : true,
-		showStack : true
-	}));
-});
-
-app.configure('production', function() {
-	app.use(express.errorHandler());
-});
-
-var places = placesC.collection;
-
-var flatPlaces = function () {
-	return _u.chain(places.tables)
-		.map(function(table){
-			return table.places;
-		})
-		.flatten()
-		.value();
-}
-
-// Routes
-
-app.get('/', routes.index);
-
-
-app.get('/recepcao', function(req,res){
-	  res.render('reception.ejs');
-});
-
-app.get('/salao1', function(req,res){
-	  res.render('blocks.ejs');
-});
-
-app.get('/lugares.json', function(req,res){
-	res.send(places);
-});
-
-app.get('/livres.json', function(req,res){
-	res.send(_u.chain(flatPlaces())
-			.filter(function(place){
-				return place.occupied === false;
-			})
-			.value());
-});
-
-app.get('/ocupados.json', function(req,res){
-	res.send(_u.chain(flatPlaces())
-			.flatten()
-			.filter(function(place){
-				return place.occupied === true;
-			})
-			.value());
-});
-
-app.post('/ocupar', function(req,res){
-	var occupiedPlaces = req.param('places','null');
-	console.log(occupiedPlaces);
-	_u.each(occupiedPlaces, function(id){
-		var place = _u.find(flatPlaces(), function(place){
-			return place.id*1 === id*1;
-		});
-		place.occupied = true;
-	});
-	res.send('ok');
-});
-
-app.post('/liberar', function(req,res){
-	var freePlaces = req.param('places','null');
-	console.log(freePlaces);
-	_u.each(freePlaces, function(id){
-		var place = _u.find(flatPlaces(), function(place){
-			return place.id*1 === id*1;
-		});
-		place.occupied = false;
-	});
-	res.send('ok');
-});
-
-app.listen(3000, function() {
-	console.log("Express server listening on port %d in %s mode",
-			app.address().port, app.settings.env);
-});
+}).call(this);

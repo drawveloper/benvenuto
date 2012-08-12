@@ -1,6 +1,6 @@
 require('zappa') ->
   routes = require './routes'
-  placesC = require './places/places.coffee'
+  placesC = require './places/places.js'
   _u = require 'underscore'
   places = placesC.collection
   flatPlaces = ->

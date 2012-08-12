@@ -24,10 +24,12 @@ body {
 			<div id="config-checkbox">
 				<label for="hall1">Salão em blocos</label><input type="radio" id="hall1" 
 					name="settings.selectedHall" value="${models.SettingsConfig.HALL_1" 
-					#{if settings.selectedHall == models.SettingsConfig.HALL_1 checked="checked" #{/if}/>
+					#{if settings.selectedHall == models.SettingsConfig.HALL_1 checked="checked" #{/if}
+                />
 				<label for="hall2">Salão em lista</label><input type="radio" id="hall2" 
 					name="settings.selectedHall" value="${models.SettingsConfig.HALL_2}"
-					#{if settings.selectedHall == models.SettingsConfig.HALL_2} checked="checked" #{/if}/>
+					#{if settings.selectedHall == models.SettingsConfig.HALL_2} checked="checked" #{/if}
+                />
 			</div>
 			<div id="recent-time">
 				<label>Quantidade de tempo que uma mesa é considerada recente:</label>
