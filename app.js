@@ -76,7 +76,7 @@
         return this.response.send('ok');
       }
     });
-    return this.post({
+    this.post({
       '/liberar': function() {
         var freePlaces;
         freePlaces = this.request.param('places', 'null');
@@ -89,6 +89,31 @@
           return place.occupied = false;
         });
         return this.response.send('ok');
+      }
+    });
+    this.on({
+      'connection': function() {
+        return this.emit({
+          welcome: {
+            time: new Date()
+          }
+        });
+      }
+    });
+    return this.on({
+      'occupy': function() {
+        var occupiedPlaces;
+        console.log(this.data);
+        occupiedPlaces = this.data.places;
+        console.log(occupiedPlaces);
+        _u.each(occupiedPlaces, function(id) {
+          var place;
+          place = _u.find(flatPlaces(), function(place) {
+            return place.id * 1 === id * 1;
+          });
+          return place.occupied = true;
+        });
+        return this.emit('ok');
       }
     });
   });

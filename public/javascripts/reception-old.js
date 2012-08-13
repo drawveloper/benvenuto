@@ -126,6 +126,21 @@ function LayoutViewModel() {
          + " " + selectedPlaces["places[0].id"]
          + " " + selectedPlaces["places[1].id"]); */
         self.loading(true);
+
+        socket.emit('occupy', selectedPlaces);
+
+        self.occupyCallback = function(){
+            //alert("occupy ok");
+            //location.reload();
+            self.numberOfOccupants(1);
+            self.hasTeacher(false);
+            $.each(self.selectedPlaces(), function(index, value) {
+                value.occupy(true);
+            });
+            self.loading(false);
+        }
+
+        /*
         $.post('/ocupar',
             selectedPlaces)
             .done(function(data){
@@ -143,6 +158,7 @@ function LayoutViewModel() {
                 self.loading(false);
                 location.reload();
             });
+            */
         return false;
     };
     self.create = function(){
@@ -223,6 +239,13 @@ function getNextEvent(){
 $(function(){
     ko.applyBindings(viewmodel);
     viewmodel.create();
+
+    //TODO replace with socketio ack
+    socket.on('ok', function(){
+       console.log('caralho');
+       viewmodel.occupyCallback();
+    });
+
     //Next event sendo chamado pelo interval para impedir que loading bar fique aberto
 // 		getNextEvent();
 

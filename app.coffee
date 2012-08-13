@@ -62,3 +62,19 @@ require('zappa') ->
       place.occupied = false
 
     @response.send 'ok'
+
+
+    #Socket IO
+  @on 'connection': ->
+    @emit welcome: {time: new Date()}
+
+  @on 'occupy': ->
+    console.log @data
+    occupiedPlaces = @data.places
+    console.log occupiedPlaces
+    _u.each occupiedPlaces, (id) ->
+      place = _u.find(flatPlaces(), (place) ->
+        place.id * 1 is id * 1
+      )
+      place.occupied = true
+    @emit 'ok'
