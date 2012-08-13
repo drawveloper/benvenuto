@@ -1,9 +1,10 @@
 (function() {
 
-  require('zappa')(function() {
-    var flatPlaces, places, placesC, routes, _u,
+  require('zappajs')(function() {
+    var flatPlaces, partials, places, placesC, routes, _u,
       _this = this;
     routes = require('./routes');
+    partials = require('express-partials');
     placesC = require('./places/places.js');
     _u = require('underscore');
     places = placesC.collection;
@@ -12,7 +13,7 @@
         return table.places;
       }).flatten().value();
     };
-    this.use('bodyParser', 'methodOverride', this.app.router, this.express["static"](__dirname + '/public'));
+    this.use(partials(), 'bodyParser', 'methodOverride', this.app.router, this.express["static"](__dirname + '/public'));
     this.configure({
       development: function() {
         return _this.use({
@@ -113,7 +114,9 @@
           });
           return place.occupied = true;
         });
-        return this.emit('ok');
+        return this.ack({
+          result: 'ok'
+        });
       }
     });
   });

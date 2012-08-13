@@ -25,6 +25,10 @@ function Place(id, label, x, y, occupied, numberOfOccupants, table, rotation) {
     self.occupied = ko.observable(occupied);
     self.rotation = rotation;
     self.select = function () {
+        if (viewmodel.loading()) {
+            return false;
+        }
+
         if (!self.occupied()) {
             self.selected(!self.selected());
 // 				console.log(viewmodel.numberOfOccupants());
@@ -127,18 +131,21 @@ function LayoutViewModel() {
          + " " + selectedPlaces["places[1].id"]); */
         self.loading(true);
 
-        socket.emit('occupy', selectedPlaces);
-
-        self.occupyCallback = function(){
-            //alert("occupy ok");
-            //location.reload();
-            self.numberOfOccupants(1);
-            self.hasTeacher(false);
-            $.each(self.selectedPlaces(), function(index, value) {
-                value.occupy(true);
-            });
-            self.loading(false);
+        self.occupyCallback = function(data){
+            console.log(data);
+            if (data.result === 'ok') {
+                self.numberOfOccupants(1);
+                self.hasTeacher(false);
+                $.each(self.selectedPlaces(), function(index, value) {
+                    value.occupy(true);
+                });
+                self.loading(false);
+            }
+            else
+                location.reload();
         }
+
+        socket.emit('occupy', selectedPlaces, self.occupyCallback);
 
         /*
         $.post('/ocupar',
@@ -239,12 +246,6 @@ function getNextEvent(){
 $(function(){
     ko.applyBindings(viewmodel);
     viewmodel.create();
-
-    //TODO replace with socketio ack
-    socket.on('ok', function(){
-       console.log('caralho');
-       viewmodel.occupyCallback();
-    });
 
     //Next event sendo chamado pelo interval para impedir que loading bar fique aberto
 // 		getNextEvent();

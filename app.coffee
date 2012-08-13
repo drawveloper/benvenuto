@@ -1,5 +1,6 @@
-require('zappa') ->
+require('zappajs') ->
   routes = require './routes'
+  partials = require 'express-partials'
   placesC = require './places/places.js'
   _u = require 'underscore'
   places = placesC.collection
@@ -10,7 +11,7 @@ require('zappa') ->
 
 ## Configuration
 
-  @use 'bodyParser', 'methodOverride', @app.router, @express.static __dirname + '/public'
+  @use partials(), 'bodyParser', 'methodOverride', @app.router, @express.static __dirname + '/public'
 
   @configure
     development: => @use errorHandler: {dumpExceptions: on}
@@ -18,7 +19,6 @@ require('zappa') ->
 
   @set 'views', __dirname + '/views'
   @set 'view engine', 'ejs'
-
 
   @get '/': -> routes.index @request, @response
 
@@ -77,4 +77,4 @@ require('zappa') ->
         place.id * 1 is id * 1
       )
       place.occupied = true
-    @emit 'ok'
+    @ack result: 'ok'
