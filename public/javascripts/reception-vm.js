@@ -199,29 +199,10 @@ function LayoutViewModel() {
                 }
             });
     };
-}
 
-viewmodel = new LayoutViewModel();
-// END KNOCKOUT JS
-
-$(function(){
-    socket = io.connect();
-    socket.on('welcome', function (data) {
-        console.log (data);
-    });
-
+    //Socket IO
     socket.on('free', function (data) {
         console.log (data);
-        viewmodel.update();
+        self.update();
     });
-
-    ko.applyBindings(viewmodel);
-    viewmodel.create();
-
-    // Código para sobreviver a Sleeps e outras interrupções indesejadas da execução do JS.
-    setInterval(function(){
-            //TODO
-        }
-        ,2000);
-
-});
+}

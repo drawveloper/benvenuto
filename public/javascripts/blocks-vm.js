@@ -109,50 +109,10 @@ function LayoutViewModel() {
                     location.reload();
                 }
             });
-    }
-}
-
-var viewmodel = new LayoutViewModel();
-// END KNOCKOUT JS
-
-var request;
-function getNextEvent(){
-    request = $.ajax({url: '@{Hall.nextOccupiedPlaces}'})
-        .done(function() {
-            //alert('success');
-            //location.reload();
-            viewmodel.update();
-            // getNextEvent();
-        })
-        .fail(function (xmlHttpRequest, textStatus, errorThrown) {
-            if(xmlHttpRequest.readyState == 0 || xmlHttpRequest.status == 0)
-                return;  // it's not really an error - just a refresh or navigating away
-            else {
-                // Do normal error handling
-                alert('Ops! Aconteceu um erro ao receber lugares novos. Vamos tentar denovo.');
-                location.reload();
-            }
-        });
-};
-
-$(function(){
-    socket = io.connect();
-    socket.on('welcome', function (data) {
-        console.log (data);
-    });
+    };
 
     socket.on('occupy', function (data) {
         console.log (data);
-        viewmodel.update();
+        self.update();
     });
-
-    ko.applyBindings(viewmodel);
-    viewmodel.update();
-
-    // Código para sobreviver a Sleeps e outras interrupções indesejadas da execução do JS.
-    setInterval(function(){
-            //TODO
-        }
-        ,2000);
-
-});
+}
