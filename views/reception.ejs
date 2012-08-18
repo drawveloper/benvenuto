@@ -17,13 +17,8 @@
 	<div id="controls" style="position:fixed;z-index: 10000; margin-top:-2px" class="unselectable" >
 		<div class="button-div">
 			<div>
-				<input class="button" type="button" data-bind="click: occupyPlaces, attr: {value: loading() ? 'aguarde...' : 'ocupar' }"/>
-			</div>
-			<div class="white-text" id="teacher-input">
-			<!-- TODO: a inclusão do JQuery Mobile quebrou esse posicionamento. Consertar -->
-				<span style="margin-left: 33px">professor(a)</span>
-				<input type="checkbox" id="teacher-checkbox" data-bind="attr: {checked: hasTeacher}"><label data-bind="click: toggleTeacher" for="teacher-checkbox"><span id="box"></span></label>
-			</div>
+                <input class="button" type="button" data-bind="click: occupyPlacesWithoutTeacher, attr: {value: loading() ? 'aguarde...' : 'ocupar' }"/>
+            </div>
 		</div>
 		<div style="position: absolute; left: 205px;">
 			<span class="white-text">número de pessoas</span>
@@ -36,7 +31,14 @@
 				<span data-bind="text: occupiedPlaces().length + ' mesas ocupadas (' + occupiedPercent() + '%)'"></span>
 			</div>
 		</div>
-		<div id="top">
+        <div class="button-div" style="position: absolute; left: 460px;">
+            <div>
+                <input class="button" type="button"
+                       style="white-space: pre-wrap"
+                       data-bind="click: occupyPlacesWithTeacher, attr: {value: loading() ? 'aguarde...' : 'ocupar com professor' }"/>
+            </div>
+        </div>
+        <div id="top" style="position: absolute; left: 650px;">
 	    	<a href="@{Application.index}"  ><img id="logo" src="/images/logo.jpg" /></a>
 		</div>
 	</div>

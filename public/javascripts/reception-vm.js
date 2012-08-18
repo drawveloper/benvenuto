@@ -109,7 +109,14 @@ function LayoutViewModel() {
         label = label.slice(0, label.length - 2);
         return label;
     });
-    self.occupyPlaces = function(){
+
+    self.occupyPlacesWithTeacher = function() {
+        self.occupyPlaces(true);
+    };
+    self.occupyPlacesWithoutTeacher = function() {
+        self.occupyPlaces(false);
+    };
+    self.occupyPlaces = function(hasTeacher){
         //No meio de uma ocupação.
         if (self.loading()) {
             return false;
@@ -123,7 +130,7 @@ function LayoutViewModel() {
             return false;
         }
         selectedPlaces["numberOfOccupants"] = self.numberOfOccupants();
-        selectedPlaces["hasTeacher"] = self.hasTeacher();
+        selectedPlaces["hasTeacher"] = hasTeacher;
 
         //Entra em loading - bloqueia interface
         self.loading(true);
@@ -132,7 +139,6 @@ function LayoutViewModel() {
             console.log(data);
             if (data.result === 'ok') {
                 self.numberOfOccupants(1);
-                self.hasTeacher(false);
                 $.each(self.selectedPlaces(), function(index, value) {
                     value.occupy(true);
                 });
