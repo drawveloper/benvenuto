@@ -1,5 +1,3 @@
-// KNOCKOUT JS
-var viewmodel;
 // Classe que representa um lugar
 function Place(id, label, x, y, occupied, numberOfOccupants, table, rotation) {
     var self = this;
@@ -202,7 +200,12 @@ function LayoutViewModel() {
 
     //Socket IO
     socket.on('free', function (data) {
-        console.log (data);
+        console.log ('free', data);
+        self.update();
+    });
+
+    socket.on('occupy', function (data) {
+        console.log ('occupy', data);
         self.update();
     });
 }

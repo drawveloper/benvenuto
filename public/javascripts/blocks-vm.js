@@ -1,4 +1,3 @@
-// KNOCKOUT JS
 // Classe que representa um lugar
 function Place(id, label, occupied, recent) {
     var self = this;
@@ -112,7 +111,12 @@ function LayoutViewModel() {
     };
 
     socket.on('occupy', function (data) {
-        console.log (data);
+        console.log ('occupy', data);
+        self.update();
+    });
+
+    socket.on('free', function (data) {
+        console.log ('free', data);
         self.update();
     });
 }
