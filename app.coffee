@@ -41,29 +41,6 @@ require('zappajs') ->
       place.occupied is true
     ).value()
 
-  @post '/ocupar': ->
-    occupiedPlaces = @request.param('places', 'null')
-    console.log occupiedPlaces
-    _u.each occupiedPlaces, (id) ->
-      place = _u.find(flatPlaces(), (place) ->
-        place.id * 1 is id * 1
-      )
-      place.occupied = true
-
-    @response.send 'ok'
-
-  @post '/liberar': ->
-    freePlaces = @request.param('places', 'null')
-    console.log freePlaces
-    _u.each freePlaces, (id) ->
-      place = _u.find(flatPlaces(), (place) ->
-        place.id * 1 is id * 1
-      )
-      place.occupied = false
-
-    @response.send 'ok'
-
-
     #Socket IO
   @on 'connection': ->
     @emit welcome: {time: new Date()}
@@ -77,4 +54,16 @@ require('zappajs') ->
         place.id * 1 is id * 1
       )
       place.occupied = true
+    @broadcast 'occupy' : {occupiedPlaces}
+    @ack result: 'ok'
+
+  @on 'free': ->
+    freePlaces = @data.places
+    console.log freePlaces
+    _u.each freePlaces, (id) ->
+      place = _u.find(flatPlaces(), (place) ->
+        place.id * 1 is id * 1
+      )
+      place.occupied = false
+    @broadcast 'free' : {freePlaces}
     @ack result: 'ok'

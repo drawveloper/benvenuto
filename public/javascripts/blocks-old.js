@@ -63,20 +63,21 @@ function LayoutViewModel() {
             return false;
         }
         self.loading(true);
-        $.post('/liberar',
-            selectedPlaces)
-            .done(function(data){
-                //alert("occupy ok");
-                //location.reload();
-// 			    	viewmodel.update();
+
+        self.freeCallback = function(data){
+            if (data.result === 'ok') {
                 self.places.removeAll(self.selectedPlaces());
                 self.loading(false);
-            })
-            .fail(function(){
+            }
+            else {
                 alert('Ops! Aconteceu um erro ao ocupar os lugares. Cheque sua conexão com a rede.');
                 self.loading(false);
                 location.reload();
-            });
+            }
+        };
+
+        //Envia o evento de ocupação para o servidor
+        socket.emit('free', selectedPlaces, self.freeCallback);
         return false;
     }
     self.update = function (){
@@ -135,32 +136,22 @@ function getNextEvent(){
 };
 
 $(function(){
+    socket = io.connect();
+    socket.on('welcome', function (data) {
+        console.log (data);
+    });
+
+    socket.on('occupy', function (data) {
+        console.log (data);
+        viewmodel.update();
+    });
+
     ko.applyBindings(viewmodel);
     viewmodel.update();
-    //Next event sendo chamado pelo interval para impedir que loading bar fique aberto
-    //getNextEvent();
-    //Ao receber foco, sempre atualize a lista de lugares.
-    $(window).focus(function() {
-        console.log('Focus');
-        viewmodel.update();
-        if (request != null) {
-            request.abort();
-        }
-        // getNextEvent();
-    });
 
     // Código para sobreviver a Sleeps e outras interrupções indesejadas da execução do JS.
     setInterval(function(){
-            // $.active é o número de requests ajax abertos,
-            // e o request.readyState 0 indica que o request está 'UNSENT'
-            if ($.active == 0 || request == null || request.readyState == 0) {
-// 				alert('Nenhuma conexão - reestabelecendo.');
-                viewmodel.update();
-                if (request != null) {
-                    request.abort();
-                }
-                // getNextEvent();
-            }
+            //TODO
         }
         ,2000);
 

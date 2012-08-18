@@ -62,36 +62,6 @@
         }).value());
       }
     });
-    this.post({
-      '/ocupar': function() {
-        var occupiedPlaces;
-        occupiedPlaces = this.request.param('places', 'null');
-        console.log(occupiedPlaces);
-        _u.each(occupiedPlaces, function(id) {
-          var place;
-          place = _u.find(flatPlaces(), function(place) {
-            return place.id * 1 === id * 1;
-          });
-          return place.occupied = true;
-        });
-        return this.response.send('ok');
-      }
-    });
-    this.post({
-      '/liberar': function() {
-        var freePlaces;
-        freePlaces = this.request.param('places', 'null');
-        console.log(freePlaces);
-        _u.each(freePlaces, function(id) {
-          var place;
-          place = _u.find(flatPlaces(), function(place) {
-            return place.id * 1 === id * 1;
-          });
-          return place.occupied = false;
-        });
-        return this.response.send('ok');
-      }
-    });
     this.on({
       'connection': function() {
         return this.emit({
@@ -101,7 +71,7 @@
         });
       }
     });
-    return this.on({
+    this.on({
       'occupy': function() {
         var occupiedPlaces;
         console.log(this.data);
@@ -113,6 +83,33 @@
             return place.id * 1 === id * 1;
           });
           return place.occupied = true;
+        });
+        this.broadcast({
+          'occupy': {
+            occupiedPlaces: occupiedPlaces
+          }
+        });
+        return this.ack({
+          result: 'ok'
+        });
+      }
+    });
+    return this.on({
+      'free': function() {
+        var freePlaces;
+        freePlaces = this.data.places;
+        console.log(freePlaces);
+        _u.each(freePlaces, function(id) {
+          var place;
+          place = _u.find(flatPlaces(), function(place) {
+            return place.id * 1 === id * 1;
+          });
+          return place.occupied = false;
+        });
+        this.broadcast({
+          'free': {
+            freePlaces: freePlaces
+          }
         });
         return this.ack({
           result: 'ok'

@@ -126,9 +126,8 @@ function LayoutViewModel() {
         }
         selectedPlaces["numberOfOccupants"] = self.numberOfOccupants();
         selectedPlaces["hasTeacher"] = self.hasTeacher();
-        /* alert(selectedPlaces["numberOfOccupants"]
-         + " " + selectedPlaces["places[0].id"]
-         + " " + selectedPlaces["places[1].id"]); */
+
+        //Entra em loading - bloqueia interface
         self.loading(true);
 
         self.occupyCallback = function(data){
@@ -141,31 +140,14 @@ function LayoutViewModel() {
                 });
                 self.loading(false);
             }
-            else
+            else {
+                //Algo inesperado aconteceu. Vamos reconectar.
                 location.reload();
+            }
         }
 
+        //Envia o evento de ocupação para o servidor
         socket.emit('occupy', selectedPlaces, self.occupyCallback);
-
-        /*
-        $.post('/ocupar',
-            selectedPlaces)
-            .done(function(data){
-                //alert("occupy ok");
-                //location.reload();
-                self.numberOfOccupants(1);
-                self.hasTeacher(false);
-                $.each(self.selectedPlaces(), function(index, value) {
-                    value.occupy(true);
-                });
-                self.loading(false);
-            })
-            .fail(function(){
-                alert('Ops! Aconteceu um erro ao ocupar os lugares. Cheque sua conexão com a rede.');
-                self.loading(false);
-                location.reload();
-            });
-            */
         return false;
     };
     self.create = function(){
@@ -222,56 +204,23 @@ function LayoutViewModel() {
 viewmodel = new LayoutViewModel();
 // END KNOCKOUT JS
 
-var request;
-function getNextEvent(){
-    request = $.ajax({url: '/eventolivres'})
-        .done(function() {
-            //alert('success');
-            viewmodel.update();
-            getNextEvent();
-        })
-        .fail(function (xmlHttpRequest, textStatus, errorThrown) {
-            if(xmlHttpRequest.readyState == 0 || xmlHttpRequest.status == 0)
-                return;  // it's not really an error - just a refresh or navigating away
-            else {
-                // Do normal error handling
-                alert('Ops! Aconteceu um erro ao receber lugares novos. Cheque a conexão com a rede.');
-            }
-        })
-        .always(function(){
-            // TODO getNextEvent aqui
-        });
-}
-
 $(function(){
+    socket = io.connect();
+    socket.on('welcome', function (data) {
+        console.log (data);
+    });
+
+    socket.on('free', function (data) {
+        console.log (data);
+        viewmodel.update();
+    });
+
     ko.applyBindings(viewmodel);
     viewmodel.create();
 
-    //Next event sendo chamado pelo interval para impedir que loading bar fique aberto
-// 		getNextEvent();
-
-    //Ao receber foco, sempre atualize a lista de lugares.
-    $(window).focus(function() {
-        console.log('Focus');
-        viewmodel.update();
-        if (request != null) {
-            request.abort();
-        }
-        // getNextEvent();
-    });
-
     // Código para sobreviver a Sleeps e outras interrupções indesejadas da execução do JS.
     setInterval(function(){
-            // $.active é o número de requests ajax abertos,
-            // e o request.readyState 0 indica que o request está 'UNSENT'
-            if ($.active == 0 || request == null || request.readyState == 0) {
-// 				alert('Nenhuma conexão - reestabelecendo.');
-                viewmodel.update();
-                if (request != null) {
-                    request.abort();
-                }
-                // getNextEvent();
-            }
+            //TODO
         }
         ,2000);
 
