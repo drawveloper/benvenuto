@@ -40,7 +40,7 @@ body, html {
 }
 
 .selected{
-    background-color:#252322;
+    background-color:#252322 !important;
     color:#F7F7F7;
 }
 
@@ -71,4 +71,10 @@ body, html {
 	position:fixed;
 	bottom: 0px;
 	width:100%;
+}
+
+#block-bottom .button {
+    height:90px;
+    font-size:xx-large;
+    font-weight:bold;
 }

@@ -5,9 +5,9 @@
 
 <link rel="stylesheet" media="screen" href="/stylesheets/hall-blocks.css">
 
-<div id="blockWrapper" data-bind="foreach: places, style: {height: Math.ceil((occupiedPlacesNumber().length/3))*91 + 75 + 'px' }" class="centerdiv unselectable">
+<div id="blockWrapper" data-bind="foreach: places, style: {height: Math.ceil((occupiedPlacesNumber().length/3))*91 + 128 + 'px' }" class="centerdiv unselectable">
     <!-- ko if: occupied -->
-    <div class="box" data-bind="event: {vclick: select}, css: { 'selected' : selected, 'recent' : recent }" >
+    <div class="box" data-bind="event: {vclick: select}, css: { 'selected' : selected }, style: { 'background-color': backgroundColor }" >
         <span data-bind="text: label" style="float:left"></span>
     </div>
     <!-- /ko -->

@@ -48,22 +48,27 @@ require('zappajs') ->
   @on 'occupy': ->
     console.log @data
     occupiedPlaces = @data.places
+    occupiedArray = []
     console.log occupiedPlaces
     _u.each occupiedPlaces, (id) ->
       place = _u.find(flatPlaces(), (place) ->
         place.id * 1 is id * 1
       )
       place.occupied = true
-    @broadcast 'occupy' : {occupiedPlaces}
+      place.lastOccupation = new Date()
+      occupiedArray.push {id: place.id, lastOccupation: place.lastOccupation}
+    @broadcast 'occupy' : {'occupiedPlaces': occupiedArray}
     @ack result: 'ok'
 
   @on 'free': ->
     freePlaces = @data.places
+    freeArray = []
     console.log freePlaces
     _u.each freePlaces, (id) ->
       place = _u.find(flatPlaces(), (place) ->
         place.id * 1 is id * 1
       )
       place.occupied = false
-    @broadcast 'free' : {freePlaces}
+      freeArray.push {id: place.id}
+    @broadcast 'free' : {'freePlaces': freeArray}
     @ack result: 'ok'

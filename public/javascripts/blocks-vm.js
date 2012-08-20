@@ -1,15 +1,68 @@
+//TODO receber do servidor
+maxTime = 1000 * 60 * 5;
+
 // Classe que representa um lugar
-function Place(id, label, occupied, recent) {
+function Place(id, label, occupied, lastOccupation) {
     var self = this;
     self.id = id;
     self.stale = false;
     self.label = ko.observable(label);
     self.selected = ko.observable(false);
     self.occupied = ko.observable(occupied);
-    self.recent = ko.observable(recent);
+    self.lastOccupation = ko.observable(lastOccupation != void(0)? lastOccupation : new Date());
+    self.completion = ko.observable(0);
+    self.updateCompletion = function() {
+        var now = new Date().getTime();
+        var then = new Date(self.lastOccupation()).getTime();
+        var elapsedTime = now - then;
+        //Avança completion
+        self.completion((elapsedTime/maxTime) > 1 ? 1 : (elapsedTime/maxTime));
+        //console.log('Completion avançada.')
+    };
     self.select = function () {
         self.selected(!self.selected());
     };
+    self.startColors = {red:239, green:239, blue:239};
+    self.endColors = {red:255, green:121, blue:0};
+    self.redDifference = self.endColors.red - self.startColors.red;
+    self.greenDifference = self.endColors.green - self.startColors.green;
+    self.blueDifference = self.endColors.blue - self.startColors.blue;
+    self.red = ko.computed(function(){
+        return self.startColors.red + (self.completion() * self.redDifference)
+    });
+    self.green = ko.computed(function(){
+        return self.startColors.green + (self.completion() * self.greenDifference)
+    });
+    self.blue = ko.computed(function(){
+        return self.startColors.blue + (self.completion() * self.blueDifference)
+    });
+    self.backgroundColor = ko.computed(function(){
+            return 'rgba(' + Math.floor(self.red()) + ',' + Math.floor(self.green()) + ',' + Math.floor(self.blue()) + ',1)'
+        }
+    );
+    //Number of steps é a maior diferença.
+    self.numberOfSteps = (Math.abs(self.redDifference) > Math.abs(self.greenDifference)
+        ? ( Math.abs(self.redDifference) > Math.abs(self.blueDifference)
+        ? Math.abs(self.redDifference)
+        : Math.abs(self.blueDifference) )
+        : ( Math.abs(self.greenDifference) > Math.abs(self.blueDifference)
+        ? Math.abs(self.greenDifference)
+        : Math.abs(self.blueDifference) ) );
+    self.interval = maxTime/self.numberOfSteps;
+
+    self.calculateAnimation = function () {
+        self.updateCompletion();
+        self.currentStep = self.completion() * self.numberOfSteps;
+        clearInterval(self.timer);
+        self.timer = setInterval(function(){
+            self.currentStep++;
+            if (self.currentStep >= self.numberOfSteps)
+                clearInterval(self.timer);
+
+            self.updateCompletion();
+        }, self.interval);
+    }
+    self.calculateAnimation();
 }
 
 // Viewmodel para o layout
@@ -84,7 +137,8 @@ function LayoutViewModel() {
             //Para cada lugar
             for (var placeIndex in json.places) {
                 var jsonPlace = json.places[placeIndex];
-                self.places.push(new Place(jsonPlace.id, jsonPlace.label, jsonPlace.occupied, jsonPlace.recent));
+                self.places.push(new Place(jsonPlace.id, jsonPlace.label, jsonPlace.occupied,
+                    jsonPlace.lastOccupation));
             }
         }
 
@@ -100,8 +154,10 @@ function LayoutViewModel() {
             var placesArray = occupy ? places.occupiedPlaces : places.freePlaces;
             console.log('Lugares ' + (occupy ? 'ocupados' : 'liberados') + ':', placesArray);
             for (var index in placesArray) {
-                var id = placesArray[index];
+                var id = placesArray[index].id;
                 var place = self.findPlaceById(id);
+                place.lastOccupation(placesArray[index].lastOccupation);
+                place.calculateAnimation();
                 place.occupied(occupy);
             }
         }
@@ -121,5 +177,11 @@ function LayoutViewModel() {
     socket.on('free', function (data) {
         console.log ('free', data);
         self.update(data);
+    });
+
+    socket.on('disconnect', function () {
+        console.log ('Disconnected!');
+        alert('Desconectado do servidor. Cheque a conexão Wi-Fi do aparelho.');
+        location.reload();
     });
 }

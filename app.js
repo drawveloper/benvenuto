@@ -74,20 +74,26 @@
     });
     this.on({
       'occupy': function() {
-        var occupiedPlaces;
+        var occupiedArray, occupiedPlaces;
         console.log(this.data);
         occupiedPlaces = this.data.places;
+        occupiedArray = [];
         console.log(occupiedPlaces);
         _u.each(occupiedPlaces, function(id) {
           var place;
           place = _u.find(flatPlaces(), function(place) {
             return place.id * 1 === id * 1;
           });
-          return place.occupied = true;
+          place.occupied = true;
+          place.lastOccupation = new Date();
+          return occupiedArray.push({
+            id: place.id,
+            lastOccupation: place.lastOccupation
+          });
         });
         this.broadcast({
           'occupy': {
-            occupiedPlaces: occupiedPlaces
+            'occupiedPlaces': occupiedArray
           }
         });
         return this.ack({
@@ -97,19 +103,23 @@
     });
     return this.on({
       'free': function() {
-        var freePlaces;
+        var freeArray, freePlaces;
         freePlaces = this.data.places;
+        freeArray = [];
         console.log(freePlaces);
         _u.each(freePlaces, function(id) {
           var place;
           place = _u.find(flatPlaces(), function(place) {
             return place.id * 1 === id * 1;
           });
-          return place.occupied = false;
+          place.occupied = false;
+          return freeArray.push({
+            id: place.id
+          });
         });
         this.broadcast({
           'free': {
-            freePlaces: freePlaces
+            'freePlaces': freeArray
           }
         });
         return this.ack({

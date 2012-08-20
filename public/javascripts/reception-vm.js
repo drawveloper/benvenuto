@@ -178,7 +178,7 @@ function LayoutViewModel() {
             var placesArray = occupy ? places.occupiedPlaces : places.freePlaces;
             console.log('Lugares ' + (occupy ? 'ocupados' : 'liberados') + ':', placesArray);
             for (var index in placesArray) {
-                var id = placesArray[index];
+                var id = placesArray[index].id;
                 var place = self.findPlaceById(id);
                 place.occupied(occupy);
             }
@@ -199,5 +199,11 @@ function LayoutViewModel() {
     socket.on('occupy', function (data) {
         console.log ('occupy', data);
         self.update(data);
+    });
+
+    socket.on('disconnect', function () {
+        console.log ('Disconnected!');
+        alert('Desconectado do servidor. Cheque a conexão Wi-Fi do aparelho.');
+        location.reload();
     });
 }
