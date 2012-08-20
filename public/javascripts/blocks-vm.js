@@ -96,15 +96,18 @@ function LayoutViewModel() {
     self.update = function (places){
         //Já recebemos os lugares - não precisa buscar no servidor.
         if (places != void(0)) {
-            console.log('Lugares ocupados:', places.occupiedPlaces);
-            for (var index in places.occupiedPlaces) {
-                var id = places.occupiedPlaces[index];
+            var occupy = places.occupiedPlaces != void(0);
+            var placesArray = occupy ? places.occupiedPlaces : places.freePlaces;
+            console.log('Lugares ' + (occupy ? 'ocupados' : 'liberados') + ':', placesArray);
+            for (var index in placesArray) {
+                var id = placesArray[index];
                 var place = self.findPlaceById(id);
-                place.occupied(true);
+                place.occupied(occupy);
             }
         }
     };
 
+    //Socket IO
     socket.on('welcome', function (data) {
         console.log (data);
         self.create(data.data);
@@ -117,6 +120,6 @@ function LayoutViewModel() {
 
     socket.on('free', function (data) {
         console.log ('free', data);
-        self.update();
+        self.update(data);
     });
 }

@@ -174,36 +174,15 @@ function LayoutViewModel() {
     self.update = function(places){
         //Já recebemos os lugares - não precisa buscar no servidor.
         if (places != void(0)) {
-            console.log('Lugares liberados:', places.freePlaces);
-            for (var index in places.freePlaces) {
-                var id = places.freePlaces[index];
+            var occupy = places.occupiedPlaces != void(0);
+            var placesArray = occupy ? places.occupiedPlaces : places.freePlaces;
+            console.log('Lugares ' + (occupy ? 'ocupados' : 'liberados') + ':', placesArray);
+            for (var index in placesArray) {
+                var id = placesArray[index];
                 var place = self.findPlaceById(id);
-                place.occupy(false);
+                place.occupied(occupy);
             }
         }
-        //Não recebemos os lugares - busque a lista toda no servidor.
-        else {
-            $.getJSON('/livres.json')
-                .done(function(data) {
-                    //Para cada table
-                    for (var index in data) {
-                        var json = data[index];
-                        var place = self.findPlaceById(json.id);
-                        place.occupy(json.occupied);
-                    }
-                })
-                .fail(function (xmlHttpRequest, textStatus, errorThrown) {
-                    if(xmlHttpRequest.readyState == 0 || xmlHttpRequest.status == 0)
-                        return;  // it's not really an error - just a refresh or navigating away
-                    else {
-                        // Do normal error handling
-                        alert('Ops! Aconteceu um erro ao atualizar os lugares. Vamos tentar denovo.');
-                        location.reload();
-                    }
-                });
-        }
-
-
     };
 
     //Socket IO
@@ -219,6 +198,6 @@ function LayoutViewModel() {
 
     socket.on('occupy', function (data) {
         console.log ('occupy', data);
-        self.update();
+        self.update(data);
     });
 }
