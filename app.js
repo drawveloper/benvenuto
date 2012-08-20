@@ -66,7 +66,8 @@
       'connection': function() {
         return this.emit({
           welcome: {
-            time: new Date()
+            time: new Date(),
+            data: places
           }
         });
       }

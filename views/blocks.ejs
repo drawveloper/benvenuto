@@ -5,10 +5,12 @@
 
 <link rel="stylesheet" media="screen" href="/stylesheets/hall-blocks.css">
 
-<div id="blockWrapper" data-bind="foreach: places, style: {height: Math.ceil((places().length/3))*91 + 75 + 'px' }" class="centerdiv unselectable">
-	    <div class="box" data-bind="event: {vclick: select}, css: { 'selected' : selected, 'recent' : recent }" > 
-	    	<span data-bind="text: label" style="float:left"></span>
-	    </div>
+<div id="blockWrapper" data-bind="foreach: places, style: {height: Math.ceil((occupiedPlacesNumber().length/3))*91 + 75 + 'px' }" class="centerdiv unselectable">
+    <!-- ko if: occupied -->
+    <div class="box" data-bind="event: {vclick: select}, css: { 'selected' : selected, 'recent' : recent }" >
+        <span data-bind="text: label" style="float:left"></span>
+    </div>
+    <!-- /ko -->
 </div>
 <div id="block-bottom">
 	<input type="button" class="button centerdiv unselectable" data-bind="click: freePlaces, attr: {value: loading() ? 'aguarde...' : 'liberar'}">

@@ -43,7 +43,7 @@ require('zappajs') ->
 
     #Socket IO
   @on 'connection': ->
-    @emit welcome: {time: new Date()}
+    @emit welcome: {time: new Date(), data: places}
 
   @on 'occupy': ->
     console.log @data

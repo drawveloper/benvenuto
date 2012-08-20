@@ -154,60 +154,67 @@ function LayoutViewModel() {
         socket.emit('occupy', selectedPlaces, self.occupyCallback);
         return false;
     };
-    self.create = function(){
-        $.getJSON('/lugares.json')
-            .done(function(data) {
-                viewmodel.name(data.name);
-                viewmodel.gridSizePixels(data.gridSizePixels);
-                //Para cada table
-                for (var index in data.tables) {
-                    var json = data.tables[index];
-                    //Crie uma nova table
-                    table = new Table(json.id, json.label, json.x, json.y, json['_class']);
-                    self.tables.push(table);
+    self.create = function(data){
+        self.name(data.name);
+        self.gridSizePixels(data.gridSizePixels);
+        //Para cada table
+        for (var index in data.tables) {
+            var json = data.tables[index];
+            //Crie uma nova table
+            table = new Table(json.id, json.label, json.x, json.y, json['_class']);
+            self.tables.push(table);
 
-                    //Para cada lugar
-                    for (var placeIndex in json.places) {
-                        var jsonPlace = json.places[placeIndex];
-                        table.addPlace(jsonPlace);
-                    }
-                }
-            })
-            .fail(function (xmlHttpRequest, textStatus, errorThrown) {
-                if(xmlHttpRequest.readyState == 0 || xmlHttpRequest.status == 0)
-                    return;  // it's not really an error - just a refresh or navigating away
-                else {
-                    // Do normal error handling
-                    alert('Ops! Aconteceu um erro ao receber os lugares. Vamos tentar denovo.');
-                    location.reload();
-                }
-            });
+            //Para cada lugar
+            for (var placeIndex in json.places) {
+                var jsonPlace = json.places[placeIndex];
+                table.addPlace(jsonPlace);
+            }
+        }
     };
-    self.update = function(){
-        $.getJSON('/livres.json')
-            .done(function(data) {
-                //Para cada table
-                for (var index in data) {
-                    var json = data[index];
-                    var place = self.findPlaceById(json.id);
-                    place.occupy(json.occupied);
-                }
-            })
-            .fail(function (xmlHttpRequest, textStatus, errorThrown) {
-                if(xmlHttpRequest.readyState == 0 || xmlHttpRequest.status == 0)
-                    return;  // it's not really an error - just a refresh or navigating away
-                else {
-                    // Do normal error handling
-                    alert('Ops! Aconteceu um erro ao atualizar os lugares. Vamos tentar denovo.');
-                    location.reload();
-                }
-            });
+    self.update = function(places){
+        //Já recebemos os lugares - não precisa buscar no servidor.
+        if (places != void(0)) {
+            console.log('Lugares liberados:', places.freePlaces);
+            for (var index in places.freePlaces) {
+                var id = places.freePlaces[index];
+                var place = self.findPlaceById(id);
+                place.occupy(false);
+            }
+        }
+        //Não recebemos os lugares - busque a lista toda no servidor.
+        else {
+            $.getJSON('/livres.json')
+                .done(function(data) {
+                    //Para cada table
+                    for (var index in data) {
+                        var json = data[index];
+                        var place = self.findPlaceById(json.id);
+                        place.occupy(json.occupied);
+                    }
+                })
+                .fail(function (xmlHttpRequest, textStatus, errorThrown) {
+                    if(xmlHttpRequest.readyState == 0 || xmlHttpRequest.status == 0)
+                        return;  // it's not really an error - just a refresh or navigating away
+                    else {
+                        // Do normal error handling
+                        alert('Ops! Aconteceu um erro ao atualizar os lugares. Vamos tentar denovo.');
+                        location.reload();
+                    }
+                });
+        }
+
+
     };
 
     //Socket IO
+    socket.on('welcome', function (data) {
+        console.log (data);
+        self.create(data.data);
+    });
+
     socket.on('free', function (data) {
         console.log ('free', data);
-        self.update();
+        self.update(data);
     });
 
     socket.on('occupy', function (data) {

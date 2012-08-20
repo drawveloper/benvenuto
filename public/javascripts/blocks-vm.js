@@ -18,21 +18,15 @@ function LayoutViewModel() {
     self.name = ko.observable();
     self.loading = ko.observable(false);
     self.places = ko.observableArray();
+    self.occupiedPlacesNumber = ko.computed(function(){
+       return ko.utils.arrayFilter(self.places(), function(item){
+           item.occupied() === true;
+       }).length;
+    });
     self.findPlaceById = function(id) {
         return ko.utils.arrayFirst(self.places(), function(item) {
             return item.id == id;
         });
-    };
-    self.markAllStale = function (){
-        ko.utils.arrayMap(self.places(), function(item) {
-            item.stale = true;
-        });
-    };
-    self.deleteStale = function (){
-        self.places.remove(function(item){ if (item.stale) console.log('stale! ' + item.id); return item.stale })
-    };
-    self.deleteAll = function (){
-        self.places.remove(function(item){ return true; })
     };
     self.selectedPlaces = ko.computed(function() {
         return ko.utils.arrayFilter(self.places(), function(item) {
@@ -65,7 +59,10 @@ function LayoutViewModel() {
 
         self.freeCallback = function(data){
             if (data.result === 'ok') {
-                self.places.removeAll(self.selectedPlaces());
+                $.each(self.selectedPlaces(), function(index, value) {
+                    value.occupied(false);
+                    value.selected(false);
+                });
                 self.loading(false);
             }
             else {
@@ -79,40 +76,43 @@ function LayoutViewModel() {
         socket.emit('free', selectedPlaces, self.freeCallback);
         return false;
     }
-    self.update = function (){
-        $.getJSON('/ocupados.json')
-            .done(function(data) {
-                self.markAllStale();
-// 		    	self.deleteAll();
-                for (var index in data) {
-                    var json = data[index];
-                    var place = self.findPlaceById(json.id);
-                    if (place == null)
-                        self.places.push(new Place(json.id, json.label, json.occupied, json.recent));
-                    else {
-                        place.recent(json.recent);
-                        place.stale = false;
-                    }
-                }
-                self.deleteStale();
-                self.places.sort(function(left, right) {
-                    return left.label() == right.label() ? 0 : (left.label() < right.label() ? -1 : 1)
-                });
-            })
-            .fail(function (xmlHttpRequest, textStatus, errorThrown) {
-                if(xmlHttpRequest.readyState == 0 || xmlHttpRequest.status == 0)
-                    return;  // it's not really an error - just a refresh or navigating away
-                else {
-                    // Do normal error handling
-                    alert('Ops! Aconteceu um erro ao receber os lugares. Vamos tentar denovo.');
-                    location.reload();
-                }
-            });
+    self.create = function(data){
+        self.name(data.name);
+        //Para cada table
+        for (var index in data.tables) {
+            var json = data.tables[index];
+            //Para cada lugar
+            for (var placeIndex in json.places) {
+                var jsonPlace = json.places[placeIndex];
+                self.places.push(new Place(jsonPlace.id, jsonPlace.label, jsonPlace.occupied, jsonPlace.recent));
+            }
+        }
+
+        //Coloca na ordem correta
+        self.places.sort(function(left, right) {
+            return left.label() == right.label() ? 0 : (left.label() < right.label() ? -1 : 1)
+        });
     };
+    self.update = function (places){
+        //Já recebemos os lugares - não precisa buscar no servidor.
+        if (places != void(0)) {
+            console.log('Lugares ocupados:', places.occupiedPlaces);
+            for (var index in places.occupiedPlaces) {
+                var id = places.occupiedPlaces[index];
+                var place = self.findPlaceById(id);
+                place.occupied(true);
+            }
+        }
+    };
+
+    socket.on('welcome', function (data) {
+        console.log (data);
+        self.create(data.data);
+    });
 
     socket.on('occupy', function (data) {
         console.log ('occupy', data);
-        self.update();
+        self.update(data);
     });
 
     socket.on('free', function (data) {
