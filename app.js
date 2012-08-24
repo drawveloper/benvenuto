@@ -30,7 +30,10 @@
     this.set('view engine', 'ejs');
     this.get({
       '/': function() {
-        return routes.index(this.request, this.response);
+        return routes.index(this.request, this.response, {
+          selectedHall: 'HALL_1',
+          tableRecentTimeMillis: 60000
+        });
       }
     });
     this.get({

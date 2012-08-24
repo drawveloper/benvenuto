@@ -20,7 +20,7 @@ require('zappajs') ->
   @set 'views', __dirname + '/views'
   @set 'view engine', 'ejs'
 
-  @get '/': -> routes.index @request, @response
+  @get '/': -> routes.index @request, @response, {selectedHall: 'HALL_1', tableRecentTimeMillis: 60000}
 
   @get '/recepcao': ->
     @render 'reception.ejs'

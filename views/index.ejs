@@ -23,12 +23,12 @@ body {
 		<form action="Settings.apply" method="POST">
 			<div id="config-checkbox">
 				<label for="hall1">Salão em blocos</label><input type="radio" id="hall1" 
-					name="settings.selectedHall" value="${models.SettingsConfig.HALL_1" 
-					#{if settings.selectedHall == models.SettingsConfig.HALL_1 checked="checked" #{/if}
+					name="settings.selectedHall" value="HALL_1"
+                <% if (settings.selectedHall == 'HALL_1') { %> checked="checked" <% } %>
                 />
 				<label for="hall2">Salão em lista</label><input type="radio" id="hall2" 
-					name="settings.selectedHall" value="${models.SettingsConfig.HALL_2}"
-					#{if settings.selectedHall == models.SettingsConfig.HALL_2} checked="checked" #{/if}
+					name="settings.selectedHall" value="HALL_2"
+                <% if (settings.selectedHall == 'HALL_2') { %> checked="checked" <% } %>
                 />
 			</div>
 			<div id="recent-time">

@@ -1,7 +1,7 @@
 ## GET home page.
 
 
-exports.index = (req, res) ->
+exports.index = (req, res, settings) ->
   res.render 'index.ejs',
     title: 'Benvenuto'
-    settings: selectedHall: 'HALL_1'
+    settings: settings

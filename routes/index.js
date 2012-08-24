@@ -1,11 +1,9 @@
 (function() {
 
-  exports.index = function(req, res) {
+  exports.index = function(req, res, settings) {
     return res.render('index.ejs', {
       title: 'Benvenuto',
-      settings: {
-        selectedHall: 'HALL_1'
-      }
+      settings: settings
     });
   };
 
