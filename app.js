@@ -1,13 +1,18 @@
 (function() {
 
   require('zappajs')(function() {
-    var flatPlaces, partials, places, placesC, routes, _u,
+    var client, flatPlaces, partials, places, placesC, redis, routes, settings, _u,
       _this = this;
     routes = require('./routes');
+    redis = require("redis");
+    client = redis.createClient();
     partials = require('express-partials');
     placesC = require('./places/places.js');
     _u = require('underscore');
     places = placesC.collection;
+    settings = {
+      tableRecentTimeMillis: 60000
+    };
     flatPlaces = function() {
       return _u.chain(places.tables).map(function(table) {
         return table.places;
@@ -28,12 +33,15 @@
     });
     this.set('views', __dirname + '/views');
     this.set('view engine', 'ejs');
+    console.log('Bem vindo ao Benvenuto!');
+    client.get("places", function(err, reply) {
+      if (!reply) {
+        return client.set("places", places);
+      }
+    });
     this.get({
       '/': function() {
-        return routes.index(this.request, this.response, {
-          selectedHall: 'HALL_1',
-          tableRecentTimeMillis: 60000
-        });
+        return routes.index(this.request, this.response, settings);
       }
     });
     this.get({
@@ -42,8 +50,10 @@
       }
     });
     this.get({
-      '/salao1': function() {
-        return this.render('blocks.ejs');
+      '/salao': function() {
+        return this.render('blocks.ejs', {
+          settings: settings
+        });
       }
     });
     this.get({
@@ -63,6 +73,13 @@
         return this.response.send(_u.chain(flatPlaces()).flatten().filter(function(place) {
           return place.occupied === true;
         }).value());
+      }
+    });
+    this.post({
+      '/config/tempo': function() {
+        console.log(this.request.body);
+        settings.tableRecentTimeMillis = this.request.body.time * 1;
+        return this.response.send(200);
       }
     });
     this.on({

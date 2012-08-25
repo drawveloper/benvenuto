@@ -1,9 +1,12 @@
 require('zappajs') ->
   routes = require './routes'
+  redis = require("redis")
+  client = redis.createClient()
   partials = require 'express-partials'
   placesC = require './places/places.js'
   _u = require 'underscore'
   places = placesC.collection
+  settings = {tableRecentTimeMillis: 60000}
   flatPlaces = ->
     _u.chain(places.tables).map(
       (table) -> table.places
@@ -20,13 +23,19 @@ require('zappajs') ->
   @set 'views', __dirname + '/views'
   @set 'view engine', 'ejs'
 
-  @get '/': -> routes.index @request, @response, {selectedHall: 'HALL_1', tableRecentTimeMillis: 60000}
+  ##Inicialização
+  console.log 'Bem vindo ao Benvenuto!'
+  client.get "places", (err, reply) ->
+    if (!reply)
+      client.set "places", places
+
+  @get '/': -> routes.index @request, @response, settings
 
   @get '/recepcao': ->
     @render 'reception.ejs'
 
-  @get '/salao1': ->
-    @render 'blocks.ejs'
+  @get '/salao': ->
+    @render 'blocks.ejs', settings: settings
 
   @get '/lugares.json': ->
     @response.send places
@@ -41,7 +50,12 @@ require('zappajs') ->
       place.occupied is true
     ).value()
 
-    #Socket IO
+  @post '/config/tempo': ->
+    console.log @request.body
+    settings.tableRecentTimeMillis = @request.body.time * 1
+    @response.send 200
+
+  #Socket IO
   @on 'connection': ->
     @emit welcome: {time: new Date(), data: places}
 

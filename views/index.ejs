@@ -5,44 +5,29 @@ body {
 	background-color: #fff;
 	margin-bottom:20px;
 }
-
 </style>
 
 <div id="selection-box">
 <img src="/images/logo.jpg" />
 
 	<a	href="/recepcao" id="reception-button" class="landing-button"></a>
-	<% if (settings.selectedHall == 'HALL_1') { %>
-		<a	href="/salao1" id="hall-button" class="landing-button" ></a>
-	<% } else { %>
-		<a	href="/salao2" id="hall-button" class="landing-button"></a> 
-	<% } %>
+    <a	href="/salao" id="hall-button" class="landing-button" ></a>
 	<a	href="Reports.reports" id="reports-button" class="landing-button" ></a>
-	<a	id="settings-button" class="landing-button"></a> 
+	<a	id="settings-button" class="landing-button"></a>
 	<div id="settings-div">
 		<form action="Settings.apply" method="POST">
-			<div id="config-checkbox">
-				<label for="hall1">Salão em blocos</label><input type="radio" id="hall1" 
-					name="settings.selectedHall" value="HALL_1"
-                <% if (settings.selectedHall == 'HALL_1') { %> checked="checked" <% } %>
-                />
-				<label for="hall2">Salão em lista</label><input type="radio" id="hall2" 
-					name="settings.selectedHall" value="HALL_2"
-                <% if (settings.selectedHall == 'HALL_2') { %> checked="checked" <% } %>
-                />
-			</div>
 			<div id="recent-time">
 				<label>Quantidade de tempo que uma mesa é considerada recente:</label>
 				<select name="settings.tableRecentTimeMillis">
-					<option value="60000" #{if settings.tableRecentTimeMillis == 60000} selected="selected" #{/if}>Um minuto</option>
-					<option value="300000" #{if settings.tableRecentTimeMillis == 300000} selected="selected" #{/if}>Cinco minutos</option>
-					<option value="600000" #{if settings.tableRecentTimeMillis == 600000} selected="selected" #{/if}>Dez minutos</option>
-					<option value="900000" #{if settings.tableRecentTimeMillis == 900000} selected="selected" #{/if}>Quinze minutos</option>
-					<option value="1200000" #{if settings.tableRecentTimeMillis == 1200000} selected="selected" #{/if}>Vinte minutos</option>
+					<option value="60000" <%if (settings.tableRecentTimeMillis == 60000) { %> selected="selected" <% } %>>Um minuto</option>
+					<option value="300000" <%if (settings.tableRecentTimeMillis == 300000) { %> selected="selected" <% } %>>Cinco minutos</option>
+					<option value="600000" <%if (settings.tableRecentTimeMillis == 600000) { %> selected="selected" <% } %>>Dez minutos</option>
+					<option value="900000" <%if (settings.tableRecentTimeMillis == 900000) { %> selected="selected" <% } %>>Quinze minutos</option>
+					<option value="1200000" <%if (settings.tableRecentTimeMillis == 1200000) { %> selected="selected" <% } %>>Vinte minutos</option>
 				</select>
 			</div>
 			
-			<input type="submit" value="Aplicar modificações" />
+			<input type="button" id="applySettings" value="Aplicar modificações" />
 		</form>
 		</div>
 </div>
@@ -50,5 +35,14 @@ body {
 <script type="text/javascript">
    $("#settings-button").click(function () {
      $("#settings-div").slideToggle("slow");
+   });
+
+   $("#applySettings").click(function(){
+       var time = $('#recent-time').find(":selected").val();
+      console.log(time);
+       $.post('/config/tempo', {time: time}).done(function(){
+           alert('Configuração salva');
+           $("#settings-div").slideToggle("slow");
+       });
    });
 </script>

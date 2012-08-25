@@ -1,5 +1,5 @@
 //TODO receber do servidor
-maxTime = 1000 * 60 * 5;
+var maxTime = tableRecentTimeMillis != void(0) ? tableRecentTimeMillis : 1000 * 60 * 5;
 
 // Classe que representa um lugar
 function Place(id, label, occupied, lastOccupation) {
