@@ -1,22 +1,17 @@
 (function() {
 
   require('zappajs')(function() {
-    var client, flatPlaces, partials, places, placesC, redis, routes, settings, _u,
+    var client, layout, partials, places, redis, routes, settings, _u,
       _this = this;
     routes = require('./routes');
     redis = require("redis");
     client = redis.createClient();
     partials = require('express-partials');
-    placesC = require('./places/places.js');
     _u = require('underscore');
-    places = placesC.collection;
+    layout = (require('./places/newplaces.js')).layout;
+    places = layout.places;
     settings = {
       tableRecentTimeMillis: 60000
-    };
-    flatPlaces = function() {
-      return _u.chain(places.tables).map(function(table) {
-        return table.places;
-      }).flatten().value();
     };
     this.use(partials(), 'bodyParser', 'methodOverride', this.app.router, this.express["static"](__dirname + '/public'));
     this.configure({
@@ -63,14 +58,14 @@
     });
     this.get({
       '/livres.json': function() {
-        return this.response.send(_u.chain(flatPlaces()).filter(function(place) {
+        return this.response.send(_u.chain(places).filter(function(place) {
           return place.occupied === false;
         }).value());
       }
     });
     this.get({
       '/ocupados.json': function() {
-        return this.response.send(_u.chain(flatPlaces()).flatten().filter(function(place) {
+        return this.response.send(_u.chain(places).flatten().filter(function(place) {
           return place.occupied === true;
         }).value());
       }
@@ -87,7 +82,7 @@
         return this.emit({
           welcome: {
             time: new Date(),
-            data: places
+            data: layout
           }
         });
       }
@@ -101,7 +96,7 @@
         console.log(occupiedPlaces);
         _u.each(occupiedPlaces, function(id) {
           var place;
-          place = _u.find(flatPlaces(), function(place) {
+          place = _u.find(places, function(place) {
             return place.id * 1 === id * 1;
           });
           place.occupied = true;
@@ -129,7 +124,7 @@
         console.log(freePlaces);
         _u.each(freePlaces, function(id) {
           var place;
-          place = _u.find(flatPlaces(), function(place) {
+          place = _u.find(places, function(place) {
             return place.id * 1 === id * 1;
           });
           place.occupied = false;

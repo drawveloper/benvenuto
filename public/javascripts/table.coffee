@@ -5,8 +5,3 @@ class window.Table
     @x = ko.observable(x)
     @y = ko.observable(y)
     @places = ko.observableArray()
-
-  addPlace : (json) ->
-    @places.push new Place(json.id, json.label,
-      json.x, json.y, json.occupied, json.numberOfOccupants,
-      this, json.rotation)

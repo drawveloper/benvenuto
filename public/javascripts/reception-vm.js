@@ -48,19 +48,11 @@ function LayoutViewModel() {
     self.name = ko.observable();
     self.loading = ko.observable(false);
     self.gridSizePixels = ko.observable(5);
-    self.tables = ko.observableArray();
     self.hasTeacher = ko.observable(false);
     self.toggleTeacher = function(){
         self.hasTeacher(!self.hasTeacher());
     };
-    self.places = ko.computed(function(){
-        var array = [];
-        for (var table in self.tables()) {
-            var places = self.tables()[table].places();
-            array = array.concat(places);
-        }
-        return array;
-    });
+    self.places = ko.observableArray([]);
     self.numberOfOccupants = ko.observable(1);
     self.addNumberOfOccupants = function(){
         self.numberOfOccupants(self.numberOfOccupants() + 1);
@@ -158,17 +150,12 @@ function LayoutViewModel() {
         self.name(data.name);
         self.gridSizePixels(data.gridSizePixels);
         //Para cada table
-        for (var index in data.tables) {
-            var json = data.tables[index];
-            //Crie uma nova table
-            table = new Table(json.id, json.label, json.x, json.y, json['_class']);
-            self.tables.push(table);
-
-            //Para cada lugar
-            for (var placeIndex in json.places) {
-                var jsonPlace = json.places[placeIndex];
-                table.addPlace(jsonPlace);
-            }
+        for (var index in data.places) {
+            var json = data.places[index];
+            self.places.push(new Place(json.id, json.label,
+                json.x, json.y, json.occupied, json.numberOfOccupants,
+                new Table(json.tableId, '', json.tableX, json.tableY, json.tableClass),
+                json.rotation))
         }
     };
     self.update = function(places){

@@ -3,14 +3,10 @@ require('zappajs') ->
   redis = require("redis")
   client = redis.createClient()
   partials = require 'express-partials'
-  placesC = require './places/places.js'
   _u = require 'underscore'
-  places = placesC.collection
+  layout = (require './places/newplaces.js').layout
+  places = layout.places
   settings = {tableRecentTimeMillis: 60000}
-  flatPlaces = ->
-    _u.chain(places.tables).map(
-      (table) -> table.places
-    ).flatten().value()
 
 ## Configuration
 
@@ -41,12 +37,12 @@ require('zappajs') ->
     @response.send places
 
   @get '/livres.json': ->
-    @response.send _u.chain(flatPlaces()).filter((place) ->
+    @response.send _u.chain(places).filter((place) ->
       place.occupied is false
     ).value()
 
   @get '/ocupados.json': ->
-    @response.send _u.chain(flatPlaces()).flatten().filter((place) ->
+    @response.send _u.chain(places).flatten().filter((place) ->
       place.occupied is true
     ).value()
 
@@ -57,7 +53,7 @@ require('zappajs') ->
 
   #Socket IO
   @on 'connection': ->
-    @emit welcome: {time: new Date(), data: places}
+    @emit welcome: {time: new Date(), data: layout}
 
   @on 'occupy': ->
     console.log @data
@@ -65,7 +61,7 @@ require('zappajs') ->
     occupiedArray = []
     console.log occupiedPlaces
     _u.each occupiedPlaces, (id) ->
-      place = _u.find(flatPlaces(), (place) ->
+      place = _u.find(places, (place) ->
         place.id * 1 is id * 1
       )
       place.occupied = true
@@ -79,7 +75,7 @@ require('zappajs') ->
     freeArray = []
     console.log freePlaces
     _u.each freePlaces, (id) ->
-      place = _u.find(flatPlaces(), (place) ->
+      place = _u.find(places, (place) ->
         place.id * 1 is id * 1
       )
       place.occupied = false

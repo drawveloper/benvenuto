@@ -132,14 +132,10 @@ function LayoutViewModel() {
     self.create = function(data){
         self.name(data.name);
         //Para cada table
-        for (var index in data.tables) {
-            var json = data.tables[index];
-            //Para cada lugar
-            for (var placeIndex in json.places) {
-                var jsonPlace = json.places[placeIndex];
-                self.places.push(new Place(jsonPlace.id, jsonPlace.label, jsonPlace.occupied,
-                    jsonPlace.lastOccupation));
-            }
+        for (var index in data.places) {
+            var jsonPlace = data.places[index];
+            self.places.push(new Place(jsonPlace.id, jsonPlace.label, jsonPlace.occupied,
+                jsonPlace.lastOccupation));
         }
 
         //Coloca na ordem correta
