@@ -1,4 +1,5 @@
 exports.layout = { gridSizePixels:10,
+    id: 1,
     name:'Couveflor-PUC-1',
     places:[
         { id:3,

@@ -21,9 +21,35 @@ require('zappajs') ->
 
   ##Inicialização
   console.log 'Bem vindo ao Benvenuto!'
-  client.get "places", (err, reply) ->
+  client.get "layout", (err, reply) ->
+    if err
+      console.log "Erro ao recuperar layout do banco. Usando mapa default.", err
+      return
+    # Não existe layout - inicialize com o bootstrap do arquivo
     if (!reply)
-      client.set "places", places
+      leanLayout =
+        gridSizePixels: layout.gridSizePixels
+        name: layout.name
+        id: layout.id
+      client.set "layout", JSON.stringify leanLayout
+      layoutKey = "layout:" + leanLayout.id
+      for place in places
+        redisKey = "place:" + place.id
+        client.hset layoutKey, redisKey, JSON.stringify place
+    ###else
+      console.log reply
+      layoutKey = "layout:" + JSON.parse(reply).id
+      console.log layoutKey
+      client.hgetall layoutKey, (err, reply) ->
+        if err
+          console.log "Erro ao recuperar lugares do banco. Usando mapa default.", err
+          return
+        #console.log reply
+        places = []
+        for key, value of reply
+          console.log value
+          places.push JSON.parse value
+        #places = JSON.parse(reply)###
 
   @get '/': -> routes.index @request, @response, settings
 
