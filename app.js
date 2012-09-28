@@ -220,20 +220,21 @@
     });
     return this.on({
       'free': function() {
-        var freeArray, freePlaces;
+        var freeArray, freePlaces, placeId, _i, _len,
+          _this = this;
         freePlaces = this.data.places;
         freeArray = [];
         console.log(freePlaces);
-        _u.each(freePlaces, function(id) {
-          var place;
-          place = _u.find(places, function(place) {
-            return place.id * 1 === id * 1;
+        for (_i = 0, _len = freePlaces.length; _i < _len; _i++) {
+          placeId = freePlaces[_i];
+          getPlace(placeId, function(place) {
+            place.occupied = false;
+            return setPlace(place);
           });
-          place.occupied = false;
-          return freeArray.push({
-            id: place.id
+          freeArray.push({
+            id: placeId
           });
-        });
+        }
         this.broadcast({
           'free': {
             'freePlaces': freeArray

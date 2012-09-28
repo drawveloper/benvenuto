@@ -152,11 +152,13 @@ require('zappajs') ->
     freePlaces = @data.places
     freeArray = []
     console.log freePlaces
-    _u.each freePlaces, (id) ->
-      place = _u.find(places, (place) ->
-        place.id * 1 is id * 1
-      )
-      place.occupied = false
-      freeArray.push {id: place.id}
+    # TODO usar promises e esperar todas voltarem para mandar resposta atômica
+    for placeId in freePlaces
+      getPlace placeId, (place) =>
+        place.occupied = false
+        # Grava o lugar alterado
+        setPlace(place)
+
+      freeArray.push {id: placeId}
     @broadcast 'free' : {'freePlaces': freeArray}
     @ack result: 'ok'
