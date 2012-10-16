@@ -4,10 +4,17 @@ require('zappajs') ->
   client = redis.createClient()
   partials = require 'express-partials'
   _u = require 'underscore'
-  layout = {}
+  layout = {id:1}
   settings = {tableRecentTimeMillis: 60000}
+
+  layoutKey = (id) -> if id then return "layout:" + id else return "layout:" + layout.id
+
+  placeKey = (id) -> return layoutKey() + ":place:" + id
+
+  placeArrayKeys = (idsArray) -> return _u.map idsArray, (id) -> placeKey(id)
+
   initializeRedis = ->
-    # Pegue do banco o layout escolhido atualmente
+    # Pega do banco o layout escolhido atualmente
     client.get "layout", (err, reply) ->
       if err
         console.log "Erro ao recuperar layout do banco. Usando mapa default.", err
@@ -22,53 +29,64 @@ require('zappajs') ->
           name: layout.name
           id: layout.id
         client.set "layout", JSON.stringify leanLayout
-        layoutKey = "layout:" + leanLayout.id
-        # Guarde cada lugar como um field do hash cuja key é esse layout
+        # Guarde cada lugar como uma key separada
+        # E guarde todas as keys num set para recuperar todas
         places = layout.places
         for place in places
-          redisKey = "place:" + place.id
-          client.hset layoutKey, redisKey, JSON.stringify place
+          redisKey = placeKey place.id
+          client.sadd layoutKey(), redisKey
+          client.set redisKey, JSON.stringify place
       # Já existe layout no banco - use ele para essa sessão
       else
         layout = JSON.parse reply
 
-  getAllPlaces = (callback) ->
-    layoutKey = "layout:" + layout.id
-    client.hgetall layoutKey, (err, reply) ->
+  # Retorna do banco todos os lugares identificados pelos id's presentes em idsArray
+  getMultiplePlaces = (idsArray, callback) ->
+    client.mget idsArray, (err, replies) ->
       if err
         console.log "Erro ao recuperar lugares do banco.", err
         callback(undefined)
         return
+      # console.log "Recuperei lugares:", replies
       redisPlaces = []
-      for key, value of reply
-        # console.log value
+      for value in replies
         redisPlaces.push JSON.parse value
-      console.log "Enviando lugares do REDIS: ", redisPlaces
+      # console.log "Enviando lugares do REDIS: ", redisPlaces
       callback(redisPlaces)
+
+  # Retorna todos os lugares do banco
+  getAllPlaces = (callback) ->
+    client.smembers layoutKey(), (err, replyKeys) ->
+      if err
+        console.log "Erro ao recuperar lista de places.", err
+        callback(undefined)
+        return
+      # console.log "Resultado de smembers com ", layoutKey(), "foi", replyKeys
+      getMultiplePlaces replyKeys, callback
 
   getPlace = (id, callback) ->
     layoutKey = "layout:" + layout.id
-    fieldKey = "place:" + id
-    client.hget layoutKey, fieldKey, (err, reply) ->
+    fieldKey = layoutKey + ":place:" + id
+    client.get fieldKey, (err, reply) ->
       if err
         console.log "Erro ao recuperar lugar do banco.", err
         callback(undefined)
         return
       place = JSON.parse reply
-      console.log "Enviando lugar do REDIS: ", place
+      # console.log "Enviando lugar do REDIS: ", place
       callback(place)
 
   setPlace = (place) ->
     layoutKey = "layout:" + layout.id
-    fieldKey = "place:" + place.id
-    client.hset layoutKey, fieldKey, JSON.stringify place
+    fieldKey = layoutKey + ":place:" + place.id
+    client.set fieldKey, JSON.stringify place
 
 
   # Configuration
   @use partials(), 'bodyParser', 'methodOverride', @app.router, @express.static __dirname + '/public'
 
   @configure
-    development: => @use errorHandler: {dumpExceptions: on}
+    development: => @use 'errorHandler'
     production: => @use 'errorHandler'
 
   @set 'views', __dirname + '/views'
@@ -124,6 +142,7 @@ require('zappajs') ->
     occupationDate = new Date()
     ackSent = false
     # TODO usar promises e esperar todas voltarem para mandar resposta atômica
+    ###
     for placeId in occupiedPlaces
       getPlace placeId, (place) =>
         if ackSent
@@ -144,7 +163,9 @@ require('zappajs') ->
     # Foi abortado no meio da operação.
     if ackSent
       return
-
+    ###
+    console.log placeArrayKeys(occupiedPlaces)
+    getMultiplePlaces( placeArrayKeys(occupiedPlaces), (places) => console.log places )
     @broadcast 'occupy' : {'occupiedPlaces': occupiedArray}
     @ack result: 'ok'
 

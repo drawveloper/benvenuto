@@ -1,20 +1,37 @@
 (function() {
 
   require('zappajs')(function() {
-    var client, getAllPlaces, getPlace, initializeRedis, layout, partials, redis, routes, setPlace, settings, _u,
+    var client, getAllPlaces, getMultiplePlaces, getPlace, initializeRedis, layout, layoutKey, partials, placeArrayKeys, placeKey, redis, routes, setPlace, settings, _u,
       _this = this;
     routes = require('./routes');
     redis = require("redis");
     client = redis.createClient();
     partials = require('express-partials');
     _u = require('underscore');
-    layout = {};
+    layout = {
+      id: 1
+    };
     settings = {
       tableRecentTimeMillis: 60000
     };
+    layoutKey = function(id) {
+      if (id) {
+        return "layout:" + id;
+      } else {
+        return "layout:" + layout.id;
+      }
+    };
+    placeKey = function(id) {
+      return layoutKey() + ":place:" + id;
+    };
+    placeArrayKeys = function(idsArray) {
+      return _u.map(idsArray, function(id) {
+        return placeKey(id);
+      });
+    };
     initializeRedis = function() {
       return client.get("layout", function(err, reply) {
-        var layoutKey, leanLayout, place, places, redisKey, _i, _len, _results;
+        var leanLayout, place, places, redisKey, _i, _len, _results;
         if (err) {
           console.log("Erro ao recuperar layout do banco. Usando mapa default.", err);
           layout = (require('./places/newplaces.js')).layout;
@@ -28,13 +45,13 @@
             id: layout.id
           };
           client.set("layout", JSON.stringify(leanLayout));
-          layoutKey = "layout:" + leanLayout.id;
           places = layout.places;
           _results = [];
           for (_i = 0, _len = places.length; _i < _len; _i++) {
             place = places[_i];
-            redisKey = "place:" + place.id;
-            _results.push(client.hset(layoutKey, redisKey, JSON.stringify(place)));
+            redisKey = placeKey(place.id);
+            client.sadd(layoutKey(), redisKey);
+            _results.push(client.set(redisKey, JSON.stringify(place)));
           }
           return _results;
         } else {
@@ -42,30 +59,37 @@
         }
       });
     };
-    getAllPlaces = function(callback) {
-      var layoutKey;
-      layoutKey = "layout:" + layout.id;
-      return client.hgetall(layoutKey, function(err, reply) {
-        var key, redisPlaces, value;
+    getMultiplePlaces = function(idsArray, callback) {
+      return client.mget(idsArray, function(err, replies) {
+        var redisPlaces, value, _i, _len;
         if (err) {
           console.log("Erro ao recuperar lugares do banco.", err);
           callback(void 0);
           return;
         }
         redisPlaces = [];
-        for (key in reply) {
-          value = reply[key];
+        for (_i = 0, _len = replies.length; _i < _len; _i++) {
+          value = replies[_i];
           redisPlaces.push(JSON.parse(value));
         }
-        console.log("Enviando lugares do REDIS: ", redisPlaces);
         return callback(redisPlaces);
       });
     };
+    getAllPlaces = function(callback) {
+      return client.smembers(layoutKey(), function(err, replyKeys) {
+        if (err) {
+          console.log("Erro ao recuperar lista de places.", err);
+          callback(void 0);
+          return;
+        }
+        return getMultiplePlaces(replyKeys, callback);
+      });
+    };
     getPlace = function(id, callback) {
-      var fieldKey, layoutKey;
+      var fieldKey;
       layoutKey = "layout:" + layout.id;
-      fieldKey = "place:" + id;
-      return client.hget(layoutKey, fieldKey, function(err, reply) {
+      fieldKey = layoutKey + ":place:" + id;
+      return client.get(fieldKey, function(err, reply) {
         var place;
         if (err) {
           console.log("Erro ao recuperar lugar do banco.", err);
@@ -73,24 +97,19 @@
           return;
         }
         place = JSON.parse(reply);
-        console.log("Enviando lugar do REDIS: ", place);
         return callback(place);
       });
     };
     setPlace = function(place) {
-      var fieldKey, layoutKey;
+      var fieldKey;
       layoutKey = "layout:" + layout.id;
-      fieldKey = "place:" + place.id;
-      return client.hset(layoutKey, fieldKey, JSON.stringify(place));
+      fieldKey = layoutKey + ":place:" + place.id;
+      return client.set(fieldKey, JSON.stringify(place));
     };
     this.use(partials(), 'bodyParser', 'methodOverride', this.app.router, this.express["static"](__dirname + '/public'));
     this.configure({
       development: function() {
-        return _this.use({
-          errorHandler: {
-            dumpExceptions: true
-          }
-        });
+        return _this.use('errorHandler');
       },
       production: function() {
         return _this.use('errorHandler');
@@ -175,7 +194,7 @@
     });
     this.on({
       'occupy': function() {
-        var ackSent, occupationDate, occupiedArray, occupiedPlaces, placeId, _i, _len,
+        var ackSent, occupationDate, occupiedArray, occupiedPlaces,
           _this = this;
         console.log(this.data);
         occupiedPlaces = this.data.places;
@@ -183,31 +202,33 @@
         console.log(occupiedPlaces);
         occupationDate = new Date();
         ackSent = false;
-        for (_i = 0, _len = occupiedPlaces.length; _i < _len; _i++) {
-          placeId = occupiedPlaces[_i];
-          getPlace(placeId, function(place) {
-            if (ackSent) {
-              return;
-            }
-            if (place.occupied) {
-              _this.ack({
-                result: 'fail'
-              });
-              ackSent = true;
-              return;
-            }
-            place.occupied = true;
-            place.lastOccupation = occupationDate;
-            return setPlace(place);
-          });
-          occupiedArray.push({
-            id: placeId,
-            lastOccupation: occupationDate
-          });
-        }
-        if (ackSent) {
-          return;
-        }
+        /*
+            for placeId in occupiedPlaces
+              getPlace placeId, (place) =>
+                if ackSent
+                  return
+        
+                if place.occupied
+                  @ack result: 'fail'
+                  ackSent = true
+                  return
+        
+                place.occupied = true
+                place.lastOccupation = occupationDate
+                # Grava o lugar alterado
+                setPlace(place)
+        
+              occupiedArray.push {id: placeId, lastOccupation: occupationDate}
+        
+            # Foi abortado no meio da operação.
+            if ackSent
+              return
+        */
+
+        console.log(placeArrayKeys(occupiedPlaces));
+        getMultiplePlaces(placeArrayKeys(occupiedPlaces), function(places) {
+          return console.log(places);
+        });
         this.broadcast({
           'occupy': {
             'occupiedPlaces': occupiedArray
