@@ -144,6 +144,12 @@ require('zappajs') ->
     console.log 'Recebido evento occupy', @data
     # occupiedPlacesIds é um array com os id's inteiros de todos os lugares a serem ocupados
     occupiedPlacesIds = @data.places
+
+    # Ignore mensagens com array vazio de ids
+    if occupiedPlacesIds.length is 0
+      @ack result: 'ok'
+      return
+
     lastOccupation = new Date()
     # Watch todas as keys - se qualquer uma delas for alterada, a transação é abortada
     client.watch placeArrayKeys(occupiedPlacesIds)
@@ -177,6 +183,12 @@ require('zappajs') ->
     console.log 'Recebido evento occupy', @data
     # freePlacesIds é um array com os id's inteiros de todos os lugares a serem liberados
     freePlacesIds = @data.places
+
+    # Ignore mensagens com array vazio de ids
+    if freePlacesIds.length is 0
+      @ack result: 'ok'
+      return
+
     getMultiplePlaces freePlacesIds, (places) =>
       console.log places
       _u.each places, (p) ->

@@ -207,6 +207,12 @@
           _this = this;
         console.log('Recebido evento occupy', this.data);
         occupiedPlacesIds = this.data.places;
+        if (occupiedPlacesIds.length === 0) {
+          this.ack({
+            result: 'ok'
+          });
+          return;
+        }
         lastOccupation = new Date();
         client.watch(placeArrayKeys(occupiedPlacesIds));
         return getMultiplePlaces(occupiedPlacesIds, function(places) {
@@ -264,6 +270,12 @@
           _this = this;
         console.log('Recebido evento occupy', this.data);
         freePlacesIds = this.data.places;
+        if (freePlacesIds.length === 0) {
+          this.ack({
+            result: 'ok'
+          });
+          return;
+        }
         return getMultiplePlaces(freePlacesIds, function(places) {
           console.log(places);
           _u.each(places, function(p) {
