@@ -41,8 +41,10 @@ require('zappajs') ->
         layout = JSON.parse reply
 
   # Retorna do banco todos os lugares identificados pelos id's presentes em idsArray
-  getMultiplePlaces = (idsArray, callback) ->
-    client.mget idsArray, (err, replies) ->
+  # keysAreStructured indica se as chaves são apenas os ids inteiros ou já contem o namespace.
+  getMultiplePlaces = (idsArray, callback, keysAreStructured) ->
+    placeKeys = if keysAreStructured then idsArray else placeArrayKeys(idsArray);
+    client.mget placeKeys, (err, replies) ->
       if err
         console.log "Erro ao recuperar lugares do banco.", err
         callback(undefined)
@@ -62,7 +64,9 @@ require('zappajs') ->
         callback(undefined)
         return
       # console.log "Resultado de smembers com ", layoutKey(), "foi", replyKeys
-      getMultiplePlaces replyKeys, callback
+      # SMEMBERS já devolve as keys com o namespace apropriado, eg. layout:1:place:2
+      keysAreStructured = true
+      getMultiplePlaces replyKeys, callback, keysAreStructured
 
   getPlace = (id, callback) ->
     layoutKey = "layout:" + layout.id
@@ -76,11 +80,13 @@ require('zappajs') ->
       # console.log "Enviando lugar do REDIS: ", place
       callback(place)
 
-  setPlace = (place) ->
-    layoutKey = "layout:" + layout.id
-    fieldKey = layoutKey + ":place:" + place.id
-    client.set fieldKey, JSON.stringify place
-
+  setPlacesMulti = (places, execCallback) ->
+    argsArray = []
+    for place in places
+      fieldKey = placeKey place.id
+      argsArray.push fieldKey
+      argsArray.push JSON.stringify place
+    client.multi().mset(argsArray).exec execCallback
 
   # Configuration
   @use partials(), 'bodyParser', 'methodOverride', @app.router, @express.static __dirname + '/public'
@@ -135,51 +141,52 @@ require('zappajs') ->
       console.log layout
 
   @on 'occupy': ->
-    console.log @data
-    occupiedPlaces = @data.places
-    occupiedArray = []
-    console.log occupiedPlaces
-    occupationDate = new Date()
-    ackSent = false
-    # TODO usar promises e esperar todas voltarem para mandar resposta atômica
-    ###
-    for placeId in occupiedPlaces
-      getPlace placeId, (place) =>
-        if ackSent
+    console.log 'Recebido evento occupy', @data
+    # occupiedPlacesIds é um array com os id's inteiros de todos os lugares a serem ocupados
+    occupiedPlacesIds = @data.places
+    lastOccupation = new Date()
+    # Watch todas as keys - se qualquer uma delas for alterada, a transação é abortada
+    client.watch placeArrayKeys(occupiedPlacesIds)
+    getMultiplePlaces occupiedPlacesIds, (places) =>
+      console.log places
+      alreadyOccupiedPlaces = []
+      for place in places
+        if place.occupied then alreadyOccupiedPlaces.push(place)
+      if alreadyOccupiedPlaces.length > 0
+        # Já existem lugares ocupados
+        client.unwatch()
+        # Avisa a interface quais lugares já estavam ocupados
+        @ack {result: 'fail', alreadyOccupiedPlaces: alreadyOccupiedPlaces}
+        return
+
+      # Nenhum lugar está ocupado - inicie uma transação com MULTI para ocupar todos
+      _u.each places, (p) ->
+        p.occupied = true
+        p.lastOccupation = lastOccupation
+      setPlacesMulti places, (err, replies) =>
+        if err or replies is null
+          console.log "Erro ao salvar os lugares no banco:", err
+          @ack {result: 'fail'}
           return
-
-        if place.occupied
-          @ack result: 'fail'
-          ackSent = true
-          return
-
-        place.occupied = true
-        place.lastOccupation = occupationDate
-        # Grava o lugar alterado
-        setPlace(place)
-
-      occupiedArray.push {id: placeId, lastOccupation: occupationDate}
-
-    # Foi abortado no meio da operação.
-    if ackSent
-      return
-    ###
-    console.log placeArrayKeys(occupiedPlaces)
-    getMultiplePlaces( placeArrayKeys(occupiedPlaces), (places) => console.log places )
-    @broadcast 'occupy' : {'occupiedPlaces': occupiedArray}
-    @ack result: 'ok'
+        # Monta um array somente com o necessario para passar aos outros clientes
+        occupiedPlacesArray = _u.map places, (p) -> {id: p.id, lastOccupation: p.lastOccupation}
+        @broadcast 'occupy' : {'occupiedPlaces': occupiedPlacesArray}
+        @ack result: 'ok'
 
   @on 'free': ->
-    freePlaces = @data.places
-    freeArray = []
-    console.log freePlaces
-    # TODO usar promises e esperar todas voltarem para mandar resposta atômica
-    for placeId in freePlaces
-      getPlace placeId, (place) =>
-        place.occupied = false
-        # Grava o lugar alterado
-        setPlace(place)
-
-      freeArray.push {id: placeId}
-    @broadcast 'free' : {'freePlaces': freeArray}
-    @ack result: 'ok'
+    console.log 'Recebido evento occupy', @data
+    # freePlacesIds é um array com os id's inteiros de todos os lugares a serem liberados
+    freePlacesIds = @data.places
+    getMultiplePlaces freePlacesIds, (places) =>
+      console.log places
+      _u.each places, (p) ->
+        p.occupied = false
+      setPlacesMulti places, (err, replies) =>
+        if err or replies is null
+          console.log "Erro ao salvar os lugares no banco:", err
+          @ack {result: 'fail'}
+          return
+        # Monta um array somente com o necessario para passar aos outros clientes
+        freePlacesArray = _u.map places, (p) -> {id: p.id}
+        @broadcast 'free' : {'freePlaces': freePlacesArray}
+        @ack result: 'ok'

@@ -1,7 +1,7 @@
 (function() {
 
   require('zappajs')(function() {
-    var client, getAllPlaces, getMultiplePlaces, getPlace, initializeRedis, layout, layoutKey, partials, placeArrayKeys, placeKey, redis, routes, setPlace, settings, _u,
+    var client, getAllPlaces, getMultiplePlaces, getPlace, initializeRedis, layout, layoutKey, partials, placeArrayKeys, placeKey, redis, routes, setPlacesMulti, settings, _u,
       _this = this;
     routes = require('./routes');
     redis = require("redis");
@@ -59,8 +59,10 @@
         }
       });
     };
-    getMultiplePlaces = function(idsArray, callback) {
-      return client.mget(idsArray, function(err, replies) {
+    getMultiplePlaces = function(idsArray, callback, keysAreStructured) {
+      var placeKeys;
+      placeKeys = keysAreStructured ? idsArray : placeArrayKeys(idsArray);
+      return client.mget(placeKeys, function(err, replies) {
         var redisPlaces, value, _i, _len;
         if (err) {
           console.log("Erro ao recuperar lugares do banco.", err);
@@ -77,12 +79,14 @@
     };
     getAllPlaces = function(callback) {
       return client.smembers(layoutKey(), function(err, replyKeys) {
+        var keysAreStructured;
         if (err) {
           console.log("Erro ao recuperar lista de places.", err);
           callback(void 0);
           return;
         }
-        return getMultiplePlaces(replyKeys, callback);
+        keysAreStructured = true;
+        return getMultiplePlaces(replyKeys, callback, keysAreStructured);
       });
     };
     getPlace = function(id, callback) {
@@ -100,11 +104,16 @@
         return callback(place);
       });
     };
-    setPlace = function(place) {
-      var fieldKey;
-      layoutKey = "layout:" + layout.id;
-      fieldKey = layoutKey + ":place:" + place.id;
-      return client.set(fieldKey, JSON.stringify(place));
+    setPlacesMulti = function(places, execCallback) {
+      var argsArray, fieldKey, place, _i, _len;
+      argsArray = [];
+      for (_i = 0, _len = places.length; _i < _len; _i++) {
+        place = places[_i];
+        fieldKey = placeKey(place.id);
+        argsArray.push(fieldKey);
+        argsArray.push(JSON.stringify(place));
+      }
+      return client.multi().mset(argsArray).exec(execCallback);
     };
     this.use(partials(), 'bodyParser', 'methodOverride', this.app.router, this.express["static"](__dirname + '/public'));
     this.configure({
@@ -194,75 +203,95 @@
     });
     this.on({
       'occupy': function() {
-        var ackSent, occupationDate, occupiedArray, occupiedPlaces,
+        var lastOccupation, occupiedPlacesIds,
           _this = this;
-        console.log(this.data);
-        occupiedPlaces = this.data.places;
-        occupiedArray = [];
-        console.log(occupiedPlaces);
-        occupationDate = new Date();
-        ackSent = false;
-        /*
-            for placeId in occupiedPlaces
-              getPlace placeId, (place) =>
-                if ackSent
-                  return
-        
-                if place.occupied
-                  @ack result: 'fail'
-                  ackSent = true
-                  return
-        
-                place.occupied = true
-                place.lastOccupation = occupationDate
-                # Grava o lugar alterado
-                setPlace(place)
-        
-              occupiedArray.push {id: placeId, lastOccupation: occupationDate}
-        
-            # Foi abortado no meio da operação.
-            if ackSent
-              return
-        */
-
-        console.log(placeArrayKeys(occupiedPlaces));
-        getMultiplePlaces(placeArrayKeys(occupiedPlaces), function(places) {
-          return console.log(places);
-        });
-        this.broadcast({
-          'occupy': {
-            'occupiedPlaces': occupiedArray
+        console.log('Recebido evento occupy', this.data);
+        occupiedPlacesIds = this.data.places;
+        lastOccupation = new Date();
+        client.watch(placeArrayKeys(occupiedPlacesIds));
+        return getMultiplePlaces(occupiedPlacesIds, function(places) {
+          var alreadyOccupiedPlaces, place, _i, _len;
+          console.log(places);
+          alreadyOccupiedPlaces = [];
+          for (_i = 0, _len = places.length; _i < _len; _i++) {
+            place = places[_i];
+            if (place.occupied) {
+              alreadyOccupiedPlaces.push(place);
+            }
           }
-        });
-        return this.ack({
-          result: 'ok'
+          if (alreadyOccupiedPlaces.length > 0) {
+            client.unwatch();
+            _this.ack({
+              result: 'fail',
+              alreadyOccupiedPlaces: alreadyOccupiedPlaces
+            });
+            return;
+          }
+          _u.each(places, function(p) {
+            p.occupied = true;
+            return p.lastOccupation = lastOccupation;
+          });
+          return setPlacesMulti(places, function(err, replies) {
+            var occupiedPlacesArray;
+            if (err || replies === null) {
+              console.log("Erro ao salvar os lugares no banco:", err);
+              _this.ack({
+                result: 'fail'
+              });
+              return;
+            }
+            occupiedPlacesArray = _u.map(places, function(p) {
+              return {
+                id: p.id,
+                lastOccupation: p.lastOccupation
+              };
+            });
+            _this.broadcast({
+              'occupy': {
+                'occupiedPlaces': occupiedPlacesArray
+              }
+            });
+            return _this.ack({
+              result: 'ok'
+            });
+          });
         });
       }
     });
     return this.on({
       'free': function() {
-        var freeArray, freePlaces, placeId, _i, _len,
+        var freePlacesIds,
           _this = this;
-        freePlaces = this.data.places;
-        freeArray = [];
-        console.log(freePlaces);
-        for (_i = 0, _len = freePlaces.length; _i < _len; _i++) {
-          placeId = freePlaces[_i];
-          getPlace(placeId, function(place) {
-            place.occupied = false;
-            return setPlace(place);
+        console.log('Recebido evento occupy', this.data);
+        freePlacesIds = this.data.places;
+        return getMultiplePlaces(freePlacesIds, function(places) {
+          console.log(places);
+          _u.each(places, function(p) {
+            return p.occupied = false;
           });
-          freeArray.push({
-            id: placeId
+          return setPlacesMulti(places, function(err, replies) {
+            var freePlacesArray;
+            if (err || replies === null) {
+              console.log("Erro ao salvar os lugares no banco:", err);
+              _this.ack({
+                result: 'fail'
+              });
+              return;
+            }
+            freePlacesArray = _u.map(places, function(p) {
+              return {
+                id: p.id
+              };
+            });
+            _this.broadcast({
+              'free': {
+                'freePlaces': freePlacesArray
+              }
+            });
+            return _this.ack({
+              result: 'ok'
+            });
           });
-        }
-        this.broadcast({
-          'free': {
-            'freePlaces': freeArray
-          }
-        });
-        return this.ack({
-          result: 'ok'
         });
       }
     });

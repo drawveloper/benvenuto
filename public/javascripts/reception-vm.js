@@ -68,11 +68,6 @@ function LayoutViewModel() {
         });
         return count;
     });
-    self.findTableById = function(id) {
-        return ko.utils.arrayFirst(self.tables(), function(item) {
-            return item.id == id;
-        });
-    };
     self.findPlaceById = function(id) {
         return ko.utils.arrayFirst(self.places(), function(item) {
             return item.id == id;
