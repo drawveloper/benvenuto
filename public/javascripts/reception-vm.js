@@ -112,7 +112,7 @@ function LayoutViewModel() {
         $.each(self.selectedPlaces(), function(index, value) {
             selectedPlaces.places.push(value.id*1);
         });
-        if ($.isEmptyObject(selectedPlaces)) {
+        if (selectedPlaces.places.length == 0) {
             //TODO tratar validação - pedir para selecionar mesas.
             return false;
         }
