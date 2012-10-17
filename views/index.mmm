@@ -17,12 +17,10 @@ body {
 		<form action="Settings.apply" method="POST">
 			<div id="recent-time">
 				<label>Quantidade de tempo que uma mesa é considerada recente:</label>
-				<select name="settings.tableRecentTimeMillis">
-					<option value="60000" <%if (tableRecentTimeMillis == 60000) { %> selected="selected" <% } %>>Um minuto</option>
-					<option value="300000" <%if (tableRecentTimeMillis == 300000) { %> selected="selected" <% } %>>Cinco minutos</option>
-					<option value="600000" <%if (tableRecentTimeMillis == 600000) { %> selected="selected" <% } %>>Dez minutos</option>
-					<option value="900000" <%if (tableRecentTimeMillis == 900000) { %> selected="selected" <% } %>>Quinze minutos</option>
-					<option value="1200000" <%if (tableRecentTimeMillis == 1200000) { %> selected="selected" <% } %>>Vinte minutos</option>
+				<select name="tableRecentTimeMillis">
+                    {{#tableRecentOptions}}
+                    <option value="{{value}}" {{#selected}}selected="selected"{{/selected}}>{{text}}</option>
+                    {{/tableRecentOptions}}
 				</select>
 			</div>
 			

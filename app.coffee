@@ -16,7 +16,35 @@ layout = {id:1}
 #
 # Configurações do aplicativo
 #
-settings = {tableRecentTimeMillis: 60000}
+settings = {
+  tableRecentOptions: [
+    {
+      value: 1 * 60 * 1000,
+      text: 'Um minuto',
+      selected: false
+    },
+    {
+    value: 5 * 60 * 1000,
+    text: 'Cinco minutos',
+    selected: false
+    },
+    {
+    value: 10 * 60 * 1000,
+    text: 'Dez minutos',
+    selected: false
+    },
+    {
+    value: 15 * 60 * 1000,
+    text: 'Quinze minutos',
+    selected: false
+    },
+    {
+    value: 20 * 60 * 1000,
+    text: 'Vinte minutos',
+    selected: true
+    },
+  ]
+}
 
 app.configure ->
   app.set "port", process.env.PORT or 3000
@@ -32,9 +60,6 @@ app.configure ->
 
 app.configure "development", ->
   app.use express.errorHandler()
-
-app.get "/", (req, res) ->
-  res.render 'index'
 
 #
 # Mapeamento de identificadores
@@ -155,8 +180,13 @@ app.get '/ocupados.json', (req, res) ->
     ).value()
 
 app.post '/config/tempo', (req, res) ->
-  console.log app.request.body
-  settings.tableRecentTimeMillis = app.request.body.time * 1
+  console.log req.body
+  tableRecentTimeMillis = req.body.time * 1
+  _u.each settings.tableRecentOptions, (option) ->
+    if option.value is tableRecentTimeMillis
+      option.selected = true
+    else
+      option.selected = false
   res.send 200
 
 #

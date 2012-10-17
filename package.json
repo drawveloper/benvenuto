@@ -8,7 +8,8 @@
     "socket.io" : "0.9.10",
     "mmm" : "0.1.0",
     "redis" : "0.8.x",
-    "underscore" : "1.4.x"
+    "underscore" : "1.4.x",
+    "d3" : "2.10.3"
   },
   "engines": {
     "node": ">=0.8"
