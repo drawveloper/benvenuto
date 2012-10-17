@@ -2,179 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db699745-3793-4f2f-ba2a-48527ce9bbf5" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/.bin/handlebars" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/.jshintrc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/.rspec" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/README.markdown" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/bin/handlebars" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/lib/handlebars.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/lib/handlebars/base.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/lib/handlebars/compiler/ast.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/lib/handlebars/compiler/base.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/lib/handlebars/compiler/compiler.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/lib/handlebars/compiler/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/lib/handlebars/compiler/parser.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/lib/handlebars/compiler/printer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/lib/handlebars/compiler/visitor.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/lib/handlebars/runtime.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/lib/handlebars/utils.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/.bin/uglifyjs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/.travis.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/README.markdown" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/example/bool.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/example/boolean_double.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/example/boolean_single.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/example/default_hash.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/example/default_singles.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/example/divide.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/example/line_count.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/example/line_count_options.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/example/line_count_wrap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/example/nonopt.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/example/reflect.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/example/short.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/example/string.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/example/usage-options.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/example/xup.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/node_modules/wordwrap/.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/node_modules/wordwrap/README.markdown" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/node_modules/wordwrap/example/center.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/node_modules/wordwrap/example/meat.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/node_modules/wordwrap/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/node_modules/wordwrap/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/node_modules/wordwrap/test/break.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/node_modules/wordwrap/test/idleness.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/node_modules/wordwrap/test/wrap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/test/_.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/test/_/argv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/test/_/bin.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/test/parse.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/test/usage.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/optimist/x.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/README.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/README.org" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/bin/uglifyjs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/docstyle.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/lib/consolidator.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/lib/object-ast.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/lib/parse-js.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/lib/process.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/lib/squeeze-more.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/beautify.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/testparser.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/array1.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/array2.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/array3.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/array4.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/assignment.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/concatstring.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/const.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/empty-blocks.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/forstatement.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/if.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/ifreturn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/ifreturn2.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue10.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue11.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue13.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue14.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue16.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue17.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue20.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue21.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue25.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue27.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue278.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue28.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue29.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue30.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue34.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue4.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue48.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue50.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue53.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue54.1.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue68.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue69.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/issue9.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/mangle.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/null_string.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/strict-equals.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/var.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/whitespace.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/expected/with.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/array1.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/array2.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/array3.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/array4.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/assignment.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/concatstring.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/const.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/empty-blocks.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/forstatement.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/if.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/ifreturn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/ifreturn2.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue10.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue11.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue13.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue14.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue16.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue17.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue20.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue21.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue25.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue27.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue278.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue28.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue29.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue30.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue34.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue4.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue48.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue50.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue53.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue54.1.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue68.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue69.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/issue9.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/mangle.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/null_string.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/strict-equals.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/var.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/whitespace.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/compress/test/with.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/test/unit/scripts.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/tmp/269.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/tmp/app.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/tmp/embed-tokens.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/tmp/goto.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/tmp/goto2.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/tmp/hoist.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/tmp/instrument.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/tmp/instrument2.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/tmp/liftvars.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/tmp/test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/tmp/uglify-hangs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/tmp/uglify-hangs2.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/node_modules/uglify-js/uglify-js.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/handlebars/package.json" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/views/blocks.handlebars" afterPath="$PROJECT_DIR$/views/blocks.hogan" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/views/footer.handlebars" afterPath="$PROJECT_DIR$/views/footer.hogan" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/views/header.handlebars" afterPath="$PROJECT_DIR$/views/header.hogan" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/views/index.handlebars" afterPath="$PROJECT_DIR$/views/index.hogan" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/views/reception.handlebars" afterPath="$PROJECT_DIR$/views/reception.hogan" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/js/app.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/consolidate/.npmignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/consolidate/History.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/consolidate/Makefile" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/consolidate/Readme.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/consolidate/index.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/consolidate/lib/consolidate.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/consolidate/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/views/footer.hogan" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/coffee/app.coffee" afterPath="$PROJECT_DIR$/app.coffee" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/views/blocks.hogan" afterPath="$PROJECT_DIR$/views/blocks.mmm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/views/header.hogan" afterPath="$PROJECT_DIR$/views/layout.mmm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/views/index.hogan" afterPath="$PROJECT_DIR$/views/index.mmm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/views/reception.hogan" afterPath="$PROJECT_DIR$/views/reception.mmm" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/coffee/app.coffee" afterPath="$PROJECT_DIR$/coffee/app.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/app.js" afterPath="$PROJECT_DIR$/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/compile.sh" afterPath="$PROJECT_DIR$/compile.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/start.sh" afterPath="$PROJECT_DIR$/start.sh" />
     </list>
     <ignored path="benvenuto-node.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -197,27 +42,56 @@
   <component name="FileEditorManager">
     <leaf>
       <file leaf-file-name="app.coffee" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/coffee/app.coffee">
+        <entry file="file://$PROJECT_DIR$/app.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="109" column="0" selection-start="3849" selection-end="3849" vertical-scroll-proportion="0.63712376">
+            <state line="110" column="14" selection-start="3870" selection-end="3870" vertical-scroll-proportion="0.5986622">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="header.hogan" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/header.hogan">
+      <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="32" selection-start="67" selection-end="67" vertical-scroll-proportion="-2.5">
+            <state line="122" column="7" selection-start="4133" selection-end="4133" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1350494645000" expanded="true" signature="4484:4537" placeholder="{&quot;header&quot;: 'header'...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="compile.sh" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/compile.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="29" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.hogan" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/index.hogan">
+      <file leaf-file-name="start.sh" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/start.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="11" selection-start="11" selection-end="11" vertical-scroll-proportion="-0.0">
+            <state line="1" column="18" selection-start="30" selection-end="30" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="22" selection-start="244" selection-end="244" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.mmm" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/index.mmm">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="47" column="9" selection-start="1910" selection-end="1910" vertical-scroll-proportion="-19.625">
               <folding />
             </state>
           </provider>
@@ -238,11 +112,16 @@
       <list>
         <option value="$PROJECT_DIR$/views/header.handlebars" />
         <option value="$PROJECT_DIR$/views/footer.handlebars" />
-        <option value="$PROJECT_DIR$/js/app.js" />
         <option value="$PROJECT_DIR$/views/index.handlebars" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/views/index.hogan" />
+        <option value="$PROJECT_DIR$/js/app.js" />
         <option value="$PROJECT_DIR$/coffee/app.coffee" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/views/layout.mmm" />
+        <option value="$PROJECT_DIR$/views/index.mmm" />
+        <option value="$PROJECT_DIR$/compile.sh" />
+        <option value="$PROJECT_DIR$/start.sh" />
+        <option value="$PROJECT_DIR$/app.coffee" />
       </list>
     </option>
   </component>
@@ -334,20 +213,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="benvenuto-node" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="benvenuto-node" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="coffee" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -363,6 +228,9 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/views" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunManager">
@@ -381,12 +249,18 @@
       <created>1350442146796</created>
       <updated>1350442146796</updated>
     </task>
+    <task id="LOCAL-00001" summary="começando a usar hogan">
+      <created>1350447753277</created>
+      <updated>1350447753277</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="29" width="1368" height="745" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
@@ -443,7 +317,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" />
+    <option name="LAST_COMMIT_MESSAGE" value="começando a usar hogan" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -456,19 +330,13 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+    <MESSAGE value="começando a usar hogan" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/views/blocks.hogan">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/footer.hogan">
+    <entry file="file://$PROJECT_DIR$/views/blocks.mmm">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
@@ -482,37 +350,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/app.js">
+    <entry file="file://$PROJECT_DIR$/views/layout.mmm">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="120" column="7" selection-start="4063" selection-end="4063" vertical-scroll-proportion="0.46153846">
+        <state line="20" column="16" selection-start="834" selection-end="834" vertical-scroll-proportion="0.50167227">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/index.mmm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="9" selection-start="1910" selection-end="1910" vertical-scroll-proportion="-19.625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coffee/utils.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coffee/table.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coffee/places.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coffee/convertTables.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/compile.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="29" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/start.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="18" selection-start="30" selection-end="30" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="19" selection-start="249" selection-end="249" vertical-scroll-proportion="0.2006689">
+        <state line="8" column="22" selection-start="244" selection-end="244" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/header.hogan">
+    <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="32" selection-start="67" selection-end="67" vertical-scroll-proportion="-2.5">
-          <folding />
+        <state line="122" column="7" selection-start="4133" selection-end="4133" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1350494645000" expanded="true" signature="4484:4537" placeholder="{&quot;header&quot;: 'header'...}" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/index.hogan">
+    <entry file="file://$PROJECT_DIR$/app.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="11" selection-start="11" selection-end="11" vertical-scroll-proportion="-0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/coffee/app.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="0" selection-start="3849" selection-end="3849" vertical-scroll-proportion="0.63712376">
+        <state line="110" column="14" selection-start="3870" selection-end="3870" vertical-scroll-proportion="0.5986622">
           <folding />
         </state>
       </provider>

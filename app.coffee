@@ -1,5 +1,4 @@
 require('zappajs') ->
-  cons = require 'consolidate'
   redis = require 'redis'
   client = redis.createClient()
   _u = require 'underscore'
@@ -17,11 +16,11 @@ require('zappajs') ->
     client.get "layout", (err, reply) ->
       if err
         console.log "Erro ao recuperar layout do banco. Usando mapa default.", err
-        layout = (require '../js/newplaces.js').layout
+        layout = (require 'js/newplaces.js').layout
         return
       # Não existe layout - inicialize com o default do arquivo
       if (!reply)
-        layout = (require '../js/newplaces.js').layout
+        layout = (require 'js/newplaces.js').layout
         # Não guarde os lugares no layout
         leanLayout =
           gridSizePixels: layout.gridSizePixels
@@ -92,30 +91,31 @@ require('zappajs') ->
     'methodOverride',
     @app.router
 
-  @app.use '/js', @express.static(__dirname + '/../js')
-  @app.use '/img', @express.static(__dirname + '/../img')
-  @app.use '/css', @express.static(__dirname + '/../css')
-
-  @app.engine 'hogan', cons.hogan
+  # Static folders
+  @app.use '/js', @express.static(__dirname + '/js')
+  @app.use '/img', @express.static(__dirname + '/img')
+  @app.use '/css', @express.static(__dirname + '/css')
 
   @configure
     development: => @use 'errorHandler'
     production: => @use 'errorHandler'
 
-  @set 'view engine': 'hogan', views: "#{__dirname}/../views"
+  # View engine
+  #@app.engine 'mmm', require('mmm')
+  @set 'view engine': 'mmm', views: "#{__dirname}/views", 'layout': 'layout'
 
   # Inicialização
   console.log 'Bem vindo ao Benvenuto!'
   initializeRedis()
 
   @get '/': ->
-    @render 'index.hogan', settings: settings
+    @render 'index', {settings: settings}
 
   @get '/recepcao': ->
-    @render 'reception.hogan'
+    @render 'reception'
 
   @get '/salao': ->
-    @render 'blocks.hogan', settings: settings
+    @render 'blocks', {settings: settings}
 
   @get '/lugares.json': ->
     getAllPlaces (places) =>

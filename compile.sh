@@ -1,2 +1,2 @@
 #!/bin/bash
-coffee -o ./js/ -wc ./coffee/
+coffee -o ./ -wc ./app.coffee
