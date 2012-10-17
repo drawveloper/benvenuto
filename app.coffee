@@ -169,6 +169,10 @@ app.get '/salao', (req, res) ->
 app.get '/relatorios', (req, res) ->
   res.render 'reports'
 
+app.get '/relatorio1.json', (req, res) ->
+  getAllPlaces (places) =>
+    res.send places
+
 app.get '/lugares.json', (req, res) ->
   getAllPlaces (places) =>
     res.send places

@@ -81,82 +81,19 @@ var buckets = 11,
 		{ name: 'Tuesday', abbr: 'Tu' },
 		{ name: 'Wednesday', abbr: 'We' },
 		{ name: 'Thursday', abbr: 'Th' },
-		{ name: 'Friday', abbr: 'Fr' },
-		{ name: 'Saturday', abbr: 'Sa' },
-		{ name: 'Sunday', abbr: 'Su' }
+		{ name: 'Friday', abbr: 'Fr' }
 	],
-	types = {
-		all: 'All',
-		pc: 'Computer',
-		mob: 'Mobile'
-	},
-	hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a', '7a', '8a', '9a', '10a', '11a', '12p', '1p', '2p', '3p', '4p', '5p', '6p', '7p', '8p', '9p', '10p', '11p'],
-	stateAbbrs = ['all', 'AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY'],
-	states = {
-		all: { name: 'All States', abbr: 'all', offset: 0 },
-		AK: { name: 'Alaska', abbr: 'AK', offset: -1 },
-		AL: { name: 'Alabama', abbr: 'AL', offset: 2 },
-		AR: { name: 'Arkansas', abbr: 'AR', offset: 2 },
-		AZ: { name: 'Arizona', abbr: 'AZ', offset: 0 },
-		CA: { name: 'California', abbr: 'CA', offset: 0 },
-		CO: { name: 'Colorado', abbr: 'CO', offset: 1 },
-		CT: { name: 'Connecticut', abbr: 'CT', offset: 3 },
-		DC: { name: 'Washington D.C.', abbr: 'DC', offset: 3 },
-		DE: { name: 'Delaware', abbr: 'DE', offset: 3 },
-		FL: { name: 'Florida', abbr: 'FL', offset: 3 },
-		GA: { name: 'Georgia', abbr: 'GA', offset: 3 },
-		HI: { name: 'Hawaii', abbr: 'HI', offset: -3 },
-		IA: { name: 'Iowa', abbr: 'IA', offset: 2 },
-		ID: { name: 'Idaho', abbr: 'ID', offset: 1 },
-		IL: { name: 'Illinois', abbr: 'IL', offset: 2 },
-		IN: { name: 'Indiana', abbr: 'IN', offset: 3 },
-		KS: { name: 'Kansas', abbr: 'KS', offset: 2 },
-		KY: { name: 'Kentucky', abbr: 'KY', offset: 3 },
-		LA: { name: 'Louisiana', abbr: 'LA', offset: 2 },
-		MA: { name: 'Massachusetts', abbr: 'MA', offset: 3 },
-		MD: { name: 'Maryland', abbr: 'MD', offset: 3 },
-		ME: { name: 'Maine', abbr: 'ME', offset: 3 },
-		MI: { name: 'Michigan', abbr: 'MI', offset: 3 },
-		MN: { name: 'Minnesota', abbr: 'MN', offset: 2 },
-		MO: { name: 'Missouri', abbr: 'MO', offset: 2 },
-		MS: { name: 'Missippippi', abbr: 'MS', offset: 2 },
-		MT: { name: 'Montana', abbr: 'MT', offset: 1 },
-		NC: { name: 'North Carolina', abbr: 'NC', offset: 3 },
-		ND: { name: 'North Dakota', abbr: 'ND', offset: 2 },
-		NE: { name: 'Nebraska', abbr: 'NE', offset: 2 },
-		NH: { name: 'New Hampshire', abbr: 'NH', offset: 3 },
-		NJ: { name: 'New Jersey', abbr: 'NJ', offset: 3 },
-		NM: { name: 'New Mexico', abbr: 'NM', offset: 1 },
-		NV: { name: 'Nevada', abbr: 'NV', offset: 0 },
-		NY: { name: 'New York', abbr: 'NY', offset: 3 },
-		OH: { name: 'Ohio', abbr: 'OH', offset: 3 },
-		OK: { name: 'Oklahoma', abbr: 'OK', offset: 2 },
-		OR: { name: 'Oregon', abbr: 'OR', offset: 0 },
-		PA: { name: 'Pennsylvania', abbr: 'PA', offset: 3 },
-		RI: { name: 'Rhode Island', abbr: 'RI', offset: 3 },
-		SC: { name: 'South Carolina', abbr: 'SC', offset: 3 },
-		SD: { name: 'South Dakota', abbr: 'SD', offset: 2 },
-		TN: { name: 'Tennessee', abbr: 'TN', offset: 2 },
-		TX: { name: 'Texas', abbr: 'TX', offset: 2 },
-		UT: { name: 'Utah', abbr: 'UT', offset: 1 },
-		VA: { name: 'Virginia', abbr: 'VA', offset: 3 },
-		VT: { name: 'Vermont', abbr: 'VT', offset: 3 },
-		WA: { name: 'Washington', abbr: 'WA', offset: 0 },
-		WI: { name: 'Wisconsin', abbr: 'WI', offset: 2 },
-		WV: { name: 'West Virginia', abbr: 'WV', offset: 3 },
-		WY: { name: 'Wyoming', abbr: 'WY', offset: 1 }
-	};
-	
+	hours = ['11:00a', '11:30a', '12:00p', '12:30p', '1:00p', '1:30p', '2:00p', '2:30p', '3:00p', '3:30p', '4:00p']
+
 var data;
 
 if (isOldBrowser() === false) {
 	createMap();
 }
-addStateButtons();
 
 d3.select('#vis').classed(colorScheme, true);
 
-d3.json('tru247.json', function(json) {
+d3.json('relatorio1.json', function(json) {
 	
 	data = json;
 
@@ -323,18 +260,6 @@ function selectedType() {
 	
 	//return d3.select('input[name="type"]:checked').property('value'); // IE8 doesn't like this
 	return $('input[name="type"]:checked').val();
-}
-
-/* ************************** */
-
-function addStateButtons() {
-
-	for (var i = 1; i < stateAbbrs.length; i++) {
-		var abbr = stateAbbrs[i];
-		var html = '<input type="radio" id="state_' + abbr + '" name="state" value="' + abbr + '"/><label for="state_' + abbr + '"><span class="' + abbr + '">' + abbr + '</span></label>';
-	
-		$('fieldset#state').append(html);
-	}
 }
 
 /* ************************** */

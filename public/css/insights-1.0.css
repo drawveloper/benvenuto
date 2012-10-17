@@ -4,7 +4,6 @@ body {
 	font: 13px/16px "ff-dagny-web-pro-1","ff-dagny-web-pro-2",sans-serif;
 	color: #333;
 	position: relative;
-	background: url(../img/bg-pixel1a.png) 0 -25px repeat-x;
 }
 
 #container {
@@ -60,20 +59,6 @@ body {
 	float: left;
 	clear: left;
 }
-
-#poweredby a {
-	display: block;
-	width: 72px;
-	height: 33px;
-	background-image: url(../img/powered-by-trulia.png);
-	text-indent: -9999px;
-}
-
-#poweredby.bw a {
-	background-image: url(../img/powered-by-trulia-bw.png);
-}
-
-
 #poweredby a:link {
 	background-position: left bottom;
 }
@@ -115,92 +100,4 @@ body {
 
 #footer a:active {
 	color: #666;
-}
-
-
-
-
-
-/* SOCIAL MEDIA LINKS*/
-#pinImg, #pinImg img {
-	opacity: 0;
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	overflow: hidden;
-	pointer-events: none;
-}
-
-
-#sharestatic {
-	background: url(../img/share-buttons-horiz.png) no-repeat;
-	width: 428px;
-	height: 20px;
-	float: left;
-	clear: left;
-	margin: 0 0 25px 5px;
-}
-
-#sharestatic2 {
-	background: url(../img/share-buttons-2rows.png) no-repeat;
-	width: 213px;
-	height: 46px;
-	float: right;
-	clear: right;
-	margin: 3px 5px 25px 5px;
-}
-
-#sharestatic3 {
-	background: url(../img/share-buttons-horiz2.png) no-repeat;
-	width: 222px;
-	height: 62px;
-	float: right;
-	clear: right;
-	margin: 3px 5px 25px 5px;
-}
-
-#share {
-	width: 340px;
-}
-
-#share li {
-	float: left;
-	margin-left: 7px;
-}
-
-#share li.share_stumble {
-	padding: 1px 0 0 0;
-	margin: 0;
-}
-
-#share li.share_twitter {
-	margin-left: 2px;
-}
-
-#share2 {
-	float: right;
-	clear: right;
-	margin: 3px 5px 25px 5px;
-}
-
-#share2 li {
-	float: left;
-	margin-right: 6px;
-}
-
-#share2 li.share_fblike {
-	padding-top: 0;
-	margin-right: 0;
-}
-
-#share2 li.share_twitter {
-
-}
-
-#share2 li.share_google {
-	padding-top: 2px;
-}
-
-#share2 li.share_stumble {
-	padding-top: 2px;
 }
