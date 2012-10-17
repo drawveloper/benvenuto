@@ -6,7 +6,7 @@
   "dependencies" : {
     "zappajs" :  "0.4.x",
     "consolidate" : "0.4.x",
-    "handlebars" : "1.0.x",
+    "hogan.js" : "2.0.x",
     "redis" : "0.8.x",
     "underscore" : "1.4.x"
   },

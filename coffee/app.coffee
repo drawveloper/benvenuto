@@ -96,26 +96,26 @@ require('zappajs') ->
   @app.use '/img', @express.static(__dirname + '/../img')
   @app.use '/css', @express.static(__dirname + '/../css')
 
-  @app.engine 'handlebars', cons.handlebars
+  @app.engine 'hogan', cons.hogan
 
   @configure
     development: => @use 'errorHandler'
     production: => @use 'errorHandler'
 
-  @set 'view engine': 'handlebars', views: "#{__dirname}/../views"
+  @set 'view engine': 'hogan', views: "#{__dirname}/../views"
 
   # Inicialização
   console.log 'Bem vindo ao Benvenuto!'
   initializeRedis()
 
   @get '/': ->
-    @render 'index.handlebars', settings: settings
+    @render 'index.hogan', settings: settings
 
   @get '/recepcao': ->
-    @render 'reception.handlebars'
+    @render 'reception.hogan'
 
   @get '/salao': ->
-    @render 'blocks.handlebars', settings: settings
+    @render 'blocks.hogan', settings: settings
 
   @get '/lugares.json': ->
     getAllPlaces (places) =>

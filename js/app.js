@@ -119,7 +119,7 @@
     this.app.use('/js', this.express["static"](__dirname + '/../js'));
     this.app.use('/img', this.express["static"](__dirname + '/../img'));
     this.app.use('/css', this.express["static"](__dirname + '/../css'));
-    this.app.engine('handlebars', cons.handlebars);
+    this.app.engine('hogan', cons.hogan);
     this.configure({
       development: function() {
         return _this.use('errorHandler');
@@ -129,26 +129,26 @@
       }
     });
     this.set({
-      'view engine': 'handlebars',
+      'view engine': 'hogan',
       views: "" + __dirname + "/../views"
     });
     console.log('Bem vindo ao Benvenuto!');
     initializeRedis();
     this.get({
       '/': function() {
-        return this.render('index.handlebars', {
+        return this.render('index.hogan', {
           settings: settings
         });
       }
     });
     this.get({
       '/recepcao': function() {
-        return this.render('reception.handlebars');
+        return this.render('reception.hogan');
       }
     });
     this.get({
       '/salao': function() {
-        return this.render('blocks.handlebars', {
+        return this.render('blocks.hogan', {
           settings: settings
         });
       }

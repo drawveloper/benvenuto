@@ -1,3 +1,4 @@
+{{>header}}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
@@ -8,7 +9,7 @@ body {
 </style>
 
 <div id="selection-box">
-<img src="/images/logo.jpg" />
+<img src="/img/logo.jpg" />
 
 	<a	href="/recepcao" id="reception-button" class="landing-button"></a>
     <a	href="/salao" id="hall-button" class="landing-button" ></a>
@@ -46,3 +47,4 @@ body {
        });
    });
 </script>
+{{>footer}}
