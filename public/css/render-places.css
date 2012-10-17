@@ -1,13 +1,13 @@
 .place{
 	width: 46px;
 	height: 57px;
-	background-image:url(../img/tablemap.png);
+	background-image:url(/img/tablemap.png);
 	background-position:0px 0px;
 }
 
 .place:hover{
 	cursor: pointer;
-	background-image:url(../img/tablemap.png);
+	background-image:url(/img/tablemap.png);
 	background-position:-46px 0px;
 }
 
@@ -35,13 +35,13 @@
 }
 
 .round-place {
-	background-image:url(../img/segmentmap.png) !important;
+	background-image:url(/img/segmentmap.png) !important;
 	width: 58px;
 	height: 44px;
 }
 .round-place.place:hover{
 	cursor: pointer;
-	background-image:url(../img/tablemap.png);
+	background-image:url(/img/tablemap.png);
 	background-position:-58px 0px;
 }
 .round-place.selected-place{

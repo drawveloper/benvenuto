@@ -37,7 +37,7 @@ body {
 /* restaurant elements */
 
 #places {
-	background-image: url('../img/floor.png');
+	background-image: url('/img/floor.png');
 	position: absolute;
 	top: 140px;
 	left:20px;
@@ -254,19 +254,19 @@ border-bottom-width:1px;
 }
 
 #reception-button{
-	background-image: url('../img/icon-reception.png');
+	background-image: url('/img/icon-reception.png');
 }
 
 #hall-button{
-	background-image: url('../img/icon-hall.png');
+	background-image: url('/img/icon-hall.png');
 }
 
 #reports-button{
-	background-image: url('../img/icon-report.png');
+	background-image: url('/img/icon-report.png');
 }
 
 #settings-button{
-	background-image: url('../img/icon-config.png');
+	background-image: url('/img/icon-config.png');
 	cursor:pointer;
 	margin-bottom:0px !important;
 }

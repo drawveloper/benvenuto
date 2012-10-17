@@ -51,11 +51,12 @@ initializeRedis = ->
   client.get "layout", (err, reply) ->
     if err
       console.log "Erro ao recuperar layout do banco. Usando mapa default.", err
-      layout = (require 'js/newplaces.js').layout
+      layout = (require './public/js/newplaces.js').layout
       return
     # Não existe layout - inicialize com o default do arquivo
     if (!reply)
-      layout = (require 'js/newplaces.js').layout
+      console.log "Inicializando banco com dados do arquivo."
+      layout = (require './public/js/newplaces.js').layout
       # Não guarde os lugares no layout
       leanLayout =
         gridSizePixels: layout.gridSizePixels
@@ -71,11 +72,13 @@ initializeRedis = ->
         client.set redisKey, JSON.stringify place
       # Já existe layout no banco - use ele para essa sessão
     else
+      console.log "Banco OK."
       layout = JSON.parse reply
 
 # Retorna do banco todos os lugares identificados pelos id's presentes em idsArray
 # keysAreStructured indica se as chaves são apenas os ids inteiros ou já contem o namespace.
 getMultiplePlaces = (idsArray, callback, keysAreStructured) ->
+  #console.log 'getMultiplePlaces sendo chamado com', idsArray, keysAreStructured
   placeKeys = if keysAreStructured then idsArray else placeArrayKeys(idsArray);
   client.mget placeKeys, (err, replies) ->
     if err
@@ -84,9 +87,11 @@ getMultiplePlaces = (idsArray, callback, keysAreStructured) ->
       return
     # console.log "Recuperei lugares:", replies
     redisPlaces = []
+    #console.log 'getMultiplePlaces recebeu', replies,'length', replies.length
     for value in replies
-      redisPlaces.push JSON.parse value
-    # console.log "Enviando lugares do REDIS: ", redisPlaces
+      placeObj = JSON.parse value
+      redisPlaces.push placeObj
+    #console.log "Enviando lugares do REDIS: ", redisPlaces, 'length', redisPlaces.length
     callback(redisPlaces)
 
 # Retorna todos os lugares do banco
@@ -154,22 +159,17 @@ app.post '/config/tempo', (req, res) ->
   settings.tableRecentTimeMillis = app.request.body.time * 1
   res.send 200
 
-server.listen app.get("port"), ->
-  console.log "Benvenuto - Express server listening on port " + app.get("port")
-  console.log 'Bem vindo ao Benvenuto!'
-  initializeRedis()
-
 #
 # SocketIO
 #
 io.sockets.on 'connection', (socket) ->
+  console.log 'Iniciando conexão', socket
   getAllPlaces (places) =>
     data = {}
     data[key] = value for key, value of layout
     data.places = places
-    socket.emit welcome: {time: new Date(), data: data}
+    socket.emit 'welcome', {time: new Date(), data: data}
     console.log layout
-
 
   socket.on 'occupy', (data, ack) ->
     console.log 'Recebido evento occupy', data
@@ -185,7 +185,6 @@ io.sockets.on 'connection', (socket) ->
     # Watch todas as keys - se qualquer uma delas for alterada, a transação é abortada
     client.watch placeArrayKeys(occupiedPlacesIds)
     getMultiplePlaces occupiedPlacesIds, (places) =>
-      console.log places
       alreadyOccupiedPlaces = []
       for place in places
         if place.occupied then alreadyOccupiedPlaces.push(place)
@@ -207,7 +206,7 @@ io.sockets.on 'connection', (socket) ->
           return
         # Monta um array somente com o necessario para passar aos outros clientes
         occupiedPlacesArray = _u.map places, (p) -> {id: p.id, lastOccupation: p.lastOccupation}
-        socket.broadcast.emit 'occupy' : {'occupiedPlaces': occupiedPlacesArray}
+        socket.broadcast.emit 'occupy', {'occupiedPlaces': occupiedPlacesArray}
         ack result: 'ok'
 
   socket.on 'free', (data, ack) ->
@@ -221,7 +220,6 @@ io.sockets.on 'connection', (socket) ->
       return
 
     getMultiplePlaces freePlacesIds, (places) =>
-      console.log places
       _u.each places, (p) ->
         p.occupied = false
       setPlacesMulti places, (err, replies) =>
@@ -231,5 +229,13 @@ io.sockets.on 'connection', (socket) ->
           return
         # Monta um array somente com o necessario para passar aos outros clientes
         freePlacesArray = _u.map places, (p) -> {id: p.id}
-        socket.broadcast.emit 'free' : {'freePlaces': freePlacesArray}
+        socket.broadcast.emit 'free', {'freePlaces': freePlacesArray}
         ack result: 'ok'
+
+#
+# Inicia servidor
+#
+server.listen app.get("port"), ->
+  initializeRedis()
+  console.log "Benvenuto - Express server listening on port " + app.get("port")
+  console.log 'Bem vindo ao Benvenuto!'
