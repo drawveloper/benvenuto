@@ -1,5 +1,4 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <style>
 body {
 	background-color: #fff;
@@ -19,11 +18,11 @@ body {
 			<div id="recent-time">
 				<label>Quantidade de tempo que uma mesa é considerada recente:</label>
 				<select name="settings.tableRecentTimeMillis">
-					<option value="60000" <%if (settings.tableRecentTimeMillis == 60000) { %> selected="selected" <% } %>>Um minuto</option>
-					<option value="300000" <%if (settings.tableRecentTimeMillis == 300000) { %> selected="selected" <% } %>>Cinco minutos</option>
-					<option value="600000" <%if (settings.tableRecentTimeMillis == 600000) { %> selected="selected" <% } %>>Dez minutos</option>
-					<option value="900000" <%if (settings.tableRecentTimeMillis == 900000) { %> selected="selected" <% } %>>Quinze minutos</option>
-					<option value="1200000" <%if (settings.tableRecentTimeMillis == 1200000) { %> selected="selected" <% } %>>Vinte minutos</option>
+					<option value="60000" <%if (tableRecentTimeMillis == 60000) { %> selected="selected" <% } %>>Um minuto</option>
+					<option value="300000" <%if (tableRecentTimeMillis == 300000) { %> selected="selected" <% } %>>Cinco minutos</option>
+					<option value="600000" <%if (tableRecentTimeMillis == 600000) { %> selected="selected" <% } %>>Dez minutos</option>
+					<option value="900000" <%if (tableRecentTimeMillis == 900000) { %> selected="selected" <% } %>>Quinze minutos</option>
+					<option value="1200000" <%if (tableRecentTimeMillis == 1200000) { %> selected="selected" <% } %>>Vinte minutos</option>
 				</select>
 			</div>
 			

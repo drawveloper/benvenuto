@@ -18,6 +18,6 @@
         </script>
     </head>
     <body data-role="page">
-    {{>content}}
+    {{> content }}
     </body>
 </html>

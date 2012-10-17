@@ -4,7 +4,8 @@
   "author": "Guilherme Rodrigues <gadr90@gmail.com>",
   "description": "Sistema de reserva de mesas",
   "dependencies" : {
-    "zappajs" :  "0.4.x",
+    "express" :  "3.x",
+    "socket.io" : "0.9.10",
     "mmm" : "0.1.0",
     "redis" : "0.8.x",
     "underscore" : "1.4.x"

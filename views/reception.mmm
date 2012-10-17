@@ -1,6 +1,6 @@
 <meta name="viewport" content="initial-scale=1.0,maximum-scale=2.0,height=device-height,width=device-width,user-scalable = yes">
-<script src="/javascripts/jquery.mobile-1.1.0.min.js" type="text/javascript" charset="UTF-8"></script>
-<link rel="stylesheet" media="screen" href="/stylesheets/render-places.css">
+<script src="/js/lib/jquery.mobile-1.1.0.min.js" type="text/javascript" charset="UTF-8"></script>
+<link rel="stylesheet" media="screen" href="/css/render-places.css">
 <style>
 	@media (max-width: 800px){
 		#top {
@@ -8,10 +8,10 @@
 			 }
 		}
 </style>
-<script type="text/javascript" src="/javascripts/utils.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/javascripts/table.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/javascripts/reception-vm.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/javascripts/reception.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/utils.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/table.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/reception-vm.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/reception.js" charset="UTF-8"></script>
 <div id="content">
 
 	<div id="controls" style="position:fixed;z-index: 10000; margin-top:-2px" class="unselectable" >
@@ -39,7 +39,7 @@
             </div>
         </div>
         <div id="top" style="position: absolute; left: 650px;">
-	    	<a href="@{Application.index}"  ><img id="logo" src="/images/logo.jpg" /></a>
+	    	<a href="@{Application.index}"  ><img id="logo" src="/img/logo.jpg" /></a>
 		</div>
 	</div>
 
