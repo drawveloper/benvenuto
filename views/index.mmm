@@ -8,10 +8,9 @@ body {
 
 <div id="selection-box">
 <img src="/img/logo.jpg" />
-
 	<a	href="/recepcao" id="reception-button" class="landing-button"></a>
     <a	href="/salao" id="hall-button" class="landing-button" ></a>
-	<a	href="Reports.reports" id="reports-button" class="landing-button" ></a>
+	<a	href="/relatorios" id="reports-button" class="landing-button" ></a>
 	<a	id="settings-button" class="landing-button"></a>
 	<div id="settings-div">
 		<form action="Settings.apply" method="POST">

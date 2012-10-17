@@ -43,7 +43,10 @@ settings = {
     text: 'Vinte minutos',
     selected: true
     },
-  ]
+  ],
+  selectedTableRecentMillis: (text) ->
+    sel = _u.find settings.tableRecentOptions, (option) -> option.selected
+    return sel.value
 }
 
 app.configure ->
@@ -162,6 +165,9 @@ app.get '/recepcao', (req, res) ->
 
 app.get '/salao', (req, res) ->
   res.render 'blocks', settings
+
+app.get '/relatorios', (req, res) ->
+  res.render 'reports'
 
 app.get '/lugares.json', (req, res) ->
   getAllPlaces (places) =>

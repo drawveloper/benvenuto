@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db699745-3793-4f2f-ba2a-48527ce9bbf5" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/reports.mmm" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.coffee" afterPath="$PROJECT_DIR$/app.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/blocks.mmm" afterPath="$PROJECT_DIR$/views/blocks.mmm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.mmm" afterPath="$PROJECT_DIR$/views/index.mmm" />
     </list>
     <ignored path="benvenuto-node.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,62 +28,70 @@
     <favorites_list name="benvenuto-node" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="app.coffee" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="56" selection-start="724" selection-end="724" vertical-scroll-proportion="0.57251906">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="newplaces.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/newplaces.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="reception-vm.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/reception-vm.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="170" column="42" selection-start="6045" selection-end="6045" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.mmm" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/index.mmm">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="50" selection-start="722" selection-end="722" vertical-scroll-proportion="-12.5">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="reception.mmm" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/reception.mmm">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="21" selection-start="150" selection-end="150" vertical-scroll-proportion="-0.625">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="blocks.mmm" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/blocks.mmm">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="48" selection-start="533" selection-end="533" vertical-scroll-proportion="-5.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.48324648">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="app.coffee" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app.coffee">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="13" column="15" selection-start="282" selection-end="282" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="package.json" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/package.json">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="11" column="4" selection-start="302" selection-end="302" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="heatmap.js" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/public/js/heatmap.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="158" column="9" selection-start="51364" selection-end="51364" vertical-scroll-proportion="0.41196582">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="index.mmm" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/views/index.mmm">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="12" column="25" selection-start="354" selection-end="354" vertical-scroll-proportion="-7.5">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="blocks.mmm" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/views/blocks.mmm">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="9" column="0" selection-start="528" selection-end="594" vertical-scroll-proportion="-5.625">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="reports.mmm" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/views/reports.mmm">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="6" column="39" selection-start="433" selection-end="433" vertical-scroll-proportion="0.15679443">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -91,30 +104,29 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/views/footer.handlebars" />
         <option value="$PROJECT_DIR$/views/index.handlebars" />
         <option value="$PROJECT_DIR$/views/index.hogan" />
         <option value="$PROJECT_DIR$/js/app.js" />
         <option value="$PROJECT_DIR$/coffee/app.coffee" />
-        <option value="$PROJECT_DIR$/compile.sh" />
         <option value="$PROJECT_DIR$/start.sh" />
         <option value="$PROJECT_DIR$/views/layout.mmm" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/public/css/common.css" />
         <option value="$PROJECT_DIR$/views/reception.mmm" />
-        <option value="$PROJECT_DIR$/views/blocks.mmm" />
-        <option value="$PROJECT_DIR$/views/index.mmm" />
         <option value="$PROJECT_DIR$/public/css/main.css" />
         <option value="$PROJECT_DIR$/public/css/render-places.css" />
+        <option value="$PROJECT_DIR$/compile.sh" />
+        <option value="$PROJECT_DIR$/views/blocks.mmm" />
+        <option value="$PROJECT_DIR$/views/index.mmm" />
         <option value="$PROJECT_DIR$/app.coffee" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/views/reports.mmm" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1" />
     <option name="y" value="29" />
-    <option name="width" value="1368" />
-    <option name="height" value="745" />
+    <option name="width" value="1366" />
+    <option name="height" value="739" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -230,6 +242,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="benvenuto-node" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="benvenuto-node" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="coffee" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -248,17 +278,18 @@
       <recent name="$PROJECT_DIR$/views" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/js/lib" />
       <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node JS" working-dir="$PROJECT_DIR$">
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node JS" working-dir="$PROJECT_DIR$" coffeescript-run="false">
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
       <JSDebuggerConfigurationSettings>
-        <option name="engineId" />
+        <option name="engineId" value="embedded" />
         <option name="fileUrl" />
       </JSDebuggerConfigurationSettings>
       <method />
@@ -286,6 +317,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+      <changelist id="db699745-3793-4f2f-ba2a-48527ce9bbf5" name="Default" comment="" />
       <created>1350442146796</created>
       <updated>1350442146796</updated>
     </task>
@@ -305,31 +337,35 @@
       <created>1350501798473</created>
       <updated>1350501798473</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Enviando configuracao de tempo de mesa - falta receber no blocks">
+      <created>1350504439909</created>
+      <updated>1350504439909</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="29" width="1368" height="745" extended-state="6" />
-    <editor active="false" />
+    <frame x="0" y="29" width="1366" height="739" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852563" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18466121" sideWeight="0.67147434" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18466121" sideWeight="0.67147434" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32852563" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852563" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="JsTestDriver Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="JsTestDriver Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852563" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -369,7 +405,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Funcionando com novo setup - falta passar templates para hogan" />
+    <option name="LAST_COMMIT_MESSAGE" value="Enviando configuracao de tempo de mesa - falta receber no blocks" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -386,119 +422,104 @@
     <MESSAGE value="Usando hogan e mmm" />
     <MESSAGE value="Dropping zappajs dependency, using express3" />
     <MESSAGE value="Funcionando com novo setup - falta passar templates para hogan" />
+    <MESSAGE value="Enviando configuracao de tempo de mesa - falta receber no blocks" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/compile.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="29" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/start.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="18" selection-start="30" selection-end="30" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testapp/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="25" selection-start="224" selection-end="224" vertical-scroll-proportion="0.17558528">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testapp/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="29" selection-start="353" selection-end="353" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="1" column="18" selection-start="30" selection-end="30" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/css/hall-blocks.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="1" selection-start="307" selection-end="307" vertical-scroll-proportion="0.5518395">
-          <folding />
-        </state>
+        <state line="22" column="1" selection-start="307" selection-end="307" vertical-scroll-proportion="0.5518395" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/css/hall-list.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="6" selection-start="32" selection-end="32" vertical-scroll-proportion="0.10033445">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/reception.mmm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="21" selection-start="150" selection-end="150" vertical-scroll-proportion="-0.625">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/blocks.mmm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="48" selection-start="533" selection-end="533" vertical-scroll-proportion="-5.0">
-          <folding />
-        </state>
+        <state line="4" column="6" selection-start="32" selection-end="32" vertical-scroll-proportion="0.10033445" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/layout.mmm">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="40" selection-start="223" selection-end="223" vertical-scroll-proportion="-4.375">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/index.mmm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="50" selection-start="722" selection-end="722" vertical-scroll-proportion="-12.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/reception-vm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="170" column="42" selection-start="6045" selection-end="6045" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/newplaces.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="7" column="40" selection-start="223" selection-end="223" vertical-scroll-proportion="-4.375" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/css/render-places.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="13" selection-start="1150" selection-end="1150" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="62" column="13" selection-start="1150" selection-end="1150" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="266" column="0" selection-start="3729" selection-end="3729" vertical-scroll-proportion="0.09364548">
+        <state line="266" column="0" selection-start="3729" selection-end="3729" vertical-scroll-proportion="0.09364548" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/newplaces.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/reception-vm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="170" column="42" selection-start="6045" selection-end="6045" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/reception.mmm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="21" selection-start="150" selection-end="150" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/compile.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="21" selection-start="33" selection-end="33" vertical-scroll-proportion="0.025083613">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="56" selection-start="724" selection-end="724" vertical-scroll-proportion="0.57251906">
+        <state line="13" column="15" selection-start="282" selection-end="282" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/index.mmm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="25" selection-start="354" selection-end="354" vertical-scroll-proportion="-7.5">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/blocks.mmm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="528" selection-end="594" vertical-scroll-proportion="-5.625">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/reports.mmm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="39" selection-start="433" selection-end="433" vertical-scroll-proportion="0.15679443">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="4" selection-start="302" selection-end="302" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/heatmap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="158" column="9" selection-start="51364" selection-end="51364" vertical-scroll-proportion="0.41196582">
           <folding />
         </state>
       </provider>

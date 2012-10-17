@@ -1,0 +1,37 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" media="screen" href="/css/insights-1.0.css">
+<link rel="stylesheet" media="screen" href="/css/heatmap.css">
+<link rel="stylesheet" media="screen" href="/css/reset.css">
+<script type="text/javascript" src="/js/lib/d3.v2.js" ></script>
+<script type="text/javascript" src="/js/lib/insights.js" ></script>
+<script type="text/javascript" src="/js/heatmap.js" ></script>
+<div id="container">
+
+    <div id="header">
+        <div id="title">
+            <h1>Relatórios</h1>
+            <p id="subtitle">Ocupação</p>
+        </div>
+    </div>
+    <div id="old_browser_msg">Utilize um browser mais recente.</div>
+    <div id="legend" class="rbow2">
+        <ul>
+            <li class="q1-11"></li>
+            <li class="q2-11"></li>
+            <li class="q3-11"></li>
+            <li class="q4-11"></li>
+            <li class="q5-11"></li>
+            <li class="q6-11"></li>
+            <li class="q7-11"></li>
+            <li class="q8-11"></li>
+            <li class="q9-11"></li>
+            <li class="q10-11"></li>
+            <li class="q11-11"></li>
+        </ul>
+        <p class="more">more traffic</p>
+        <p class="less">less traffic</p>
+    </div>
+
+    <div id="vis"></div>
+
+</div>
