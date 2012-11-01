@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Benvenuto</title>
+        <meta charset="${_response_encoding}">
+        <link rel="stylesheet" media="screen" href="/css/main.css">
+        <link rel="shortcut icon" type="image/png" href="/img/favicon.png">
+        <script type="text/javascript" src="/socket.io/socket.io.js" charset="UTF-8"></script>
+        <script src="/js/lib/jquery-1.7.1.min.js" type="text/javascript" charset="UTF-8"></script>
+        <script src="/js/lib/knockout-2.0.0.js" type="text/javascript" charset="UTF-8"></script>
+        <script type="text/javascript">
+	    	$(document).bind("mobileinit", function(){
+	    		$.mobile.loadingMessage = "";
+	    		$.mobile.ajaxEnabled=false;
+	    		$.mobile.pushStateEnabled=false
+	    	});
+        </script>
+    </head>
+    <body data-role="page">
+    {{> content }}
+    </body>
+</html>

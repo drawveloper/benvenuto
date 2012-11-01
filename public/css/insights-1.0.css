@@ -1,0 +1,103 @@
+@import url(reset.css);
+
+body {
+	font: 13px/16px "ff-dagny-web-pro-1","ff-dagny-web-pro-2",sans-serif;
+	color: #333;
+	position: relative;
+}
+
+#container {
+	width: 960px;
+	margin: 0 auto;
+	padding: 30px 0 10px 0;
+	position: relative;
+}
+
+#grid {
+	position: absolute;
+	width: 960px;
+	height: 1000px;
+	background: url(../img/24_col.gif);
+	z-index: 1337;
+	opacity: 0.2;
+	pointer-events: none;
+}
+
+#truliaBar a {
+	display: block;
+	width: 930px;
+	margin: 0 auto;
+	color: white;
+	padding: 3px 15px;
+	text-decoration: none;
+	text-align: right;
+	background: url(../img/right-arrow.png) right 7px no-repeat;
+	text-shadow: 1px 1px 1px #4d7400;
+	text-transform: lowercase;
+}
+
+#header #title {
+	float: left;
+	margin: 0 0 25px 5px;
+}
+
+#header #title h1 {
+	font-size: 28px;
+	line-height: 28px;
+	color: #690;
+	margin-bottom: 5px;
+}
+
+#header #title p {
+	padding-left: 1px;
+	color: #999;
+	font-size: 15px;
+	line-height: 19px;
+}
+
+#poweredby {
+	float: left;
+	clear: left;
+}
+#poweredby a:link {
+	background-position: left bottom;
+}
+
+#poweredby a:visited {
+	background-position: left bottom;
+}
+
+#poweredby a:hover {
+	background-position: left bottom;
+}
+
+#poweredby a:active {
+	background-position: left bottom;
+}
+
+
+/* FOOTER */
+#footer {
+	border-top: 1px dotted #DDD;
+	color: #999;
+	margin: 30px 10px 30px 0;
+	padding-top: 10px;
+	clear: both;
+}
+
+#footer a:link {
+	color: #999;
+	text-decoration: underline;
+}
+
+#footer a:visited {
+	color: #999;
+}
+
+#footer a:hover {
+	color: #666;
+}
+
+#footer a:active {
+	color: #666;
+}
