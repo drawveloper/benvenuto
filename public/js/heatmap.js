@@ -75,7 +75,7 @@ function getCalcs() {
 	for (var d = 0; d < data.views.length; d++) {
 		for (var h = 0; h < data.views[d].length; h++) {
 
-            var tot = data.views[d][h].pc + data.views[d][h].mob;
+            var tot = data.views[d][h].occupations;
 			
 			if (tot > max) {
 				max = tot;
@@ -115,7 +115,7 @@ function reColorTiles() {
 		for (var h = 0; h < data.views[d].length; h++) {
 
 			var sel = '#d' + d + 'h' + h + ' .tile .' + side,
-				val = data.views[d][h].pc + data.views[d][h].mob;
+				val = data.views[d][h].occupations;
 			
 			// erase all previous bucket designations on this cell
 			for (var i = 1; i <= buckets; i++) {
@@ -187,7 +187,7 @@ function drawHourlyChart(day) {
 		
 		
 	var y = d3.scale.linear()
-		.domain([0, d3.max(weeklyData, function(d) { return d.pc + d.mob  })])
+		.domain([0, d3.max(weeklyData, function(d) { return d.occupations })])
 		.range([0, h]);
 
 	
@@ -204,8 +204,8 @@ function drawHourlyChart(day) {
 		.enter()
 			.append('svg:rect')
 				.attr('x', function(d, i) { return i * 12; })
-				.attr('y', function(d) { h - y(d.pc + d.mob) })
-				.attr('height', function(d) { return y(d.pc + d.mob) })
+				.attr('y', function(d) { h - y(d.occupations) })
+				.attr('height', function(d) { return y(d.occupations) })
 				.attr('width', 10)
 				.attr('class', function(d, i) { return 'hr' + i});
 	

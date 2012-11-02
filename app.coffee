@@ -154,6 +154,19 @@ setPlacesMulti = (places, execCallback) ->
     argsArray.push JSON.stringify place
   client.multi().mset(argsArray).exec execCallback
 
+logOccupation = (placesIdArray, occupationDate) ->
+  # todo
+
+# Retorna um array de arrays, com todos os horarios para todos os dias de semana, com as
+# ocupações relativas a esse mês e ano.
+getOccupationLogs = (year, month, callback) ->
+  weekDays = []
+  for day in [0..4]
+    hours = []
+    for hour in [0..10]
+      hours.push {occupations: Math.random()}
+    weekDays.push hours
+  callback(weekDays)
 #
 # Rotas
 #
@@ -170,13 +183,8 @@ app.get '/relatorios', (req, res) ->
   res.render 'reports'
 
 app.get '/relatorio1.json', (req, res) ->
-  weekDays = []
-  for day in [0..4]
-    hours = []
-    for hour in [0..10]
-      hours.push {pc: Math.random(), mob: Math.random()}
-    weekDays.push hours
-  res.send {views: weekDays}
+  getOccupationLogs 2012, 11, (data) ->
+    res.send {views: data}
 
 app.get '/lugares.json', (req, res) ->
   getAllPlaces (places) =>
@@ -227,6 +235,9 @@ io.sockets.on 'connection', (socket) ->
       return
 
     lastOccupation = new Date()
+
+    logOccupation(occupiedPlacesIds, lastOccupation)
+
     # Watch todas as keys - se qualquer uma delas for alterada, a transação é abortada
     client.watch placeArrayKeys(occupiedPlacesIds)
     getMultiplePlaces occupiedPlacesIds, (places) =>

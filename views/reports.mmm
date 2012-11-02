@@ -28,8 +28,6 @@
             <li class="q10-11"></li>
             <li class="q11-11"></li>
         </ul>
-        <p class="more">more traffic</p>
-        <p class="less">less traffic</p>
     </div>
 
     <div id="vis" class="rbow2"></div>
