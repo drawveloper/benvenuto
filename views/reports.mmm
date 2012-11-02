@@ -32,6 +32,6 @@
         <p class="less">less traffic</p>
     </div>
 
-    <div id="vis"></div>
+    <div id="vis" class="rbow2"></div>
 
 </div>

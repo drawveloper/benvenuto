@@ -170,8 +170,13 @@ app.get '/relatorios', (req, res) ->
   res.render 'reports'
 
 app.get '/relatorio1.json', (req, res) ->
-  getAllPlaces (places) =>
-    res.send places
+  weekDays = []
+  for day in [0..4]
+    hours = []
+    for hour in [0..10]
+      hours.push {pc: Math.random(), mob: Math.random()}
+    weekDays.push hours
+  res.send {views: weekDays}
 
 app.get '/lugares.json', (req, res) ->
   getAllPlaces (places) =>
