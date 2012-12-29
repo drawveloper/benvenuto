@@ -46,10 +46,8 @@ sudo cp redis-cli /usr/local/bin/
 echo 'Redis install completed. '
 
 # Install Benvenuto Node
-echo 'Cloning Benvenuto Node repository'
-cd ~
-git clone https://gadr90@bitbucket.org/gadr90/benvenuto-node.git
-cd benvenuto-node.git
+echo 'Installing Benvenuto Node dependencies'
+cd ~/benvenuto-node/
 npm install
 npm install -g nodemon
 echo 'Benvenuto Node install successful. Run start.sh to start the server'
