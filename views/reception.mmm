@@ -46,12 +46,12 @@
 	<div id="places" class="unselectable" data-bind="foreach: places">
 			<!-- ko if: table()._class == 'models.RoundTable' -->
 			<div data-bind="attr: { id: id }, css: { 'occupied-place': occupied, 'selected-place': selected }, 
-					style: { top: y() + 'px', left: x() + 'px', '-moz-transform': 'rotate(' + rotation + 'deg)', 
+					style: { top: y() + 'px', left: x() + 'px', 'transform': 'rotate(' + rotation + 'deg)', 
 					'-webkit-transform': 'rotate(' + rotation + 'deg)', '-ms-transform': 'rotate(' + rotation + 'deg)' }, event: {vclick: select}"
 				class="place round-place" 
 				style="display: inline-block; position: absolute;">
 			<span class="place-name" data-bind="text: label, style: {width: 56 + 'px', top: 17 + 'px',
-				'-moz-transform': rotation > 85 && rotation < 255 ? 'rotate(' + 180 + 'deg)' : '',
+				'transform': rotation > 85 && rotation < 255 ? 'rotate(' + 180 + 'deg)' : '',
 				'-webkit-transform': rotation > 85 && rotation < 255 ? 'rotate(' + 180 + 'deg)' : '', 
 				'-ms-transform': rotation > 85 && rotation < 255 ? 'rotate(' + 180 + 'deg)' : '' }" 
 				></span>
@@ -61,7 +61,7 @@
 			<div data-bind="attr: { id: id }, css: { 'occupied-place': occupied, 'selected-place': selected }, 
 					style: { top: y() + 'px', left: x() + 'px', 
 					'-webkit-transform': rotation == 90 ? 'rotate(' + rotation + 'deg) scale(1, -1)' : 'rotate(' + rotation + 'deg)',
-					'-moz-transform': rotation == 90 ? 'rotate(' + rotation + 'deg) scale(1, -1)' : 'rotate(' + rotation + 'deg)',
+					'transform': rotation == 90 ? 'rotate(' + rotation + 'deg) scale(1, -1)' : 'rotate(' + rotation + 'deg)',
 					'-ms-transform': rotation == 90 ? 'rotate(' + rotation + 'deg) scale(1, -1)' : 'rotate(' + rotation + 'deg)'}, 
 					event: {vclick: select}"
 				class="place" 
