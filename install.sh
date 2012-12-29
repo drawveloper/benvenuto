@@ -51,4 +51,5 @@ cd ~
 git clone https://gadr90@bitbucket.org/gadr90/benvenuto-node.git
 cd benvenuto-node.git
 npm install
+npm install -g nodemon
 echo 'Benvenuto Node install successful. Run start.sh to start the server'
