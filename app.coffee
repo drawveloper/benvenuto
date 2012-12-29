@@ -167,6 +167,7 @@ getOccupationLogs = (year, month, callback) ->
       hours.push {occupations: Math.random()}
     weekDays.push hours
   callback(weekDays)
+
 #
 # Rotas
 #

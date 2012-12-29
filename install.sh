@@ -50,4 +50,5 @@ echo 'Installing Benvenuto Node dependencies'
 cd ~/benvenuto-node/
 npm install
 npm install -g nodemon
+npm install -g coffee-script
 echo 'Benvenuto Node install successful. Run start.sh to start the server'
