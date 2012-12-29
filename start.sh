@@ -1,7 +1,7 @@
 redis-cli ping
 rc=$?
 if [[ $rc != 0 ]] ; then
-    redis-server
+    redis-server &
 fi
 
 #!/bin/bash
