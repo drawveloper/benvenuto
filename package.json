@@ -4,6 +4,7 @@
   "author": "Guilherme Rodrigues <gadr90@gmail.com>",
   "description": "Sistema de reserva de mesas",
   "dependencies" : {
+    "coffee-script": "*",
     "express" :  "3.x",
     "socket.io" : "0.9.13",
     "mmm" : "0.2.1",

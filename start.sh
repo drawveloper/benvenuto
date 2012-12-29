@@ -5,4 +5,4 @@ if [[ $rc != 0 ]] ; then
 fi
 
 #!/bin/bash
-nodemon app.coffee
+nodemon benvenuto.coffee -w ./ -w ./libs/

@@ -1,2 +1,2 @@
 #!/bin/bash
-coffee -o ./js -wc ./coffee
+coffee -o ./public/js -wc ./models/table.coffee ./libs/utils.coffee

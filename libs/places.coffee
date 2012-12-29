@@ -1,4 +1,5 @@
-exports.collection =
+root = exports ? this
+root.collection =
   gridSizePixels: 10
   name: "Couveflor-PUC-1"
   tables: [
