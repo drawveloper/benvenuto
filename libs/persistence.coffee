@@ -104,7 +104,7 @@ class Persistence
 
   logOccupation: (occupationData) =>
     # Log full ocupation data - for each place, keep a key with a set sorted by Date
-    occupation = new Occupation(occupationData.places, occupationData.occupyDate)
+    occupation = new Occupation(occupationData.places, occupationData.occupyDate, undefined, occupationData.hasTeacher)
     for placeId in occupation.placesIdArray
       @client.zadd @placeLogKey(placeId), occupation.occupyDate.valueOf(), JSON.stringify(occupation)
 
@@ -164,9 +164,9 @@ class Persistence
       if err
         callback(err)
       else
+        console.log occupations
         for occupation in occupations
           weekDays[occupation.occupyMoment.day()][occupation.occupyMoment.hours()].occupations += 1
-          console.log "occupations day and hours", occupation.occupyMoment.day(), occupation.occupyMoment.hours(), weekDays[occupation.occupyMoment.day()][occupation.occupyMoment.hours()].occupations
 
         callback(undefined, weekDays)
 

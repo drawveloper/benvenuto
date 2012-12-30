@@ -15,6 +15,7 @@ Persistence = require('./libs/persistence.coffee')
 app = express()
 server = http.createServer(app)
 io = socketio.listen(server)
+io.set('log level', 1)
 p = new Persistence({id:1})
 
 app.configure ->
@@ -23,7 +24,6 @@ app.configure ->
   app.set "view engine", "mmm"
   app.set "layout", "layout"
   app.use express.favicon()
-  app.use express.logger("dev")
   app.use express.bodyParser()
   app.use express.methodOverride()
   app.use app.router
@@ -93,16 +93,15 @@ app.post '/config/tempo', (req, res) ->
 # SocketIO
 #
 io.sockets.on 'connection', (socket) ->
-  console.log 'Iniciando conexão', socket
   p.getAllPlaces (places) =>
     data = {}
     data[key] = value for key, value of p.layout
     data.places = places
+    console.log 'Enviando welcome para', socket.id
     socket.emit 'welcome', {time: new Date(), data: data}
-    console.log p.layout
 
   socket.on 'occupy', (data, ack) ->
-    console.log 'Recebido evento occupy', data
+    console.log 'Recebido evento occupy', data, 'de', socket.id
     # occupiedPlacesIds é um array com os id's inteiros de todos os lugares a serem ocupados
     occupiedPlacesIds = data.places
 
@@ -144,7 +143,7 @@ io.sockets.on 'connection', (socket) ->
         ack result: 'ok'
 
   socket.on 'free', (data, ack) ->
-    console.log 'Recebido evento occupy', data
+    console.log 'Recebido evento free', data, 'de', socket.id
     # freePlacesIds é um array com os id's inteiros de todos os lugares a serem liberados
     freePlacesIds = data.places
 
