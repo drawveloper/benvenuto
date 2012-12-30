@@ -25,8 +25,5 @@ module.exports = {
     text: 'Vinte minutos',
     selected: true
     }
-  ],
-  selectedTableRecentMillis: (text) ->
-    for option in @tableRecentOptions
-      return option.value if option.selected
+  ]
 }

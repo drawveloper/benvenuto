@@ -42,7 +42,12 @@ app.get '/recepcao', (req, res) ->
   res.render 'reception'
 
 app.get '/salao', (req, res) ->
-  res.render 'blocks', settings
+  blockSettings = _u.clone(settings)
+
+  for option in blockSettings.tableRecentOptions
+    blockSettings.selectedTableRecentMillis = option.value if option.selected
+
+  res.render 'blocks', blockSettings
 
 app.get '/relatorios', (req, res) ->
   res.render 'reports'
@@ -101,7 +106,7 @@ io.sockets.on 'connection', (socket) ->
 
     lastOccupation = new Date()
 
-    p.logOccupation(occupiedPlacesIds, lastOccupation)
+    p.logOccupation(occupiedPlacesIds, lastOccupation, data)
 
     # Watch todas as keys - se qualquer uma delas for alterada, a transação é abortada
     p.watch p.placeArrayKeys(occupiedPlacesIds)
