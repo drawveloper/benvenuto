@@ -56,6 +56,10 @@ app.get '/relatorio1.json', (req, res) ->
   p.getOccupationLogs 2012, 11, (data) ->
     res.send {views: data}
 
+app.get '/relatorio/:year-:month.json', (req, res) ->
+  p.getOccupationLogs req.params.year, req.params.month, (data) ->
+    res.send {views: data}
+
 app.get '/lugares.json', (req, res) ->
   p.getAllPlaces (places) =>
     res.send places
@@ -105,8 +109,9 @@ io.sockets.on 'connection', (socket) ->
       return
 
     lastOccupation = new Date()
+    data.occupyDate = lastOccupation
 
-    p.logOccupation(occupiedPlacesIds, lastOccupation, data)
+    p.logOccupation(data)
 
     # Watch todas as keys - se qualquer uma delas for alterada, a transação é abortada
     p.watch p.placeArrayKeys(occupiedPlacesIds)

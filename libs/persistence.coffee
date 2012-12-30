@@ -1,16 +1,22 @@
 redis = require 'redis'
 _u = require 'underscore'
+moment = require 'moment'
+Occupation = require '../models/occupation.coffee'
+
 class Persistence
   constructor: (@layout) ->
     @client = redis.createClient()
+
   #
   # Mapeamento de identificadores
   #
   layoutKey: (id) => if id then return "layout:" + id else return "layout:" + @layout.id
   placeKey: (id) => return @layoutKey() + ":place:" + id
+  placeLogKey: (id) => return @layoutKey() + ":place:" + id + ":log"
   placeArrayKeys: (idsArray) => return _u.map idsArray, (id) => @placeKey(id)
   watch: (array) => @client.watch array
   unwatch: => @client.unwatch()
+
   #
   # Acesso ao banco de dados
   #
@@ -94,18 +100,69 @@ class Persistence
       argsArray.push JSON.stringify place
     @client.multi().mset(argsArray).exec execCallback
 
-  logOccupation: (placesIdArray, occupationDate) =>
-    # todo
+  logOccupation: (occupationData) =>
+    # Log full ocupation data - for each place, keep a key with a set sorted by Date
+    occupation = new Occupation(occupationData.places, occupationData.occupyDate)
+    for placeId in occupation.places
+      console.log "Logging occupation:", @placeLogKey(placeId), occupation.occupyDate.valueOf()
+      @client.zadd @placeLogKey(placeId), occupation.occupyDate.valueOf(), JSON.stringify(occupation)
 
-    # Retorna um array de arrays, com todos os horarios para todos os dias de semana, com as
-    # ocupações relativas a esse mês e ano.
+  getPlaceOccupationsByDate: (placeId, year, month, callback) =>
+    startDate = moment([year, month - 1])
+    endDate = moment(startDate).endOf('month')
+    logKey = @placeLogKey(placeId)
+    params = [logKey, startDate.valueOf(), endDate.valueOf()]
+    # Retorne todos os logs de ocupação deste lugar entre as duas datas
+    # replyArray tem, em pares, o conteúdo do log, e seu score.
+    @client.zrangebyscore params, (err, replyArray) =>
+      if err
+        callback(err)
+        return
+
+      #console.log "log", replyArray
+      occupations = []
+      for occupation in replyArray
+        occupations.push Occupation.fromJSON(occupation)
+
+      callback(undefined, occupations)
+
+  getAllOccupationsByDate: (year, month, callback) =>
+    @client.smembers @layoutKey(), (err, replyKeys) =>
+      if err
+        console.log "Erro ao recuperar lista de places.", err
+        callback(err)
+        return
+
+      occupations = []
+      # TODO usar promises para processar todas as respostas
+      # Para cada lugar nesse layout...
+      for structuredKey, i in replyKeys
+        # SMEMBERS já devolve as keys com o namespace apropriado, eg. layout:1:place:2
+        placeId = structuredKey.replace(@placeKey(''), '')
+        @getPlaceOccupationsByDate placeId, year, month, (err, occupations) =>
+
+      # TODO
+      callback(undefined, occupations)
+
+  # Retorna um array de arrays, com todos os horarios para todos os dias de semana, com as
+  # ocupações relativas a esse mês e ano.
+  # Aceita mês com índice baseado em 1
   getOccupationLogs: (year, month, callback) =>
     weekDays = []
-    for day in [0..4]
+    for day in [0..6]
       hours = []
-      for hour in [0..10]
-        hours.push {occupations: Math.random()}
+      for hour in [0..23]
+        hours.push {occupations: 0}
       weekDays.push hours
-    callback(weekDays)
+
+    @getAllOccupationsByDate year, month, (err, occupations) =>
+      if err
+        callback(err)
+        return
+
+      for occupation in occupations
+        weekDays[occupation.occupyMoment.day()][occupation.occupyMoment.hours()].occupations += 1
+
+      callback(undefined, weekDays)
 
 module.exports = Persistence

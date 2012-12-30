@@ -9,7 +9,9 @@
     "socket.io" : "0.9.13",
     "mmm" : "0.2.1",
     "redis" : "0.8.x",
-    "underscore" : "1.4.x"
+    "underscore" : "1.4.x",
+    "moment" : "1.7.2",
+    "q" : "0.8.x"
   },
   "engines": {
     "node": ">=0.8"
