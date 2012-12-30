@@ -23,13 +23,20 @@ if (isOldBrowser()) {
 var buckets = 11,
 	colorScheme = 'rbow2',
 	days = [
+		{ name: 'Sunday', abbr: 'Su' },
 		{ name: 'Monday', abbr: 'Mo' },
 		{ name: 'Tuesday', abbr: 'Tu' },
 		{ name: 'Wednesday', abbr: 'We' },
 		{ name: 'Thursday', abbr: 'Th' },
-		{ name: 'Friday', abbr: 'Fr' }
+		{ name: 'Friday', abbr: 'Fr' },
+		{ name: 'Saturday', abbr: 'Sa' }
 	],
-	hours = ['11:00', '11:30', '12:00', '12:30', '1:00', '1:30', '2:00', '2:30', '3:00', '3:30', '4:00']
+	hours = ['00:00', '01:00', '02:00', '03:00',
+        '04:00', '05:00', '06:00', '07:00',
+        '08:00', '09:00', '10:00', '11:00',
+        '12:00', '13:00', '14:00', '15:00',
+        '16:00', '17:00', '18:00', '19:00',
+        '20:00', '21:00', '22:00', '23:00']
 
 var data;
 
@@ -39,7 +46,7 @@ if (isOldBrowser() === false) {
 
 d3.select('#vis').classed(colorScheme, true);
 
-d3.json('relatorio1.json', function(json) {
+d3.json('relatorio/2012-12.json', function(json) {
 	
 	data = json;
 

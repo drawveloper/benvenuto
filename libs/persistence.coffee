@@ -1,7 +1,9 @@
 redis = require 'redis'
 _u = require 'underscore'
 moment = require 'moment'
-Occupation = require '../models/occupation.coffee'
+require 'coffee-script'
+Occupation = require('../models/occupation.coffee').Occupation
+Q = require 'q'
 
 class Persistence
   constructor: (@layout) ->
@@ -25,21 +27,21 @@ class Persistence
     @client.get "layout", (err, reply) =>
       if err
         console.log "Erro ao recuperar layout do banco. Usando mapa default.", err
-        layout = (require '../public/js/newplaces.js').layout
+        @layout = (require '../public/js/newplaces.js').layout
         return
       # Não existe layout - inicialize com o default do arquivo
       if (!reply)
         console.log "Inicializando banco com dados do arquivo."
-        layout = (require '../public/js/newplaces.js').layout
+        @layout = (require '../public/js/newplaces.js').layout
         # Não guarde os lugares no layout
         leanLayout =
-          gridSizePixels: layout.gridSizePixels
-          name: layout.name
-          id: layout.id
+          gridSizePixels: @layout.gridSizePixels
+          name: @layout.name
+          id: @layout.id
         @client.set "layout", JSON.stringify leanLayout
         # Guarde cada lugar como uma key separada
         # E guarde todas as keys num set para recuperar todas
-        places = layout.places
+        places = @layout.places
         for place in places
           redisKey = @placeKey place.id
           @client.sadd @layoutKey(), redisKey
@@ -103,11 +105,11 @@ class Persistence
   logOccupation: (occupationData) =>
     # Log full ocupation data - for each place, keep a key with a set sorted by Date
     occupation = new Occupation(occupationData.places, occupationData.occupyDate)
-    for placeId in occupation.places
-      console.log "Logging occupation:", @placeLogKey(placeId), occupation.occupyDate.valueOf()
+    for placeId in occupation.placesIdArray
       @client.zadd @placeLogKey(placeId), occupation.occupyDate.valueOf(), JSON.stringify(occupation)
 
-  getPlaceOccupationsByDate: (placeId, year, month, callback) =>
+  getPlaceOccupationsByDate: (placeId, year, month) =>
+    deferred = Q.defer()
     startDate = moment([year, month - 1])
     endDate = moment(startDate).endOf('month')
     logKey = @placeLogKey(placeId)
@@ -116,15 +118,15 @@ class Persistence
     # replyArray tem, em pares, o conteúdo do log, e seu score.
     @client.zrangebyscore params, (err, replyArray) =>
       if err
-        callback(err)
-        return
+        deferred.reject new Error(err)
+      else
+        occupations = []
+        for occupation in replyArray
+          occupations.push Occupation.fromJSON(occupation)
 
-      #console.log "log", replyArray
-      occupations = []
-      for occupation in replyArray
-        occupations.push Occupation.fromJSON(occupation)
+        deferred.resolve(occupations)
 
-      callback(undefined, occupations)
+    return deferred.promise
 
   getAllOccupationsByDate: (year, month, callback) =>
     @client.smembers @layoutKey(), (err, replyKeys) =>
@@ -133,16 +135,19 @@ class Persistence
         callback(err)
         return
 
-      occupations = []
-      # TODO usar promises para processar todas as respostas
+      promises = []
       # Para cada lugar nesse layout...
-      for structuredKey, i in replyKeys
+      for structuredKey in replyKeys
         # SMEMBERS já devolve as keys com o namespace apropriado, eg. layout:1:place:2
         placeId = structuredKey.replace(@placeKey(''), '')
-        @getPlaceOccupationsByDate placeId, year, month, (err, occupations) =>
+        promises.push @getPlaceOccupationsByDate(placeId, year, month)
 
-      # TODO
-      callback(undefined, occupations)
+      Q.all(promises)
+        .then((results) =>
+          # Retira resultados duplicados - a mesma ocupação aparece varias vezes pois pertence a varios lugares
+          uniqueResults = _u.chain(results).flatten().uniq((v) -> v.placesIdArray.toString() + v.occupyDate).value()
+          callback(undefined, uniqueResults))
+        .fail((err) => callback(err))
 
   # Retorna um array de arrays, com todos os horarios para todos os dias de semana, com as
   # ocupações relativas a esse mês e ano.
@@ -158,11 +163,11 @@ class Persistence
     @getAllOccupationsByDate year, month, (err, occupations) =>
       if err
         callback(err)
-        return
+      else
+        for occupation in occupations
+          weekDays[occupation.occupyMoment.day()][occupation.occupyMoment.hours()].occupations += 1
+          console.log "occupations day and hours", occupation.occupyMoment.day(), occupation.occupyMoment.hours(), weekDays[occupation.occupyMoment.day()][occupation.occupyMoment.hours()].occupations
 
-      for occupation in occupations
-        weekDays[occupation.occupyMoment.day()][occupation.occupyMoment.hours()].occupations += 1
-
-      callback(undefined, weekDays)
+        callback(undefined, weekDays)
 
 module.exports = Persistence

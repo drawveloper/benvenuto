@@ -57,8 +57,11 @@ app.get '/relatorio1.json', (req, res) ->
     res.send {views: data}
 
 app.get '/relatorio/:year-:month.json', (req, res) ->
-  p.getOccupationLogs req.params.year, req.params.month, (data) ->
-    res.send {views: data}
+  p.getOccupationLogs req.params.year, req.params.month, (err, data) ->
+    if err
+      res.send(500)
+    else
+      res.send {views: data}
 
 app.get '/lugares.json', (req, res) ->
   p.getAllPlaces (places) =>
