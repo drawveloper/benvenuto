@@ -11,7 +11,9 @@
         <script src="/js/lib/knockout-2.2.0.js" type="text/javascript" charset="UTF-8"></script>
         <script type="text/javascript">
 	    	$(document).bind("mobileinit", function(){
-	    		$.mobile.loadingMessage = "";
+	    		$.mobile.loadingMessage = false;
+                $.mobile.loader.prototype.options.text = false;
+                $.mobile.loader.prototype.options.textVisible = false;
 	    		$.mobile.ajaxEnabled=false;
 	    		$.mobile.pushStateEnabled=false
 	    	});
