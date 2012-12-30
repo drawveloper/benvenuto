@@ -1,5 +1,5 @@
 <meta name="viewport" content="initial-scale=1.0,maximum-scale=2.0,height=device-height,width=device-width,user-scalable = yes">
-<script src="/js/lib/jquery.mobile-1.1.0.min.js" type="text/javascript" charset="UTF-8"></script>
+<script src="/js/lib/jquery.mobile-1.2.0.min.js" type="text/javascript" charset="UTF-8"></script>
 <link rel="stylesheet" media="screen" href="/css/render-places.css">
 <style>
 	@media (max-width: 800px){
