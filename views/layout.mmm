@@ -5,7 +5,8 @@
         <title>Benvenuto</title>
         <meta charset="${_response_encoding}">
         <link rel="stylesheet" media="screen" href="/css/main.css">
-        <link rel="shortcut icon" type="image/png" href="/img/favicon.png">
+        <link rel='icon' href='/favicon.png' type='image/png' />
+        <link rel='shortcut icon' href='/favicon.png' type='image/png' />
         <script type="text/javascript" src="/socket.io/socket.io.js" charset="UTF-8"></script>
         <script src="/js/lib/jquery-1.8.3.min.js" type="text/javascript" charset="UTF-8"></script>
         <script src="/js/lib/knockout-2.2.0.js" type="text/javascript" charset="UTF-8"></script>

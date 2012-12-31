@@ -23,7 +23,7 @@ app.configure ->
   app.set "views", __dirname + "/views"
   app.set "view engine", "mmm"
   app.set "layout", "layout"
-  app.use express.favicon()
+  app.use express.favicon(path.join(__dirname, "public/favicon.ico"))
   app.use express.bodyParser()
   app.use express.methodOverride()
   app.use app.router
