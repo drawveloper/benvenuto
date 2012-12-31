@@ -1,16 +1,39 @@
+<link rel="stylesheet" media="screen" href="/css/render-places.css">
 <script type="text/javascript" src="/js/utils.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/table.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/reception-vm.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/reception.js" charset="UTF-8"></script>
 <div data-role="page">
 
-    <div data-role="header" data-position="fixed">
-        <span data-bind="text: occupiedPlaces().length + ' mesas ocupadas (' + occupiedPercent() + '%)'"></span>
-        <span style="margin-right: 5px" data-bind="fadeVisible: numberOfOccupants() > 0">||</span>
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <span style="margin-left: 15px"
+              data-bind="text: occupiedPlaces().length + ' mesas ocupadas (' + occupiedPercent() + '%)'"></span>
+        <span style="margin: 0px 5px 0px 5px" data-bind="fadeVisible: numberOfOccupants() > 0">||</span>
         <span data-bind="text: numberOfOccupantsLabel, fadeVisible: numberOfOccupants() > 0"></span>
     </div><!-- /header -->
 
     <div data-role="content">
+        <div id="floating-controls" data-bind="fadeVisible: selectedPlaces().length > 0">
+            <button id="button-ok" data-bind="click: occupyPlacesWithoutTeacher, text: loading() ? '…' : '✓'">✓</button>
+            <br/>
+            <label id="button-ok-label" for="button-ok">ocupar</label>
+
+            <br/>
+            <button id="button-ok-teacher" data-bind="click: occupyPlacesWithTeacher, text: loading() ? '…' : '✓'">✓</button>
+            <br/>
+            <label id="button-ok-teacher-label" for="button-ok-teacher">ocupar com professor</label>
+
+            <br/>
+            <button class="small-control-button" data-bind="click: addNumberOfOccupants">+</button>
+            <br/>
+            <label class="small-control-label">mais pessoas</label>
+
+            <br/>
+            <button class="small-control-button" data-bind="click: subtractNumberOfOccupants">-</button>
+            <br/>
+            <label class="small-control-label">menos pessoas</label>
+        </div>
+
         <div id="places" class="unselectable" data-bind="foreach: places">
             <!-- ko if: table()._class == 'models.RoundTable' -->
             <div data-bind="attr: { id: id }, css: { 'occupied-place': occupied, 'selected-place': selected },

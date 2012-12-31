@@ -1,3 +1,11 @@
+<script type="text/javascript">
+    $.mobile.loadingMessage = false;
+    $.mobile.loader.prototype.options.text = false;
+    $.mobile.loader.prototype.options.textVisible = false;
+    $.mobile.button.prototype.options.initSelector = ".onlyMyButtons";
+    $.mobile.ajaxEnabled=false;
+    $.mobile.pushStateEnabled=false
+</script>
 <meta name="viewport" content="initial-scale=1.0,maximum-scale=2.0,height=device-height,width=device-width,user-scalable = yes">
 <link rel="stylesheet" media="screen" href="/css/render-places.css">
 <script type="text/javascript" src="/js/utils.js" charset="UTF-8"></script>
