@@ -3,7 +3,7 @@
 }
 
 body, html {
-    background-color:#AAA	
+    background-color:#FFF
 }
 
 #blockWrapper {
@@ -64,17 +64,27 @@ body, html {
 	 color:#F7F7F7;
 }
 
-#block-bottom{
-	padding:10px;
-	text-align: center;
-	background-color:#252322 ;
-	position:fixed;
-	bottom: 0px;
-	width:100%;
+#free-button {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    font-size: 60px;
+    border: #2e2e2e dotted 2px;
+    border-radius:40px;
+    width: 80px;
+    height: 80px;
+    background-color: #49cf31;
+    margin-top: 20px;
+    margin-left: 6px;
+    cursor: pointer;
 }
 
-#block-bottom .button {
-    height:90px;
-    font-size:xx-large;
-    font-weight:bold;
+#free-button:hover {
+    background-color: #77ff52;
+    border: #2e2e2e solid 2px;
+}
+
+#free-button:active {
+    background-color: #49cf31;
+    border: #2e2e2e solid 2px;
 }

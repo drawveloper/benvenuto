@@ -14,34 +14,37 @@
 <script type="text/javascript" src="/js/reception.js" charset="UTF-8"></script>
 <div id="content">
 
-	<div id="controls" style="position:fixed;z-index: 10000; margin-top:-2px" class="unselectable" >
-		<div class="button-div">
-			<div>
-                <input class="button" type="button" data-bind="click: occupyPlacesWithoutTeacher, attr: {value: loading() ? 'aguarde...' : 'ocupar' }"/>
-            </div>
-		</div>
-		<div style="position: absolute; left: 205px;">
-			<span class="white-text">número de pessoas</span>
-			<div id="bounds" style="width: 252px">
-		    	<label><span class="radio-border" data-bind="click: subtractNumberOfOccupants">-</span></label>
-				<label><span data-bind="text: numberOfOccupants" class="radio-border border-left border-right" >1</span></label>
-		    	<label><span class="radio-border" data-bind="click: addNumberOfOccupants">+</span></label>
-			</div>
-			<div class="white-text" id="occupied-status">
-				<span data-bind="text: occupiedPlaces().length + ' mesas ocupadas (' + occupiedPercent() + '%)'"></span>
-			</div>
-		</div>
-        <div class="button-div" style="position: absolute; left: 460px;">
-            <div>
-                <input class="button" type="button"
-                       style="white-space: pre-wrap"
-                       data-bind="click: occupyPlacesWithTeacher, attr: {value: loading() ? 'aguarde...' : 'ocupar com professor' }"/>
-            </div>
+	<div id="controls" class="unselectable" >
+        <div class="white-text" id="occupied-status">
+            <span data-bind="text: occupiedPlaces().length + ' mesas ocupadas (' + occupiedPercent() + '%)'"></span>
         </div>
-        <div id="top" style="position: absolute; left: 650px;">
-	    	<a href="@{Application.index}"  ><img id="logo" src="/img/logo.jpg" /></a>
-		</div>
+
+        <div class="white-text" data-bind="fadeVisible: numberOfOccupants() > 0">
+            <span style="margin-right: 5px">||</span>
+            <span data-bind="text: numberOfOccupantsLabel"></span>
+        </div>
 	</div>
+
+    <div id="floating-controls" data-bind="fadeVisible: selectedPlaces().length > 0">
+        <button id="button-ok" data-bind="click: occupyPlacesWithoutTeacher, text: loading() ? '…' : '✓'">✓</button>
+        <br/>
+        <label id="button-ok-label" for="button-ok">ocupar</label>
+
+        <br/>
+        <button id="button-ok-teacher" data-bind="click: occupyPlacesWithTeacher, text: loading() ? '…' : '✓'">✓</button>
+        <br/>
+        <label id="button-ok-teacher-label" for="button-ok-teacher">ocupar com professor</label>
+
+        <br/>
+        <button class="small-control-button" data-bind="click: addNumberOfOccupants">+</button>
+        <br/>
+        <label class="small-control-label">mais pessoas</label>
+
+        <br/>
+        <button class="small-control-button" data-bind="click: subtractNumberOfOccupants">-</button>
+        <br/>
+        <label class="small-control-label">menos pessoas</label>
+    </div>
 
 	<div id="places" class="unselectable" data-bind="foreach: places">
 			<!-- ko if: table()._class == 'models.RoundTable' -->

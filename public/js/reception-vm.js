@@ -32,7 +32,7 @@ function Place(id, label, x, y, occupied, numberOfOccupants, table, rotation) {
 // 				console.log(viewmodel.numberOfOccupants());
 // 				console.log(viewmodel.selectedNumberOfOccupants());
             var selected = viewmodel.selectedNumberOfOccupants();
-            viewmodel.numberOfOccupants(selected > 0 ? selected : 1 );
+            viewmodel.numberOfOccupants(selected > 0 ? selected : 0 );
         }
     };
     self.occupy = function (value) {
@@ -53,7 +53,14 @@ function LayoutViewModel() {
         self.hasTeacher(!self.hasTeacher());
     };
     self.places = ko.observableArray([]);
-    self.numberOfOccupants = ko.observable(1);
+    self.numberOfOccupants = ko.observable(0);
+    self.numberOfOccupantsLabel = ko.computed(function(){
+        var label = ' pessoa';
+        var num = self.numberOfOccupants();
+        if (num > 1)
+            label += 's';
+        return 'ocupar com ' + num + label;
+    });
     self.addNumberOfOccupants = function(){
         self.numberOfOccupants(self.numberOfOccupants() + 1);
     };
@@ -125,7 +132,7 @@ function LayoutViewModel() {
         self.occupyCallback = function(data){
             console.log(data);
             if (data.result === 'ok') {
-                self.numberOfOccupants(1);
+                self.numberOfOccupants(0);
                 $.each(self.selectedPlaces(), function(index, value) {
                     value.occupy(true);
                 });

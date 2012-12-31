@@ -9,11 +9,13 @@
         <script type="text/javascript" src="/socket.io/socket.io.js" charset="UTF-8"></script>
         <script src="/js/lib/jquery-1.8.3.min.js" type="text/javascript" charset="UTF-8"></script>
         <script src="/js/lib/knockout-2.2.0.js" type="text/javascript" charset="UTF-8"></script>
+        <script src="/js/knockout-utils.js" type="text/javascript" charset="UTF-8"></script>
         <script type="text/javascript">
 	    	$(document).bind("mobileinit", function(){
 	    		$.mobile.loadingMessage = false;
                 $.mobile.loader.prototype.options.text = false;
                 $.mobile.loader.prototype.options.textVisible = false;
+                $.mobile.button.prototype.options.initSelector = ".onlyMyButtons";
 	    		$.mobile.ajaxEnabled=false;
 	    		$.mobile.pushStateEnabled=false
 	    	});

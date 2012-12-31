@@ -8,13 +8,14 @@
 
 <link rel="stylesheet" media="screen" href="/css/hall-blocks.css">
 
-<div id="blockWrapper" data-bind="foreach: places, style: {height: Math.ceil((occupiedPlacesNumber().length/3))*91 + 128 + 'px' }" class="centerdiv unselectable">
+<div id="blockWrapper" data-bind="style: {height: Math.ceil((occupiedPlacesNumber()/3))*91 + 115 + 'px' }" class="centerdiv unselectable">
+    <!-- ko foreach: places -->
     <!-- ko if: occupied -->
     <div class="box" data-bind="event: {vclick: select}, css: { 'selected' : selected }, style: { 'background-color': backgroundColor }" >
         <span data-bind="text: label" style="float:left"></span>
     </div>
     <!-- /ko -->
-</div>
-<div id="block-bottom">
-	<input type="button" class="button centerdiv unselectable" data-bind="click: freePlaces, attr: {value: loading() ? 'aguarde...' : 'liberar'}">
+    <!-- /ko -->
+    <input type="button" id="free-button" class="button centerdiv unselectable"
+           data-bind="click: freePlaces, attr: {value: loading() ? '...' : '✓'}, fadeVisible: selectedPlaces().length > 0">
 </div>

@@ -73,7 +73,7 @@ function LayoutViewModel() {
     self.places = ko.observableArray();
     self.occupiedPlacesNumber = ko.computed(function(){
        return ko.utils.arrayFilter(self.places(), function(item){
-           item.occupied() === true;
+           return item.occupied() === true;
        }).length;
     });
     self.findPlaceById = function(id) {

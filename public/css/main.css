@@ -6,7 +6,7 @@ body, html {
 }
 
 body {
-	background-color: #e0eee6;
+	background-color: #FFF;
 }
 
 #content {
@@ -35,32 +35,6 @@ body {
 }
 
 /* restaurant elements */
-
-#places {
-	background-image: url('/img/floor.png');
-	position: absolute;
-	top: 140px;
-	left:20px;
-	height:1443px;
-	width:884px;
-}
-
-/* control elements */
-#controls {
-	background-color: #252322;
-    width: 100%;
-    height: 100px;
-    padding: 10px;
-    position: fixed;
-}
-
-#controls div {
-	float:left;
-}
-
-#controls div div{
-	clear:left;
-}
 
 #table-selected {
 	color: #ffffff;
