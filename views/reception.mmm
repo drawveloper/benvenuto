@@ -1,13 +1,9 @@
 <meta name="viewport" content="initial-scale=1.0,maximum-scale=2.0,height=device-height,width=device-width,user-scalable = yes">
-<script src="/js/lib/jquery.mobile-1.2.0.min.js" type="text/javascript" charset="UTF-8"></script>
 <link rel="stylesheet" media="screen" href="/css/render-places.css">
-<style>
-	@media (max-width: 800px){
-		#top {
-			display:none;
-			 }
-		}
-</style>
+<link rel="stylesheet" media="screen" href="/css/toastr.css">
+<script type="text/javascript" src="/js/lib/jquery.mobile-1.2.0.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/lib/soundmanager2-jsmin.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/lib/toastr.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/utils.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/table.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/reception-vm.js" charset="UTF-8"></script>

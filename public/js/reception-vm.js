@@ -182,6 +182,7 @@ function LayoutViewModel() {
 
     socket.on('free', function (data) {
         console.log ('free', data);
+        toastr.success('Mesa liberada');
         self.update(data);
     });
 
