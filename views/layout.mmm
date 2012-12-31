@@ -1,28 +1,33 @@
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>Benvenuto</title>
-        <meta charset="${_response_encoding}">
-        <link rel="stylesheet" media="screen" href="/css/main.css">
+        <meta charset="${_response_encoding}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="/css/main.css" media="screen" />
+        <link rel="stylesheet" href="/css/jquery.mobile-1.2.0.css" media="screen" />
+        <link rel="stylesheet" media="screen" href="/css/toastr.css">
         <link rel='icon' href='/favicon.png' type='image/png' />
         <link rel='shortcut icon' href='/favicon.png' type='image/png' />
-        <script type="text/javascript" src="/socket.io/socket.io.js" charset="UTF-8"></script>
+        <script src="/socket.io/socket.io.js" type="text/javascript" charset="UTF-8"></script>
         <script src="/js/lib/jquery-1.8.3.min.js" type="text/javascript" charset="UTF-8"></script>
-        <script src="/js/lib/knockout-2.2.0.js" type="text/javascript" charset="UTF-8"></script>
-        <script src="/js/knockout-utils.js" type="text/javascript" charset="UTF-8"></script>
         <script type="text/javascript">
-	    	$(document).bind("mobileinit", function(){
-	    		$.mobile.loadingMessage = false;
+            $(document).bind("mobileinit", function(){
+                $.mobile.loadingMessage = false;
                 $.mobile.loader.prototype.options.text = false;
                 $.mobile.loader.prototype.options.textVisible = false;
                 $.mobile.button.prototype.options.initSelector = ".onlyMyButtons";
-	    		$.mobile.ajaxEnabled=false;
-	    		$.mobile.pushStateEnabled=false
-	    	});
+                $.mobile.ajaxEnabled=false;
+                $.mobile.pushStateEnabled=false
+            });
         </script>
+        <script src="/js/lib/jquery.mobile-1.2.0.min.js" type="text/javascript" charset="UTF-8"></script>
+        <!--<script src="/js/lib/soundmanager2-jsmin.js" type="text/javascript" charset="UTF-8"></script>-->
+        <script src="/js/lib/toastr.js" type="text/javascript" charset="UTF-8"></script>
+        <script src="/js/lib/knockout-2.2.0.js" type="text/javascript" charset="UTF-8"></script>
+        <script src="/js/knockout-utils.js" type="text/javascript" charset="UTF-8"></script>
     </head>
-    <body data-role="page">
+    <body>
     {{> content }}
     </body>
 </html>

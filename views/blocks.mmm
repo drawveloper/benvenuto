@@ -1,5 +1,4 @@
 <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,height=device-height,width=device-width,user-scalable = no">
-<script src="/js/lib/jquery.mobile-1.2.0.min.js" type="text/javascript" charset="UTF-8"></script>
 <script type="text/javascript">
     var tableRecentTimeMillis = {{selectedTableRecentMillis}};
 </script>
@@ -8,7 +7,7 @@
 
 <link rel="stylesheet" media="screen" href="/css/hall-blocks.css">
 
-<div id="blockWrapper" data-bind="style: {height: Math.ceil((occupiedPlacesNumber()/3))*91 + 115 + 'px' }" class="centerdiv unselectable">
+<div id="blockWrapper" data-role="page" data-bind="style: {height: Math.ceil((occupiedPlacesNumber()/3))*91 + 115 + 'px' }" class="centerdiv unselectable">
     <!-- ko foreach: places -->
     <!-- ko if: occupied -->
     <div class="box" data-bind="event: {vclick: select}, css: { 'selected' : selected }, style: { 'background-color': backgroundColor }" >
