@@ -143,45 +143,45 @@
 }
 
 #button-ok {
-    font-size: 50px;
-    border: #2e2e2e dotted 2px;
-    border-radius:40px;
-    width: 70px;
-    height: 70px;
-    background-color: #49cf31;
-    cursor: pointer;
+    font-size: 50px !important;
+    border: #2e2e2e dotted 1px !important;
+    border-radius:40px !important;
+    width: 70px !important;
+    height: 70px !important;
+    background-color: #49cf31 !important;
+    cursor: pointer !important;
 }
 
 #button-ok:hover {
-    background-color: #77ff52;
-    border: #2e2e2e solid 2px;
+    background-color: #77ff52 !important;
+    border: #2e2e2e solid 2px !important;
 }
 
 #button-ok:active {
-    background-color: #49cf31;
-    border: #2e2e2e solid 2px;
+    background-color: #49cf31 !important;
+    border: #2e2e2e solid 2px !important;
 }
 
 #button-ok-teacher {
-    font-size: 30px;
-    border: #2e2e2e dotted 2px;
-    border-radius:30px;
-    width: 50px;
-    height: 50px;
-    background-color: #E9DC51;
-    margin-top: 15px;
-    margin-left: 4px;
-    cursor: pointer;
+    font-size: 30px !important;
+    border: #2e2e2e dotted 1px !important;
+    border-radius:30px !important;
+    width: 50px !important;
+    height: 50px !important;
+    background-color: #E9DC51 !important;
+    margin-top: 15px !important;
+    margin-left: 4px !important;
+    cursor: pointer !important;
 }
 
 #button-ok-teacher:hover {
-    background-color: #f2f74f;
-    border: #2e2e2e solid 2px;
+    background-color: #f2f74f !important;
+    border: #2e2e2e solid 2px !important;
 }
 
 #button-ok-teacher:active {
-    background-color: #E9DC51;
-    border: #2e2e2e solid 2px;
+    background-color: #E9DC51 !important;
+    border: #2e2e2e solid 2px !important;
 }
 
 #button-ok-label {
@@ -193,14 +193,14 @@
 }
 
 .small-control-button {
-    font-size: 20px;
-    border: #2e2e2e dotted 2px;
-    border-radius:20px;
-    width: 30px;
-    height: 30px;
-    margin-top: 20px;
-    margin-left: 4px;
-    cursor: pointer;
+    font-size: 20px !important;
+    border: #2e2e2e dotted 1px !important;
+    border-radius:20px !important;
+    width: 30px !important;
+    height: 30px !important;
+    margin-top: 12px !important;
+    margin-left: 4px !important;
+    cursor: pointer !important;
 }
 
 .small-control-label {
