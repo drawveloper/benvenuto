@@ -1,0 +1,27 @@
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,height=device-height,width=device-width,user-scalable = no">
+<link rel="stylesheet" media="screen" href="/css/hall.css">
+<script type="text/javascript">
+    var tableRecentTimeMillis = {{selectedTableRecentMillis}};
+</script>
+<script type="text/javascript" src="/js/blocks-vm.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/blocks.js" charset="UTF-8"></script>
+<div data-role="page">
+
+    <div data-role="content">
+        <div id="blockWrapper" class="centerdiv unselectable">
+            <!-- ko foreach: places -->
+            <!-- ko if: occupied -->
+            <div class="box" data-bind="event: {vclick: select},
+                css: { 'selected' : selected }, style: { 'background-color': backgroundColor }" >
+                <span data-bind="text: label" style="float:left"></span>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+        </div>
+    </div><!-- /content -->
+
+    <div id="footer" data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <button data-bind="click: freePlaces, text: loading() ? 'aguarde' : 'Liberar'">Liberar</button>
+    </div><!-- /footer -->
+
+</div><!-- /page -->

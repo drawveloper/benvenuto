@@ -88,3 +88,18 @@ body, html {
     background-color: #49cf31;
     border: #2e2e2e solid 2px;
 }
+
+#footer {
+    height: 50px;
+}
+
+#footer button {
+    margin: 0 auto;
+    font-size: 20px;
+    height: 40px;
+    width: 80px;
+    margin-top: 5px;
+    border-radius:5px;
+    background-color: #49cf31;
+    margin-left: 50%;
+}

@@ -41,17 +41,13 @@ app.get '/', (req, res) ->
 app.get '/recepcao', (req, res) ->
   res.render 'reception'
 
-# TODO remove
-app.get '/recepcao2', (req, res) ->
-  res.render 'reception-new'
-
 app.get '/salao', (req, res) ->
   blockSettings = _u.clone(settings)
 
   for option in blockSettings.tableRecentOptions
     blockSettings.selectedTableRecentMillis = option.value if option.selected
 
-  res.render 'blocks', blockSettings
+  res.render 'hall', blockSettings
 
 app.get '/relatorios', (req, res) ->
   res.render 'reports'

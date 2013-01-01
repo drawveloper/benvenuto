@@ -124,18 +124,30 @@
 #floating-controls {
     position: fixed;
     top: 35%;
-    left: 16px;
+    left: 0px;
     z-index: 10000;
-    width: 90px;
+    width: 80px;
     text-align: center;
+    background-image: -webkit-gradient(linear, left top, left bottom, from( #3c3c3c /*{a-bar-background-start}*/), to( #111 /*{a-bar-background-end}*/)); /* Saf4+, Chrome */
+    background-image: -webkit-linear-gradient( #3c3c3c /*{a-bar-background-start}*/, #111 /*{a-bar-background-end}*/); /* Chrome 10+, Saf5.1+ */
+    background-image:    -moz-linear-gradient( #3c3c3c /*{a-bar-background-start}*/, #111 /*{a-bar-background-end}*/); /* FF3.6 */
+    background-image:     -ms-linear-gradient( #3c3c3c /*{a-bar-background-start}*/, #111 /*{a-bar-background-end}*/); /* IE10 */
+    background-image:      -o-linear-gradient( #3c3c3c /*{a-bar-background-start}*/, #111 /*{a-bar-background-end}*/); /* Opera 11.10+ */
+    background-image:         linear-gradient( #3c3c3c /*{a-bar-background-start}*/, #111 /*{a-bar-background-end}*/);
+    padding: 7px;
+    border-radius:0px 10px 10px 0px;
+}
+
+#floating-controls label {
+    color: white;
 }
 
 #button-ok {
-    font-size: 60px;
+    font-size: 50px;
     border: #2e2e2e dotted 2px;
     border-radius:40px;
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     background-color: #49cf31;
     cursor: pointer;
 }
@@ -151,14 +163,14 @@
 }
 
 #button-ok-teacher {
-    font-size: 40px;
+    font-size: 30px;
     border: #2e2e2e dotted 2px;
     border-radius:30px;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     background-color: #E9DC51;
-    margin-top: 20px;
-    margin-left: 6px;
+    margin-top: 15px;
+    margin-left: 4px;
     cursor: pointer;
 }
 
@@ -187,10 +199,10 @@
     width: 30px;
     height: 30px;
     margin-top: 20px;
-    margin-left: 6px;
+    margin-left: 4px;
     cursor: pointer;
 }
 
 .small-control-label {
-    font-size: 12px;
+    font-size: 11px;
 }
