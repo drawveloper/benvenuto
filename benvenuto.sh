@@ -1,3 +1,3 @@
 #!/bin/bash
 ./start-redis.sh
-sudo -E ./start-server.sh
+sudo PORT=80 ./start-server.sh
