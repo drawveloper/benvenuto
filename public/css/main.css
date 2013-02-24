@@ -277,9 +277,8 @@ border-bottom-width:1px;
 	width:280px;
 	margin-left:-10px;
 	background-color:#ffa1c9;
-	height:118px;
+	height:150px;
 	padding:15px;
-	display:none;
 }
 
 #recent-time {
@@ -297,4 +296,8 @@ border-bottom-width:1px;
 
 #config-checkbox label:hover{
 	cursor:pointer;
+}
+
+.hide {
+    display: none;
 }

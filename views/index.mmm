@@ -12,7 +12,7 @@ body {
     <a	href="/salao" id="hall-button" class="landing-button" ></a>
 	<a	href="/relatorios" id="reports-button" class="landing-button" ></a>
 	<a	id="settings-button" class="landing-button"></a>
-	<div id="settings-div">
+	<div id="settings-div" class="hide">
 		<form action="Settings.apply" method="POST">
 			<div id="recent-time">
 				<label>Quantidade de tempo que uma mesa é considerada recente:</label>
@@ -23,22 +23,24 @@ body {
 				</select>
 			</div>
 			
-			<input type="button" id="applySettings" value="Aplicar modificações" />
+			<input type="button" id="applySettings" class="jqueryMobileButton" value="Aplicar modificações" />
 		</form>
 		</div>
 </div>
 
 <script type="text/javascript">
-   $("#settings-button").click(function () {
-     $("#settings-div").slideToggle("slow");
-   });
+		$(function(){
+			 $("#settings-button").unbind('click').click(function () {
+				 $("#settings-div").slideToggle("slow");
+			 });
 
-   $("#applySettings").click(function(){
-       var time = $('#recent-time').find(":selected").val();
-      console.log(time);
-       $.post('/config/tempo', {time: time}).done(function(){
-           alert('Configuração salva');
-           $("#settings-div").slideToggle("slow");
-       });
-   });
+			 $("#applySettings").unbind('click').click(function(){
+					 var time = $('#recent-time').find(":selected").val();
+					console.log(time);
+					 $.post('/config/tempo', {time: time}).done(function(){
+							 alert('Configuração salva');
+							 $("#settings-div").slideToggle("slow");
+					 });
+			 });
+		});
 </script>

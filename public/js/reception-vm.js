@@ -166,10 +166,20 @@ function LayoutViewModel() {
             var occupy = places.occupiedPlaces != void(0);
             var placesArray = occupy ? places.occupiedPlaces : places.freePlaces;
             console.log('Lugares ' + (occupy ? 'ocupados' : 'liberados') + ':', placesArray);
+            var placesLabel = [];
             for (var index in placesArray) {
                 var id = placesArray[index].id;
                 var place = self.findPlaceById(id);
                 place.occupied(occupy);
+                placesLabel.push(place.label());
+            }
+            if (!occupy) {
+                var message = placesLabel.length > 1 ? 'Mesas liberadas: ' : 'Mesa liberada: ';
+                ko.utils.arrayForEach(placesLabel, function(label){
+                    message += label + ', ';
+                });
+                message = message.substring(0, message.lastIndexOf(',')) + '.';
+                toastr.success(message);
             }
         }
     };
@@ -182,7 +192,6 @@ function LayoutViewModel() {
 
     socket.on('free', function (data) {
         console.log ('free', data);
-        toastr.success('Mesa liberada');
         self.update(data);
     });
 
