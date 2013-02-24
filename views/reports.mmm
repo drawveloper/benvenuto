@@ -5,6 +5,7 @@
 <script type="text/javascript" src="/js/lib/d3.v2.js" ></script>
 <script type="text/javascript" src="/js/lib/insights.js" ></script>
 <script type="text/javascript" src="/js/heatmap.js" ></script>
+<script type="text/javascript" src="/js/reports.js" ></script>
 <div id="container">
 
     <div id="header">
