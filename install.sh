@@ -24,7 +24,7 @@ apt-get -y install libssl-dev git-core pkg-config build-essential curl gcc g++ c
 # Download & Unpack Node.js - v. 0.8.20 if not installed
 which node
 exists=$?
-if [[ $exists = 1 ]] ; then
+if [[ $exists -eq 1 ]] ; then
 		echo 'Download Node.js - v. 0.8.20'
 		mkdir /tmp/node-install
 		cd /tmp/node-install
@@ -42,7 +42,7 @@ fi
 # Install Redis, only if not installed
 which redis-cli
 exists=$?
-if [[ $exists = 1 ]] ; then
+if [[ $exists -eq 1 ]] ; then
 		echo 'Installing Redis'
 		cd /tmp
 		wget http://download.redis.io/redis-stable.tar.gz
