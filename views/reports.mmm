@@ -1,20 +1,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" media="screen" href="/css/insights-1.0.css">
-<link rel="stylesheet" media="screen" href="/css/heatmap.css">
 <link rel="stylesheet" media="screen" href="/css/reset.css">
+<link rel="stylesheet" media="screen" href="/css/heatmap.css">
 <script type="text/javascript" src="/js/lib/d3.v2.js" ></script>
 <script type="text/javascript" src="/js/lib/insights.js" ></script>
 <script type="text/javascript" src="/js/heatmap.js" ></script>
 <script type="text/javascript" src="/js/reports.js" ></script>
+<div id="wrapper">
 <div id="container">
 
     <div id="header">
         <div id="title">
-            <h1>Relatórios</h1>
-            <p id="subtitle">Ocupação</p>
+            <h2>Relatório de ocupação de mesas</h2>
+            <div class="controls">
+                <select name="month" id="month" data-bind="value: month">
+                    <option value="1">Janeiro</option>
+                    <option value="2">Fevereiro</option>
+                    <option value="3">Março</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Maio</option>
+                    <option value="6">Junho</option>
+                    <option value="7">Julho</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option>
+                </select>
+                <select name="year" id="year" data-bind="value: year">
+                    <option value="2013">2013</option>
+                    <option value="2014">2014</option>
+                    <option value="2015">2015</option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                </select>
+            </div>
         </div>
     </div>
-    <div id="old_browser_msg">Utilize um browser mais recente.</div>
     <div id="legend" class="rbow2">
         <ul>
             <li class="q1-11"></li>
@@ -33,4 +57,5 @@
 
     <div id="vis" class="rbow2"></div>
 
+</div>
 </div>

@@ -14,6 +14,15 @@
 	display: inline !important;
 }
 
+body, html, #wrapper {
+    width: 100%;
+}
+
+#container {
+    margin: 0 auto;
+    width: 1115px;
+}
+
 #scale {
 	float: right;
 }
@@ -29,10 +38,10 @@
 }
 
 #vis {
-	clear: all;
+	clear: both;
 	margin-bottom: 20px;
 	height: 370px;
-	height: 285px;
+    width: 1150px;
 }
 
 #tiles {
@@ -59,8 +68,8 @@
 }
 
 #tiles .tile {
-	width: 38px;
-	height: 38px;
+	width: 45px;
+	height: 45px;
 	position: relative;
 	-webkit-transform-style: preserve-3d;
 	-webkit-transition: 0.7s;
@@ -69,8 +78,8 @@
 .face {
 	position: absolute;
 	-webkit-backface-visibility: hidden;
-	width: 36px;
-	height: 36px;
+	width: 43px;
+	height: 43px;
 	background: #eee;
 	border: 1px solid white;
 	-moz-border-radius: 4px;
@@ -144,26 +153,17 @@
 }
 
 h2 {
-	margin-top: -2px;
+	margin-top: 20px;
 	font-size: 28px;
 	line-height: 28px;
-	margin-bottom: 30px;
-	width: 250px;
-	margin-left: -50px;
-	z-index: -1337;
-	text-align: center;
+	margin-bottom: 10px;
+	width: 500px;
 }
 
 /* 11 buckets purple to red */
 
 .rbow2 .q1-11 {
 	background: #5E4FA2;
-	/*
-	border-left-color: #5b40b3;
-	border-top-color: #5b40b3;
-	border-right-color: #3e2b7a;
-	border-bottom-color: #3e2b7a;
-	*/
 }
 
 .rbow2 .q2-11 {
@@ -184,8 +184,6 @@ h2 {
 
 .rbow2 .q6-11 {
 	background: #FFFFBF;
-	background: #f6faaa;
-	/*border-color: #f6faaa;*/
 }
 
 .rbow2 .q7-11 {
@@ -208,3 +206,48 @@ h2 {
 	background: #9E0142;
 }
 
+#legend {
+    clear: left;
+    margin-left: 24px;
+    width: 165px;
+    color: #777;
+    margin-top: 10px;
+    background: #f3f3f3;
+    border: 1px solid #f0f0f0;
+    overflow: hidden;
+    padding: 5px 7px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 11px;
+    line-height: 11px;
+    margin-bottom: 10px;
+    margin-right: 24px;
+}
+
+#legend ul {
+    list-style-type: none;
+    overflow: hidden;
+    clear: both;
+}
+
+#legend li {
+    float: left;
+    margin-right: 1px;
+    width: 14px;
+    height: 14px;
+}
+
+.face.back p {
+    margin: 12px 0 0 12px;
+    font-weight: bold;
+}
+
+.q9-11.face.back p,
+.q10-11.face.back p,
+.q11-11.face.back p{
+    color: #FFF;
+}
+
+div.controls {
+    width: 240px;
+}

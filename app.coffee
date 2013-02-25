@@ -52,10 +52,6 @@ app.get '/salao', (req, res) ->
 app.get '/relatorios', (req, res) ->
   res.render 'reports'
 
-app.get '/relatorio1.json', (req, res) ->
-  p.getOccupationLogs 2012, 11, (data) ->
-    res.send {views: data}
-
 app.get '/relatorio/:year-:month.json', (req, res) ->
   p.getOccupationLogs req.params.year, req.params.month, (err, data) ->
     if err

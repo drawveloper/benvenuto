@@ -1,22 +1,30 @@
 var benvenuto = window.benvenuto || {};
 benvenuto.HeatMap = function () {
+    var self = this;
     var buckets = 11,
         colorScheme = 'rbow2',
         days = [
-            { name: 'Sunday', abbr: 'Su' },
-            { name: 'Monday', abbr: 'Mo' },
-            { name: 'Tuesday', abbr: 'Tu' },
-            { name: 'Wednesday', abbr: 'We' },
-            { name: 'Thursday', abbr: 'Th' },
-            { name: 'Friday', abbr: 'Fr' },
-            { name: 'Saturday', abbr: 'Sa' }
+            { name: 'Domingo', abbr: 'Dom' },
+            { name: 'Segunda', abbr: 'Seg' },
+            { name: 'Terça', abbr: 'Ter' },
+            { name: 'Quarta', abbr: 'Qua' },
+            { name: 'Quinta', abbr: 'Qui' },
+            { name: 'Sexta', abbr: 'Sex' },
+            { name: 'Sábado', abbr: 'Sáb' }
         ],
-        hours = ['00:00', '01:00', '02:00', '03:00',
-            '04:00', '05:00', '06:00', '07:00',
-            '08:00', '09:00', '10:00', '11:00',
-            '12:00', '13:00', '14:00', '15:00',
-            '16:00', '17:00', '18:00', '19:00',
-            '20:00', '21:00', '22:00', '23:00'];
+        hours = [
+            '08:00', '08:30',
+            '09:00', '09:00',
+            '10:00', '10:30',
+            '11:00', '11:30',
+            '12:00', '12:30',
+            '13:00', '13:30',
+            '14:00', '14:30',
+            '15:00', '15:30',
+            '16:00', '16:30',
+            '17:00', '17:30',
+            '18:00', '18:30',
+            '19:00', '19:30'];
 
     this.data = {};
 
@@ -145,7 +153,7 @@ benvenuto.HeatMap = function () {
             html += '<tr class="d' + d + '">';
             html += '<th>' + days[d].abbr + '</th>';
             for (var h = 0; h < hours.length; h++) {
-                html += '<td id="d' + d + 'h' + h + '" class="d' + d + ' h' + h + '"><div class="tile"><div class="face front"></div><div class="face back"></div></div></td>';
+                html += '<td id="d' + d + 'h' + h + '" class="d' + d + ' h' + h + '"><div class="tile"><div class="face front"></div><div class="face back"><p>'+self.data.views[d][h].occupations+'</p></div></div></td>';
             }
             html += '</tr>';
         }
