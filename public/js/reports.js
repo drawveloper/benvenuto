@@ -12,8 +12,9 @@ $(function(){
             }
             $.mobile.showPageLoadingMsg('b', 'Carregando...');
             d3.json(url, function(json) {
+                var swapped = {views: json.views.slice(1,7).concat(json.views.slice(0,1))};
                 $.mobile.hidePageLoadingMsg();
-                heatMap.startMap(json);
+                heatMap.startMap(swapped);
             });
         };
         this.yearMonthUrl = ko.computed(function(){

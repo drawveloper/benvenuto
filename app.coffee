@@ -85,6 +85,13 @@ app.post '/config/tempo', (req, res) ->
       option.selected = false
   res.send 200
 
+app.post '/test/logOccupation', (req, res) ->
+  data = req.body
+  console.log data
+  data.occupyDate = new Date(data.millis)
+  p.logOccupation(data)
+  res.send 200
+
 #
 # SocketIO
 #

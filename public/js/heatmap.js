@@ -4,17 +4,15 @@ benvenuto.HeatMap = function () {
     var buckets = 11,
         colorScheme = 'rbow2',
         days = [
-            { name: 'Domingo', abbr: 'Dom' },
             { name: 'Segunda', abbr: 'Seg' },
             { name: 'Terça', abbr: 'Ter' },
             { name: 'Quarta', abbr: 'Qua' },
             { name: 'Quinta', abbr: 'Qui' },
             { name: 'Sexta', abbr: 'Sex' },
-            { name: 'Sábado', abbr: 'Sáb' }
+            { name: 'Sábado', abbr: 'Sáb' },
+            { name: 'Domingo', abbr: 'Dom' }
         ],
         hours = [
-            '08:00', '08:30',
-            '09:00', '09:00',
             '10:00', '10:30',
             '11:00', '11:30',
             '12:00', '12:30',
@@ -22,9 +20,7 @@ benvenuto.HeatMap = function () {
             '14:00', '14:30',
             '15:00', '15:30',
             '16:00', '16:30',
-            '17:00', '17:30',
-            '18:00', '18:30',
-            '19:00', '19:30'];
+            '17:00', '17:30'];
 
     this.data = {};
 
@@ -128,8 +124,8 @@ benvenuto.HeatMap = function () {
             };
         };
 
-        for (var h = 0; h < hours.length; h++) {
-            for (var d = 0; d < days.length; d++) {
+        for (var d = 0; d < days.length; d++) {
+            for (var h = 0; h < hours.length; h++) {
                 var side = d3.select('#tiles').attr('class');
                 setTimeout(flipper(h, d, side), (h * 20) + (d * 20) + (Math.random() * 100));
             }
@@ -143,16 +139,16 @@ benvenuto.HeatMap = function () {
 
         html += '<tr><th><div>&nbsp;</div></th>';
 
-        for (var h = 0; h < hours.length; h++) {
-            html += '<th class="h' + h + '">' + hours[h] + '</th>';
+        for (var d = 0; d < days.length; d++) {
+            html += '<th class="d' + d + '">' + days[d].abbr + '</th>';
         }
 
         html += '</tr>';
 
-        for (var d = 0; d < days.length; d++) {
-            html += '<tr class="d' + d + '">';
-            html += '<th>' + days[d].abbr + '</th>';
-            for (var h = 0; h < hours.length; h++) {
+        for (var h = 0; h < hours.length; h++) {
+            html += '<tr class="h' + h + '">';
+            html += '<th>' + hours[h] + '</th>';
+            for (var d = 0; d < days.length; d++) {
                 html += '<td id="d' + d + 'h' + h + '" class="d' + d + ' h' + h + '"><div class="tile"><div class="face front"></div><div class="face back"><p>'+self.data.views[d][h].occupations+'</p></div></div></td>';
             }
             html += '</tr>';

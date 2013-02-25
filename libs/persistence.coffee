@@ -8,6 +8,10 @@ Q = require 'q'
 class Persistence
   constructor: (@layout) ->
     @client = redis.createClient()
+    @logOptions =
+      zoomFactor: 2
+      startHour: 10
+      endHour: 20
 
   #
   # Mapeamento de identificadores
@@ -166,7 +170,11 @@ class Persistence
       else
         console.log occupations
         for occupation in occupations
-          weekDays[occupation.occupyMoment.day()][occupation.occupyMoment.hours()].occupations += 1
+          continue unless (occupation.occupyMoment.hours() >= @logOptions.startHour and occupation.occupyMoment.hours() < @logOptions.endHour)
+          day = occupation.occupyMoment.day()
+          hour = ((occupation.occupyMoment.hours() - @logOptions.startHour) * @logOptions.zoomFactor)
+          hour += (if occupation.occupyMoment.minutes() > (60/(@logOptions.zoomFactor)) then 1 else 0)
+          weekDays[day][hour].occupations += 1
 
         callback(undefined, weekDays)
 
