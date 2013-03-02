@@ -1,6 +1,5 @@
 #!/bin/sh
-echo 'Uninstalling earliar NodeJS version'
-sudo npm rm npm -g
+echo 'Uninstalling earlier NodeJS version'
 rm -rf /usr/local/bin/node /usr/local/bin/node-waf /usr/local/include/node /usr/local/lib/node /usr/local/lib/pkgconfig/nodejs.pc /usr/local/share/man/man1/node.1.gz
 tar -zxf node-v0.8.21.tar.gz
 echo 'Node.js unpack completed'
