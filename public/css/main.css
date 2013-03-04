@@ -301,3 +301,33 @@ border-bottom-width:1px;
 .hide {
     display: none;
 }
+
+.circle{
+    -webkit-border-radius:32px;
+    -moz-border-radius:32px;
+    border-radius:32px;
+    border:1px solid #ccc;
+    width:16px;
+    height:16px;
+}
+
+.green {
+    background-color: #adff2f;
+}
+
+.red {
+    background-color: red;
+}
+
+#hall-connected {
+    position: absolute;
+    left: 26px;
+    bottom: 18px;
+}
+
+#reception-connected {
+    display: inline-block;
+    margin: 4px 0 0 12px;
+    width:12px;
+    height:12px;
+}

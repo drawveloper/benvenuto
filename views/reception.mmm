@@ -6,6 +6,7 @@
 <div data-role="page">
 
     <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <span id="reception-connected" class="circle" data-bind="css: {'red': !connected(), 'green': connected}"></span>
         <span style="margin-left: 15px"
               data-bind="text: occupiedPlaces().length + ' mesas ocupadas (' + occupiedPercent() + '%)'"></span>
         <span style="margin: 0px 5px 0px 5px" data-bind="fadeVisible: numberOfOccupants() > 0">||</span>

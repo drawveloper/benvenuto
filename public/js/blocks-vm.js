@@ -69,7 +69,12 @@ function Place(id, label, occupied, lastOccupation) {
 function LayoutViewModel() {
     var self = this;
     self.name = ko.observable();
-    self.loading = ko.observable(false);
+    self.connected = ko.observable(false);
+    self.loading = ko.observable();
+    self.loading.subscribe(function(loading){
+        $.mobile.loading(loading ? 'show' : 'hide');
+    });
+    self.loading(true);
     self.places = ko.observableArray();
     self.occupiedPlacesNumber = ko.computed(function(){
        return ko.utils.arrayFilter(self.places(), function(item){
@@ -163,6 +168,7 @@ function LayoutViewModel() {
     socket.on('welcome', function (data) {
         console.log (data);
         self.create(data.data);
+        viewmodel.loading(false);
     });
 
     socket.on('occupy', function (data) {
@@ -175,9 +181,13 @@ function LayoutViewModel() {
         self.update(data);
     });
 
+    socket.on('connect', function () {
+        console.log ('Connected!');
+        viewmodel.connected(true);
+    });
+
     socket.on('disconnect', function () {
         console.log ('Disconnected!');
-        alert('Desconectado do servidor. Cheque a conexão Wi-Fi do aparelho.');
-        location.reload();
+        viewmodel.connected(false);
     });
 }

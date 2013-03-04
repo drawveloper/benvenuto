@@ -21,6 +21,7 @@
     </div><!-- /content -->
 
     <div id="footer" data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <div id="hall-connected" class="circle" data-bind="css: {'red': !connected(), 'green': connected}"></div>
         <button data-bind="click: freePlaces, text: loading() ? 'aguarde' : 'Liberar'">Liberar</button>
     </div><!-- /footer -->
 

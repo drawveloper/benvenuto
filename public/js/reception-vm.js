@@ -46,7 +46,12 @@ function Place(id, label, x, y, occupied, numberOfOccupants, table, rotation) {
 function LayoutViewModel() {
     var self = this;
     self.name = ko.observable();
-    self.loading = ko.observable(false);
+    self.connected = ko.observable(false);
+    self.loading = ko.observable();
+    self.loading.subscribe(function(loading){
+        $.mobile.loading(loading ? 'show' : 'hide');
+    });
+    self.loading(true);
     self.gridSizePixels = ko.observable(5);
     self.hasTeacher = ko.observable(false);
     self.toggleTeacher = function(){
@@ -91,7 +96,8 @@ function LayoutViewModel() {
         });
     });
     self.occupiedPercent = ko.computed(function() {
-        return (self.occupiedPlaces().length/self.places().length * 100).toFixed(0);
+        var percent = (self.occupiedPlaces().length / self.places().length) * 100;
+        return isNaN (percent) ? 0 : percent.toFixed(0);
     });
     self.selectedPlacesLabel = ko.computed(function() {
         var selectedPlaces = self.selectedPlaces();
@@ -188,6 +194,7 @@ function LayoutViewModel() {
     socket.on('welcome', function (data) {
         console.log (data);
         self.create(data.data);
+        viewmodel.loading(false);
     });
 
     socket.on('free', function (data) {
@@ -200,9 +207,13 @@ function LayoutViewModel() {
         self.update(data);
     });
 
+    socket.on('connect', function () {
+        console.log ('Connected!');
+        viewmodel.connected(true);
+    });
+
     socket.on('disconnect', function () {
         console.log ('Disconnected!');
-        alert('Desconectado do servidor. Cheque a conexão Wi-Fi do aparelho.');
-        location.reload();
+        viewmodel.connected(false);
     });
 }
