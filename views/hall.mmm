@@ -12,7 +12,7 @@
             <!-- ko foreach: places -->
             <!-- ko if: occupied -->
             <div class="box" data-bind="event: {vclick: select},
-                css: { 'selected' : selected }, style: { 'background-color': backgroundColor }" >
+                css: { 'selected' : selected }, style: { backgroundColor: backgroundColor }" >
                 <span data-bind="text: label" style="float:left"></span>
             </div>
             <!-- /ko -->
