@@ -157,6 +157,7 @@ function LayoutViewModel() {
     self.create = function(data){
         self.name(data.name);
         self.gridSizePixels(data.gridSizePixels);
+	self.places.removeAll();
         //Para cada table
         for (var index in data.places) {
             var json = data.places[index];

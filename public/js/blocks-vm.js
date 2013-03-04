@@ -136,6 +136,7 @@ function LayoutViewModel() {
     }
     self.create = function(data){
         self.name(data.name);
+	self.places.removeAll();
         //Para cada table
         for (var index in data.places) {
             var jsonPlace = data.places[index];
