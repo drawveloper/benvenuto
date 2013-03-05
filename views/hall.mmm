@@ -7,18 +7,16 @@
 <script type="text/javascript" src="/js/blocks.js" charset="UTF-8"></script>
 <div data-role="page">
 
-    <div data-role="content">
-        <div id="blockWrapper" class="centerdiv unselectable">
-            <!-- ko foreach: places -->
-            <!-- ko if: occupied -->
-            <div class="box" data-bind="event: {vclick: select},
-                css: { 'selected' : selected }, style: { backgroundColor: backgroundColor }" >
-                <span data-bind="text: label" style="float:left"></span>
-            </div>
-            <!-- /ko -->
-            <!-- /ko -->
+    <div id="blockWrapper" class="centerdiv unselectable">
+        <!-- ko foreach: places -->
+        <!-- ko if: occupied -->
+        <div class="box" data-bind="event: {vclick: select},
+            css: { 'selected' : selected }, style: { backgroundColor: backgroundColor }" >
+            <span data-bind="text: label" style="float:left"></span>
         </div>
-    </div><!-- /content -->
+        <!-- /ko -->
+        <!-- /ko -->
+    </div>
 
     <div id="footer" data-role="footer" data-position="fixed" data-tap-toggle="false">
         <div id="hall-connected" class="circle" data-bind="css: {'red': !connected(), 'green': connected}"></div>
