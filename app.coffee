@@ -59,6 +59,9 @@ app.get '/relatorio/:year-:month.json', (req, res) ->
     else
       res.send {views: data}
 
+app.get '/lugares/', (req, res) ->
+  res.redirect '/lugares.json'
+
 app.get '/lugares.json', (req, res) ->
   p.getAllPlaces (places) =>
     res.send places
@@ -91,6 +94,34 @@ app.post '/test/logOccupation', (req, res) ->
   data.occupyDate = new Date(data.millis)
   p.logOccupation(data)
   res.send 200
+
+app.post '/lugares/', (req, res) ->
+  place = req.body
+  # If has id, use PUT, not POST
+  res.send(400) if not place or place.id
+  console.log 'Received post for', place
+  id = p.setPlace(place)
+  console.log 'Generated id', id
+  res.send(200, {id: id})
+
+app.put '/lugares/:id', (req, res) ->
+  place = req.body
+  res.send(400) if not place or not place.id
+  console.log 'Received put for', place
+  id = p.setPlace(place)
+  console.log 'Updated id', id
+  res.send(200, {id: id})
+
+app.get '/lugares/schema', (req, res) ->
+  res.send p.placeSchema
+
+app.get '/lugares/:id', (req, res) ->
+  p.getPlace req.params.id, (place) ->
+    res.send place
+
+app.delete '/lugares/:id', (req, res) ->
+  p.remPlace req.params.id, (numberOfRemoved) ->
+    res.send 200, numberOfRemoved
 
 #
 # SocketIO

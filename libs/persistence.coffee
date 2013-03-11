@@ -12,6 +12,20 @@ class Persistence
       zoomFactor: 2
       startHour: 10
       endHour: 20
+    @nextPlaceKey = 0
+    @placeSchema = {
+      "id": 101,
+      "label": "01B",
+      "numberOfOccupants": 1,
+      "occupied": false,
+      "rotation": 0,
+      "x": 0,
+      "y": 0,
+      "tableId": 100,
+      "tableX": 64,
+      "tableY": 64,
+      "tableClass": "models.GenericTable"
+    }
 
   #
   # Mapeamento de identificadores
@@ -26,6 +40,9 @@ class Persistence
   #
   # Acesso ao banco de dados
   #
+  updateNextPlaceKey: (key) =>
+    @nextPlaceKey = key + 2 if key >= @nextPlaceKey
+
   initializeRedis: =>
     # Pega do banco o layout escolhido atualmente
     @client.get "layout", (err, reply) =>
@@ -55,12 +72,17 @@ class Persistence
         console.log "Banco OK."
         @layout = JSON.parse reply
 
+      # Lê todos os lugares para inicializar ultimo id
+      @getAllPlaces (places) =>
+        for place in places
+          @updateNextPlaceKey place.id
+
   # Retorna do banco todos os lugares identificados pelos id's presentes em idsArray
   # keysAreStructured indica se as chaves são apenas os ids inteiros ou já contem o namespace.
   getMultiplePlaces: (idsArray, callback, keysAreStructured) =>
     #console.log 'getMultiplePlaces sendo chamado com', idsArray, keysAreStructured
     placeKeys = if keysAreStructured then idsArray else @placeArrayKeys(idsArray);
-    @client.mget placeKeys, (err, replies) ->
+    @client.mget placeKeys, (err, replies) =>
       if err
         console.log "Erro ao recuperar lugares do banco.", err
         callback(undefined)
@@ -87,8 +109,7 @@ class Persistence
       @getMultiplePlaces replyKeys, callback, keysAreStructured
 
   getPlace: (id, callback) =>
-    layoutKey = "layout:" + layout.id
-    fieldKey = layoutKey + ":place:" + id
+    fieldKey = @placeKey(id)
     @client.get fieldKey, (err, reply) ->
       if err
         console.log "Erro ao recuperar lugar do banco.", err
@@ -97,6 +118,24 @@ class Persistence
       place = JSON.parse reply
       # console.log "Enviando lugar do REDIS: ", place
       callback(place)
+
+  setPlace: (place) =>
+    return undefined unless place and place.label
+
+    if place.id
+      fieldKey = @placeKey(place.id)
+    else
+      fieldKey = @placeKey(@nextPlaceKey)
+      console.log 'Creating', fieldKey
+      place.id = @nextPlaceKey
+      place.tableId = @nextPlaceKey - 1
+      @updateNextPlaceKey(@nextPlaceKey)
+    @client.sadd @layoutKey(), fieldKey
+    @client.set fieldKey, JSON.stringify(place)
+    return place.id
+
+  remPlace: (placeId, callback) =>
+    @client.srem @layoutKey(), @placeKey(placeId), callback
 
   setPlacesMulti: (places, execCallback) =>
     argsArray = []
