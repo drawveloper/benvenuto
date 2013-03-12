@@ -21,20 +21,20 @@ echo 'Update completed'
 # Install help app
 apt-get -y install libssl-dev git-core pkg-config build-essential curl gcc g++ checkinstall
 
-# Download & Unpack Node.js - v. 0.8.20 if not installed
+# Download & Unpack Node.js - v. 0.8.22 if not installed
 which node
 if [ $? -eq 1 ]; then
-		echo 'Download Node.js - v. 0.8.20'
+		echo 'Download Node.js - v. 0.8.22'
 		mkdir /tmp/node-install
 		cd /tmp/node-install
-		wget http://nodejs.org/dist/v0.8.20/node-v0.8.20.tar.gz
-		tar -zxf node-v0.8.20.tar.gz
+		wget http://nodejs.org/dist/v0.8.22/node-v0.8.22.tar.gz
+		tar -zxf node-v0.8.22.tar.gz
 		echo 'Node.js download & unpack completed'
 
 		# Install Node.js
 		echo 'Install Node.js'
-		cd node-v0.8.20
-		./configure && make && checkinstall --install=yes --pkgname=nodejs --pkgversion "0.8.20" --default
+		cd node-v0.8.22
+		./configure && make && checkinstall --install=yes --pkgname=nodejs --pkgversion "0.8.22" --default
 		echo 'Node.js install completed'
 fi
 
