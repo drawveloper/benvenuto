@@ -3,15 +3,19 @@
   "version": "0.5.0",
   "author": "Guilherme Rodrigues <gadr90@gmail.com>",
   "description": "Sistema de reserva de mesas",
-  "dependencies" : {
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
     "coffee-script": "*",
-    "express" :  "3.x",
-    "socket.io" : "0.9.13",
-    "mmm" : "0.2.1",
-    "redis" : "0.8.x",
-    "underscore" : "1.4.x",
-    "moment" : "1.7.2",
-    "q" : "0.8.x"
+    "express": "3.x",
+    "mmm": "0.2.1",
+    "moment": "1.7.2",
+    "nodemon": "^1.11.0",
+    "q": "0.8.x",
+    "redis": "0.8.x",
+    "socket.io": "^1.7.2",
+    "underscore": "1.4.x"
   },
   "engines": {
     "node": ">=0.8"

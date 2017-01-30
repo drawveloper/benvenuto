@@ -2,10 +2,14 @@
 
 Sistema de Reserva de Mesas
 
-Para instalar
+Para instalar dependências
 
-    sudo install.sh
+    bash ./scripts/install.sh
+
+Certifique-se de que o Redis está rodando
+
+    redis-server
 
 Para iniciar
 
-    start.sh
+    npm start

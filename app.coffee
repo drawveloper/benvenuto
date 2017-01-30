@@ -7,7 +7,6 @@ path = require 'path'
 socketio = require 'socket.io'
 _u = require 'underscore'
 
-require 'coffee-script'
 # Configurações do aplicativo
 settings = require('./libs/settings.coffee')
 Persistence = require('./libs/persistence.coffee')
