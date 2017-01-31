@@ -1,15 +1,18 @@
-### Benvenuto Node
+# Benvenuto Node
 
-Sistema de Reserva de Mesas
+_This is an old project I've brought back from the dead. Currently under repairs._ :warning:
 
-Para instalar dependências
+
+### Getting Started
+
+Install deps on a bare lubuntu
 
     bash ./scripts/install.sh
 
-Certifique-se de que o Redis está rodando
+Run Redis
 
-    redis-server
+    redis-server &
 
-Para iniciar
+Run benvenuto
 
     npm start
